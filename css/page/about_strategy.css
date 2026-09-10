@@ -1,0 +1,569 @@
+/* about/strategy.html 固有スタイル（data-page="page" data-page-id="about_strategy"） */
+/* ---- 概要バナー ---- */
+.strategy-summary {
+  display: block;
+  text-decoration: none;
+  background: linear-gradient(135deg,
+      var(--primary-dark) 0%,
+      var(--primary) 60%,
+      var(--accent) 100%);
+  border-radius: var(--radius-xl);
+  padding: 48px;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 0;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+.strategy-summary:hover,
+.strategy-summary:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--shadow-md);
+  /* グローバルの a:hover（色変化・下線）を打ち消す */
+  color: #fff;
+  text-decoration: none;
+}
+.strategy-summary__label {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  padding: 4px 16px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+.strategy-summary__title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+.strategy-summary__desc {
+  font-size: 0.95rem;
+  opacity: 0.9;
+  line-height: 1.8;
+  max-width: 720px;
+  margin: 0 auto 24px;
+}
+.strategy-summary__tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.strategy-summary__tag {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.strategy-summary__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 28px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  transition: gap 0.2s;
+}
+.strategy-summary:hover .strategy-summary__more,
+.strategy-summary:focus-visible .strategy-summary__more {
+  gap: 12px;
+}
+/* ---- サイクル図エリア ---- */
+.cycle-intro {
+  background: var(--bg-white);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  margin: 40px 0;
+  box-shadow: 0 2px 16px var(--shadow);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+}
+.cycle-item {
+  text-align: center;
+  padding: 24px 20px;
+  position: relative;
+}
+.cycle-item::after {
+  content: "→";
+  position: absolute;
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  color: var(--primary);
+  font-weight: 700;
+}
+.cycle-item:last-child::after {
+  display: none;
+}
+.cycle-item__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 14px;
+}
+.cycle-item__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.cycle-item__desc {
+  font-size: 0.82rem;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+/* ---- 基本目標カード ---- */
+.goal-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 40px 0;
+}
+.goal-card {
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 2px 12px var(--shadow);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+.goal-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px var(--shadow-md);
+}
+.goal-card__header {
+  padding: 28px 24px 20px;
+}
+.goal-card__tag {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+  color: #fff;
+}
+.goal-card__num {
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.goal-card__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+.goal-card__desc {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  line-height: 1.7;
+}
+.goal-card__kpi {
+  border-top: 1px solid var(--border);
+  padding: 20px 24px;
+  margin-top: auto;
+  background: var(--bg-gray);
+}
+.goal-card__kpi-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-light);
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.kpi-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.kpi-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+.kpi-item__name {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  flex: 1;
+  line-height: 1.4;
+}
+.kpi-item__value {
+  font-size: 1.1rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+/* 目標カードごとの色（旧: インラインstyleで指定していたものをクラス化） */
+.goal-card--1 .goal-card__tag { background: #2c5f2d; }
+.goal-card--1 .goal-card__num { color: #2c5f2d; }
+.goal-card--1 .kpi-item__value { color: #2c5f2d; }
+.goal-card--2 .goal-card__tag { background: #028090; }
+.goal-card--2 .goal-card__num { color: #028090; }
+.goal-card--2 .kpi-item__value { color: #028090; }
+.goal-card--3 .goal-card__tag { background: #1a5276; }
+.goal-card--3 .goal-card__num { color: #1a5276; }
+.goal-card--3 .kpi-item__value { color: #1a5276; }
+/* ---- 推進体制 ---- */
+.network-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 40px 0;
+}
+.network-card {
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: 0 2px 12px var(--shadow);
+  border-left: 5px solid var(--primary);
+}
+.network-card--accent {
+  border-left-color: var(--accent);
+}
+.network-card__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 8px;
+}
+.network-card__sub {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+.network-card__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.network-card__list li {
+  font-size: 0.85rem;
+  color: var(--text);
+  padding-left: 16px;
+  position: relative;
+  line-height: 1.5;
+}
+.network-card__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-size: 0.7rem;
+  top: 3px;
+}
+/* ---- 5つのアクション ---- */
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin: 40px 0;
+}
+.action-card {
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 2px 12px var(--shadow);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+.action-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px var(--shadow-md);
+}
+.action-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+}
+.action-card__body {
+  padding: 16px 12px;
+}
+.action-card__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.action-card__verb {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+.action-card__sub {
+  font-size: 0.72rem;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+.action-detail-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-top: -8px;
+}
+.action-detail {
+  background: var(--bg-gray);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  padding: 14px 12px;
+  font-size: 0.78rem;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+/* アクションカードごとの色（旧: インラインstyleで指定していたものをクラス化） */
+.action-card--1 .action-card__icon { background: linear-gradient(135deg, #2c5f2d, #5a8a3c); }
+.action-card--1 .action-card__num { background: #2c5f2d; }
+.action-card--2 .action-card__icon { background: linear-gradient(135deg, #5a8a3c, #97bc62); }
+.action-card--2 .action-card__num { background: #5a8a3c; }
+.action-card--3 .action-card__icon { background: linear-gradient(135deg, #028090, #2c5f2d); }
+.action-card--3 .action-card__num { background: #028090; }
+.action-card--4 .action-card__icon { background: linear-gradient(135deg, #1a5276, #028090); }
+.action-card--4 .action-card__num { background: #1a5276; }
+.action-card--5 .action-card__icon { background: linear-gradient(135deg, #97bc62, #5a8a3c); }
+.action-card--5 .action-card__num { background: #97bc62; }
+/* ---- 主要施策 ---- */
+.measures-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 40px 0;
+}
+.measure-card {
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 2px 12px var(--shadow);
+}
+.measure-card__head {
+  padding: 20px 24px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.measure-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.measure-card__htitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  line-height: 1.4;
+}
+.measure-card__hdesc {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+.measure-card__items {
+  border-top: 1px solid var(--border);
+  padding: 16px 24px;
+}
+.measure-item {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 5px 0;
+  font-size: 0.82rem;
+  color: var(--text);
+  line-height: 1.5;
+  border-bottom: 1px solid var(--border);
+}
+.measure-item:last-child {
+  border-bottom: none;
+}
+.measure-item__num {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-light);
+  min-width: 20px;
+}
+.measure-card__more {
+  padding: 8px 24px 16px;
+  font-size: 0.78rem;
+  color: var(--text-light);
+}
+/* ---- ビジョンバナー ---- */
+.vision-banner {
+  background: linear-gradient(135deg,
+      var(--primary) 0%,
+      var(--primary-dark) 50%,
+      var(--accent) 100%);
+  border-radius: var(--radius-xl);
+  padding: 48px;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+}
+.vision-banner__title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+  color: #fff;
+}
+.vision-banner__desc {
+  font-size: 0.95rem;
+  opacity: 0.9;
+  line-height: 1.8;
+  max-width: 700px;
+  margin: 0 auto;
+}
+/* サイクル図・ネットワーク図（旧: インラインstyleで指定していたものをクラス化） */
+.strategy-diagram {
+  display: block;
+  max-width: 80%;
+  margin: 0 auto;
+}
+/* ---- レスポンシブ ---- */
+@media (max-width: 1024px) {
+  .action-grid,
+  .action-detail-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .action-detail-row .action-detail:nth-child(n + 4) {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  .goal-cards,
+  .measures-grid,
+  .network-grid {
+    grid-template-columns: 1fr;
+  }
+  .cycle-intro {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+  .cycle-item::after {
+    display: none;
+  }
+  .action-grid,
+  .action-detail-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .strategy-summary {
+    padding: 32px 24px;
+  }
+  .strategy-summary__title {
+    font-size: 1.25rem;
+  }
+  .vision-banner {
+    padding: 32px 24px;
+  }
+  .vision-banner__title {
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 480px) {
+  .action-grid,
+  .action-detail-row {
+    grid-template-columns: 1fr;
+  }
+}
+/* ここから追加 */
+@media (max-width: 425px) {
+  /* 親要素（全体）のコンテナでFlexboxを使って縦並びにする */
+  /* もし .action-grid と .action-detail-row のさらに外側をまとめる親要素がなければ下記のように設定します */
+  .container {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  /* カード群と詳細群の親枠を解除し、直下要素として並べ替え可能にする */
+  .action-grid,
+  .action-detail-row {
+    display: contents !important;
+  }
+  /* 詳細テキストが隠れてしまうのを防ぐ安全策 */
+  .action-detail {
+    display: block !important;
+    height: auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  /* --- ここから順番指定（order） --- */
+  /* 1セット目 */
+  .action-grid>.action-card:nth-child(1) {
+    order: 1;
+  }
+  .action-detail-row>.action-detail:nth-child(1) {
+    order: 2;
+    margin-bottom: 32px;
+  }
+  /* 2セット目 */
+  .action-grid>.action-card:nth-child(2) {
+    order: 3;
+  }
+  .action-detail-row>.action-detail:nth-child(2) {
+    order: 4;
+    margin-bottom: 32px;
+  }
+  /* 3セット目 */
+  .action-grid>.action-card:nth-child(3) {
+    order: 5;
+  }
+  .action-detail-row>.action-detail:nth-child(3) {
+    order: 6;
+    margin-bottom: 32px;
+  }
+  /* 4セット目 */
+  .action-grid>.action-card:nth-child(4) {
+    order: 7;
+  }
+  .action-detail-row>.action-detail:nth-child(4) {
+    order: 8;
+    margin-bottom: 32px;
+  }
+  /* 5セット目 */
+  .action-grid>.action-card:nth-child(5) {
+    order: 9;
+  }
+  .action-detail-row>.action-detail:nth-child(5) {
+    order: 10;
+    margin-bottom: 32px;
+  }
+}
+.page-header--strategy {
+  background-image: url('../../images/2025/03/sarakurayama.jpg');
+  background-size: cover;
+  background-position: center 40%;
+}

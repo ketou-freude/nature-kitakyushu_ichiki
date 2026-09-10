@@ -1,0 +1,254 @@
+/* ============================================
+   活動拠点（center CPT） - single/archive共用
+   ============================================ */
+
+/* --- ページヘッダー：per-post背景（単体ページは投稿ごとに写真が変わるため
+   <img>要素で表現し、style="background-image"のインライン指定を使わない） --- */
+.page-header__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+/* 実測: greenpark/hotarukan のみ元モックが background-position を中央からずらしていた */
+.page-header__bg--pos-40 {
+  object-position: center 40%;
+}
+.page-header__bg--pos-60 {
+  object-position: center 60%;
+}
+
+/* --- ページヘッダー：一覧ページ（center/index.html）は固定の1枚背景 --- */
+.page-header--center {
+  background-image: url('../../images/2025/03/biotope2.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+
+/* --- 概要文・施設についての本文コンテナ（旧: style="max-width:800px;margin:0 auto;"） --- */
+.center-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+/* 文中リンクを含むためwysiwyg化した段落(2.6節)。旧 <p> と同じ見た目にする */
+.center-content .wysiwyg-block {
+  margin-bottom: 16px;
+  line-height: 1.8;
+}
+
+/* --- 施設情報ボックスの見出し（旧: style="font-size:1.3rem;color:var(--primary);margin-bottom:16px;border:none;padding:0;"） --- */
+.facility-detail__info-title {
+  font-size: 1.3rem;
+  color: var(--primary);
+  margin-bottom: 16px;
+  border: none;
+  padding: 0;
+}
+
+/* --- アクセスマップの地図枠（旧: style="border-radius:12px;overflow:hidden;box-shadow:...;margin-top:24px;"） --- */
+.facility-detail__map-frame {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 24px;
+}
+.facility-detail__map-frame iframe {
+  border: 0;
+  display: block;
+}
+
+/* --- この施設のイベント：カード無し/一覧表示の余白（旧: style="text-align:center;padding:40px;color:var(--text-muted);"） --- */
+.facility-events__empty {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-muted);
+}
+.facility-events__more-btn {
+  margin-top: 16px;
+}
+
+/* --- 戻るリンク（旧: style="padding:32px 0;" / style="text-align:center;"） --- */
+.facility-back {
+  padding: 32px 0;
+}
+.facility-back__inner {
+  text-align: center;
+}
+
+/* --- 拠点マップ（center/index.html #center-map。旧インラインstyle） --- */
+#center-map {
+  height: 480px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
+  margin-top: 24px;
+}
+
+/* --- 事務局セクション（center/index.html） --- */
+.urban-center-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  align-items: center;
+}
+.urban-center-grid__image {
+  border-radius: 12px;
+  width: 100%;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
+}
+.urban-center-grid__desc {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-bottom: 20px;
+}
+.urban-center-grid__dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 16px;
+  font-size: 0.9rem;
+}
+.urban-center-grid__dl dt {
+  font-weight: 600;
+  color: var(--primary);
+  white-space: nowrap;
+}
+.urban-center-grid__dl a {
+  color: var(--primary);
+}
+
+/* --- この施設のイベント：カード（旧: 各ページ内 <style> を統合。実測でMD5相当一致） --- */
+.event-card {
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 2px 12px var(--shadow);
+  transition: all var(--transition);
+  text-decoration: none;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+}
+.event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px var(--shadow-md);
+}
+.event-card__image-wrap {
+  position: relative;
+}
+.event-card__image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+.event-card__date-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  text-align: center;
+  line-height: 1;
+}
+.event-card__date-month {
+  font-size: 0.7rem;
+  display: block;
+  margin-bottom: 2px;
+}
+.event-card__date-day {
+  font-size: 1.4rem;
+  font-weight: 800;
+  display: block;
+}
+.event-card__type-tag {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+.event-card__type-tag--open {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+.event-card__type-tag--info {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+.event-card__type-tag--project {
+  background: #fff3e0;
+  color: #e65100;
+}
+.event-card__type-tag--all {
+  background: #eceff1;
+  color: #455a64;
+}
+.event-card__body {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.event-card__tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.event-card__category {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: rgba(44, 95, 45, 0.1);
+  color: var(--primary);
+}
+.event-card__target {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: rgba(2, 128, 144, 0.1);
+  color: var(--accent);
+}
+.event-card__title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+.event-card__location {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: auto;
+}
+
+/* レスポンシブ(640px以下)の .urban-center-grid 折返しは css/base.css に既存定義あり(重複させない) */
+
+/* 施設ごとのヒーロー背景（L12対応: インラインstyle撤去、data-acf="hero_image" と対で宣言） */
+.page-header--center-greenpark { background-image: url('../../images/2025/03/b-2.jpg'); background-size: cover; background-position: center 40%; }
+.page-header--center-hotarukan { background-image: url('../../images/2025/03/hotaru.jpg'); background-size: cover; background-position: center 60%; }
+.page-header--center-index { background-image: url('../../images/2025/03/biotope2.jpg'); background-size: cover; background-position: center center; }
+.page-header--center-inochi { background-image: url('../../images/2025/03/nature1.jpg'); background-size: cover; background-position: center center; }
+.page-header--center-itouzu { background-image: url('../../images/2025/03/b-2.jpg'); background-size: cover; background-position: center center; }
+.page-header--center-katsuki-hotaru { background-image: url('../../images/2025/03/hotaru.jpg'); background-size: cover; background-position: center center; }
+.page-header--center-mizukankyokan { background-image: url('../../images/2025/03/higata.jpg'); background-size: cover; background-position: center center; }
+.page-header--center-soraland { background-image: url('../../images/2026/04/soraland-hero.png'); background-size: cover; background-position: center center; }
+.page-header--center-takamiya { background-image: url('../../images/2025/03/sarakurayama.jpg'); background-size: cover; background-position: center center; }
+.page-header--center-yamada { background-image: url('../../images/2026/04/yamada-hero.png'); background-size: cover; background-position: center 50%; }
+
+/* 事務局セクション（L12対応） */
+.urban-center-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 900px; margin: 0 auto; align-items: center; }
+.urban-center-grid__img { border-radius: 12px; width: 100%; box-shadow: 0 2px 16px rgba(0,0,0,0.12); }
+.urban-center-grid__desc { font-size: 0.9rem; color: var(--text-light); margin-bottom: 20px; }
+.urban-center-grid__dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; font-size: 0.9rem; }
+.urban-center-grid__link { color: var(--primary); }

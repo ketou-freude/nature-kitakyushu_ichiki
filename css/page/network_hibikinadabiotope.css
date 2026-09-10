@@ -1,0 +1,255 @@
+/* ============================================
+   固定ページ: network_hibikinadabiotope（響灘ビオトープ共同事業体）
+   css/page/network_hibikinadabiotope.css からは ../images/ がサイトルートの images/ を指す
+   ============================================ */
+
+/* --- ページヘッダー・CTA背景（style属性除去の受け皿） --- */
+.page-header--biotope {
+  background-image: url("../../images/2025/03/biotope.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+.cta-band--biotope2 {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url("../../images/2025/03/biotope2.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+/* --- 概要・関係セクションの本文幅 --- */
+.hb-intro {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.hb-intro__heading {
+  margin-top: 28px;
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1.4;
+  color: var(--primary);
+}
+.hb-intro__lead {
+  margin-top: 20px;
+  font-size: 1rem;
+  line-height: 1.85;
+}
+.hb-intro__body {
+  font-size: 1rem;
+  line-height: 1.85;
+}
+.hb-highlight-box {
+  margin-top: 24px;
+}
+
+/* --- 施設情報・アクセス --- */
+.hb-facility-wrap {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.hb-cta-icon {
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.hb-map-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 32px;
+}
+.hb-map-frame {
+  border: 0;
+  display: block;
+}
+
+/* --- 3つの特徴 --- */
+.hb-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+}
+.hb-feature {
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  box-shadow: 0 2px 12px var(--shadow);
+  text-align: center;
+}
+.hb-feature__icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.hb-feature__number {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.hb-feature__number--text {
+  font-size: 1.4rem;
+  padding-top: 8px;
+}
+.hb-feature__unit-ha {
+  font-size: 1.2rem;
+}
+.hb-feature__unit-yen {
+  font-size: 1rem;
+}
+.hb-feature__unit {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-bottom: 12px;
+}
+.hb-feature__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+.hb-feature__desc {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  line-height: 1.65;
+}
+
+/* --- 活動内容 --- */
+.hb-activities {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 32px;
+}
+.hb-activity {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: 0 2px 12px var(--shadow);
+}
+.hb-activity__icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    rgba(44, 95, 45, 0.1),
+    rgba(151, 188, 98, 0.15)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hb-activity__body h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+.hb-activity__body p {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* --- バッジ --- */
+.hb-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+.hb-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+  border-radius: 100px;
+  padding: 5px 14px;
+}
+
+/* --- 施設情報テーブル --- */
+.hb-info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 24px;
+  font-size: 0.9rem;
+}
+.hb-info-table th {
+  width: 130px;
+  padding: 14px 16px;
+  background: rgba(44, 95, 45, 0.06);
+  color: var(--primary);
+  font-weight: 700;
+  text-align: left;
+  border-bottom: 1px solid #e8f0e8;
+  vertical-align: top;
+}
+.hb-info-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e8f0e8;
+  color: var(--text);
+  line-height: 1.6;
+}
+.hb-cta-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+
+/* --- 写真 --- */
+.hb-photo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 32px;
+}
+.hb-photo-grid__item {
+  margin: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+}
+.hb-photo-grid__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hb-photo-grid__caption {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  text-align: center;
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .hb-features {
+    grid-template-columns: 1fr;
+  }
+  .hb-activities {
+    grid-template-columns: 1fr;
+  }
+  .hb-info-table th {
+    width: 100px;
+  }
+}
+@media (max-width: 480px) {
+  .hb-cta-row {
+    flex-direction: column;
+  }
+  .hb-cta-row .btn {
+    text-align: center;
+  }
+}

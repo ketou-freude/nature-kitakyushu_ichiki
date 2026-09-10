@@ -25,20 +25,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/page/center.css">
 </head>
-<body>
+<body data-page="single" data-cpt="center">
   <a class="skip-link" href="#main-content">メインコンテンツへスキップ</a>
   <!-- ヘッダー -->
-  <header class="header">
+              <header class="header" data-common="header">
     <div class="header__inner">
       <a href="../" class="header__logo">
         <img src="../images/2026/02/logo.png" alt="アーバンネイチャー北九州" width="160" height="40"><span class="header__logo-sub" aria-hidden="true">北九州市生物多様性戦略 2025–2030</span>
       </a>
-            <nav class="header__nav" aria-label="メインナビゲーション">
+      <nav class="header__nav" aria-label="メインナビゲーション" data-nav="global" data-nav-current="active">
         <a href="../news/" >お知らせ</a>
         <div class="nav-item">
-          <a href="../about/" class="active" >アーバンネイチャー北九州とは？</a>
+          <a href="../about/" class="active">アーバンネイチャー北九州とは？</a>
           <ul class="dropdown">
             <li><a href="../about/">全体像</a></li>
             <li><a href="../about/biodiversity.html">生物多様性とは？</a></li>
@@ -48,11 +49,10 @@
           </ul>
         </div>
         <div class="nav-item">
-          <a href="../network/" >ネットワーク</a>
+          <a href="../network/">ネットワーク</a>
           <ul class="dropdown">
             <li><a href="../network/">北九州ネイチャーポジティブネットワーク</a></li>
             <li><a href="../network/projects/">企業参加型プロジェクト</a></li>
-            
           </ul>
         </div>
         <div class="nav-item">
@@ -69,15 +69,15 @@
       <div class="header__actions">
         <a href="../contact/" class="btn btn--primary btn--sm">お問合せ</a>
         <button class="hamburger" aria-label="メニューを開く" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
       </div>
     </div>
   </header>
   <!-- モバイルナビ -->
-  <nav class="mobile-nav" id="js-mobile-nav">
+  <nav class="mobile-nav" id="js-mobile-nav" data-nav="mobile">
     <a href="../news/">お知らせ</a>
     <div class="mobile-nav__group">
       <div class="mobile-nav__parent">
@@ -104,7 +104,6 @@
       <div class="mobile-nav__children">
         <a href="../network/">北九州ネイチャーポジティブネットワーク</a>
         <a href="../network/projects/">企業参加型プロジェクト</a>
-        
       </div>
     </div>
     <div class="mobile-nav__group">
@@ -138,21 +137,22 @@
     </div>
   </nav>
   <!-- ページヘッダー -->
-  <section id="main-content" class="page-header" style="background-image: url('../images/2025/03/nature1.jpg'); background-size: cover; background-position: center center;">
+  <section id="main-content" class="page-header page-header--center-inochi" data-section="hero">
+  <template data-acf="hero_image" data-acf-type="image">../images/2025/03/nature1.jpg</template>
     <div class="container">
       <h1 class="page-header__title">いのちのたび博物館</h1>
       <p class="page-header__desc">自然史・歴史博物館</p>
     </div>
   </section>
   <!-- 施設詳細 -->
-  <section class="section section--white">
+  <section class="section section--white" data-section="facility_detail">
     <div class="container">
       <div class="facility-detail">
         <div class="facility-detail__gallery">
           <img src="../images/2026/03/inochi-1.jpg" alt="いのちのたび博物館外観">
         </div>
         <div>
-          <h2 style="font-size:1.3rem; color:var(--primary); margin-bottom:16px; border:none; padding:0;">施設情報</h2>
+          <h2 class="subsection-heading">施設情報</h2>
           <dl class="facility-detail__info-table">
             <dt>住所</dt>
             <dd>〒805-0071 北九州市八幡東区東田2-4-1</dd>
@@ -176,9 +176,9 @@
     </div>
   </section>
   <!-- 施設紹介 -->
-  <section class="section section--gray">
+  <section class="section section--gray" data-section="about">
     <div class="container">
-      <div class="content" style="max-width:800px; margin:0 auto;">
+      <div class="content content--narrow">
         <h2>施設について</h2>
         <p>北九州市立いのちのたび博物館は、西日本最大級の自然史・歴史博物館です。地球の誕生から生命の進化、人類の歴史まで、壮大なスケールの展示が魅力です。</p>
         <p>館内には恐竜の全身骨格標本をはじめ、北九州地域の自然史資料や歴史資料が数多く展示されています。エンバイラマ館では、中生代の白亜紀の世界をリアルに再現した体験型展示を楽しめます。</p>
@@ -187,13 +187,13 @@
     </div>
   </section>
   <!-- アクセスマップ -->
-  <section class="section section--white">
+  <section class="section section--white" data-section="access">
     <div class="container">
       <h2 class="section__title">アクセスマップ</h2>
-      <div style="border-radius:12px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.1); margin-top:24px;">
+      <div class="map-frame">
         <iframe
           src="https://maps.google.com/maps?q=%E5%8C%97%E4%B9%9D%E5%B7%9E%E5%B8%82%E5%85%AB%E5%B9%A1%E6%9D%B1%E5%8C%BA%E6%9D%B1%E7%94%B02-4-1&output=embed&hl=ja"
-          width="100%" height="420" style="border:0; display:block;"
+          width="100%" height="420"
           allowfullscreen="" loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
           title="施設の地図"></iframe>
@@ -201,65 +201,65 @@
     </div>
   </section>
   <!-- イベント（プレースホルダ） -->
-  <section class="section section--white">
+  <section class="section section--white" data-section="related_events">
     <div class="container">
       <h2 class="section__title">この施設のイベント</h2>
       <p class="section__subtitle">いのちのたび博物館で開催予定のイベント</p>
-      <div style="text-align:center; padding:40px; color:var(--text-muted);">
+      <div class="empty-state-note">
         <p>現在予定されているイベントはありません。</p>
-        <a href="../events/" class="btn btn--outline btn--sm" style="margin-top:16px;">全てのイベントを見る</a>
+        <a href="../events/" class="btn btn--outline btn--sm mt-16">全てのイベントを見る</a>
       </div>
     </div>
   </section>
   <!-- 戻るリンク -->
-  <section class="section section--white" style="padding:32px 0;">
-    <div class="container" style="text-align:center;">
+  <section class="section section--white section-pad" data-section="back_link">
+    <div class="container text-center">
       <a href="../center/" class="btn btn--outline">← センター一覧に戻る</a>
     </div>
   </section>
   <!-- CTA -->
-  <section class="cta-band" style="background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('../images/cta-bg.png'); background-size: cover; background-position: center;">
+  <section class="cta-band" data-common="cta">
     <div class="container">
-      <h2 class="cta-band__title">お気軽にお問合せください</h2>
+      <h2 class="cta-band__title" data-acf="cta_band_title">お気軽にお問合せください</h2>
       <div class="cta-band__buttons">
         <a href="../contact/" class="btn btn--solid-white btn--lg">お問合せ</a>
       </div>
     </div>
   </section>
   <!-- フッター -->
-  <footer class="footer">
+              <footer class="footer" data-common="footer">
     <div class="container">
       <div class="footer__grid">
         <div>
           <span class="footer__brand-name">アーバンネイチャー北九州</span>
-          <p class="footer__desc">都市と自然が近接する北九州市の強みを活かし、市民・企業・行政が一体となってネイチャーポジティブの実現を目指すプラットフォームです。</p>
+          <p class="footer__desc" data-acf="footer_text">都市と自然が近接する北九州市の強みを活かし、市民・企業・行政が一体となってネイチャーポジティブの実現を目指すプラットフォームです。</p>
         </div>
         <div>
-          <h3 class="footer__heading">アーバンネイチャー北九州とは？</h3>
-          <div class="footer__links">
+          <h3 class="footer__heading" data-acf="footer_title_1">アーバンネイチャー北九州とは？</h3>
+          <div class="footer__links" data-nav="footer_about">
             <a href="../about/">全体像</a>
             <a href="../about/biodiversity.html">生物多様性とは？</a>
             <a href="../about/strategy.html">北九州市の取組</a>
             <a href="../center/">活動拠点</a>
             <a href="../about/spots.html">北九州市の自然スポット</a>
           </div>
-          <h3 class="footer__heading" style="margin-top:24px">ネットワーク</h3>
-          <div class="footer__links">
+          <h3 class="footer__heading footer__heading--spaced" data-acf="footer_title_3">ネットワーク</h3>
+          <div class="footer__links" data-nav="footer_network">
             <a href="../network/">北九州ネイチャーポジティブ<br class="footer__br">ネットワーク</a>
             <a href="../network/projects/">企業参加型プロジェクト</a>
           </div>
         </div>
         <div>
-          <h3 class="footer__heading">活動紹介</h3>
-          <div class="footer__links">
+          <h3 class="footer__heading" data-acf="footer_title_2">活動紹介</h3>
+          <div class="footer__links" data-nav="footer_cases">
             <a href="../network/cases/">ネイチャーポジティブ実践事例</a>
             <a href="../blog/">企業の活動ブログ</a>
             <a href="../blog/organization.html">団体等の活動ブログ</a>
           </div>
         </div>
         <div>
-          <h3 class="footer__heading">その他</h3>
-          <div class="footer__links">
+          <h3 class="footer__heading" data-acf="footer_title_4">その他</h3>
+          <div class="footer__links" data-nav="footer_other">
             <a href="../events/">イベントを探す</a>
             <a href="../news/">お知らせ</a>
             <a href="../photos/">みんなの写真展</a>
