@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="アーバンネイチャー北九州の全体像。生物多様性、ネイチャーポジティブ、アーバンネイチャーの3層構造で北九州市の自然共生を理解する。">
+  <meta name="keywords" content="アーバンネイチャー,北九州,生物多様性,ネイチャーポジティブ,都市と自然">
+  <!-- ファビコン -->
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../favicon.svg">
+  <!-- OGP -->
+  <meta property="og:title" content="全体像 | アーバンネイチャー北九州">
+  <meta property="og:description" content="アーバンネイチャー北九州の全体像。生物多様性、ネイチャーポジティブ、アーバンネイチャーの3層構造で北九州市の自然共生を理解する。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ai-yoshitani.github.io/nature-kitakyushu/about/">
+  <meta property="og:image" content="https://ai-yoshitani.github.io/nature-kitakyushu/images/2025/03/main1-scaled.jpg">
+  <meta property="og:site_name" content="アーバンネイチャー北九州">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="全体像 | アーバンネイチャー北九州">
+  <meta name="twitter:description" content="アーバンネイチャー北九州の全体像。生物多様性、ネイチャーポジティブ、アーバンネイチャーの3層構造で北九州市の自然共生を理解する。">
+  <meta name="twitter:image" content="https://ai-yoshitani.github.io/nature-kitakyushu/images/2025/03/main1-scaled.jpg">
+  <title>全体像 | アーバンネイチャー北九州</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* 全体像ページ固有スタイル */
+    .concept-pyramid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      margin: 48px auto;
+      max-width: 800px;
+    }
+    .concept-pyramid__level {
+      position: relative;
+      text-align: center;
+      padding: 32px 40px;
+      color: #fff;
+      border-radius: 0;
+      width: 100%;
+      transition: transform 0.3s ease;
+    }
+    .concept-pyramid__level:hover {
+      transform: scale(1.02);
+    }
+    /* 逆三角形（倒立ピラミッド）：生物多様性が広い上段、アーバンネイチャーが先端の下段 */
+    .concept-pyramid__level--base {
+      background: linear-gradient(135deg, #1e4320, #2C5F2D);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 5% 100%);
+      padding: 40px 60px;
+    }
+    .concept-pyramid__level--middle {
+      background: linear-gradient(135deg, #2C5F2D, #3a7a3c);
+      clip-path: polygon(5% 0%, 95% 0%, 90% 100%, 10% 100%);
+      padding: 36px 80px;
+      width: 90%;
+    }
+    .concept-pyramid__level--top {
+      background: linear-gradient(135deg, #97BC62, #7aa644);
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      clip-path: polygon(10% 0%, 90% 0%, 85% 100%, 15% 100%);
+      padding: 36px 100px;
+      width: 80%;
+    }
+    .concept-pyramid__number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .concept-pyramid__title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .concept-pyramid__desc {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+    .concept-pyramid__icon {
+      margin: 10px auto 12px;
+      display: flex;
+      justify-content: center;
+    }
+    .concept-pyramid__icon svg {
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.18));
+    }
+    .concept-pyramid__arrow {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin: -4px 0;
+      z-index: 1;
+    }
+    .nature-spots {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin: 32px 0;
+    }
+    .nature-spot {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 2px 12px var(--shadow);
+      transition: all 0.3s ease;
+    }
+    .nature-spot:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px var(--shadow-md);
+    }
+    .nature-spot__photo {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+    }
+    .nature-spot__body {
+      padding: 16px 20px 20px;
+      border-top: 3px solid var(--secondary);
+    }
+    .nature-spot__name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .nature-spot__desc {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+    .page-nav {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin: 48px 0 0;
+    }
+    .page-nav__card {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: 0 2px 12px var(--shadow);
+      text-decoration: none;
+      color: var(--text);
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+    .page-nav__card:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px var(--shadow-md);
+      color: var(--text);
+    }
+    .page-nav__card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .page-nav__card-desc {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      line-height: 1.6;
+      flex: 1;
+    }
+    .page-nav__card-link {
+      margin-top: 16px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+    @media (max-width: 480px) {
+      .nature-spots {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 768px) {
+      .concept-pyramid__level {
+        padding: 24px 20px;
+      }
+      .concept-pyramid__level--base {
+        clip-path: polygon(0% 0%, 100% 0%, 98% 100%, 2% 100%);
+        padding: 28px 24px;
+      }
+      .concept-pyramid__level--middle {
+        clip-path: polygon(2% 0%, 98% 0%, 96% 100%, 4% 100%);
+        padding: 28px 24px;
+        width: 95%;
+      }
+      .concept-pyramid__level--top {
+        clip-path: polygon(4% 0%, 96% 0%, 94% 100%, 6% 100%);
+        padding: 28px 24px;
+        width: 90%;
+      }
+      .concept-pyramid__title {
+        font-size: 1.1rem;
+      }
+      .nature-spots {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .page-nav {
+        grid-template-columns: 1fr;
+      }
+    }
+    /* =========================================
+       about-intro: 公式感を冒頭で立てるセクション
+       ========================================= */
+    .about-intro__inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .about-intro__body {
+      margin-bottom: 32px;
+    }
+    .about-intro__heading {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+    .about-intro__lead {
+      font-size: 0.98rem;
+      line-height: 1.85;
+    }
+    /* 新たに追加 */
+    .about-intro__lead span{
+      font-size: 1.2rem;
+      line-height: 1.85;
+    }
+    .marker-underline {
+      background-image: linear-gradient(to bottom, transparent 70%, rgb(184, 217, 198) 70%);
+      background-repeat: no-repeat;
+      /* テキストの折り返しに対応させるために必須 */
+      display: inline;
+      /* 線と文字の重なりを調整したい場合、わずかにパディングを入れる */
+      padding-bottom: 11px; 
+    }
+    /* ここまで */
+    .about-intro__mayor {
+      display: flex;
+      gap: 36px;
+      align-items: center;
+      background: linear-gradient(135deg, rgba(44,95,45,0.05), rgba(151,188,98,0.10));
+      border-radius: var(--radius-lg);
+      padding: 28px 36px;
+      margin: 0;
+    }
+    .about-intro__mayor-photo {
+      width: 160px;
+      height: auto;
+      flex-shrink: 0;
+      border-radius: var(--radius);
+    }
+    .about-intro__mayor-caption {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .about-intro__mayor-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 0.04em;
+    }
+    .about-intro__mayor-quote {
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.8;
+      color: var(--text);
+      margin: 0;
+      padding-left: 16px;
+      border-left: 3px solid var(--primary);
+    }
+    .about-intro__mayor-cite {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      font-style: normal;
+    }
+    /* ネイチャーポジティブブロック */
+    .about-intro__np-block {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      align-items: center;
+      background: linear-gradient(135deg, rgba(44,95,45,0.06), rgba(151,188,98,0.10));
+      border-left: 4px solid var(--primary);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 24px 28px;
+      margin-top: 32px;
+    }
+    .about-intro__np-body {
+      width: 100%;
+    }
+    .about-intro__np-visual {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .about-intro__np-visual img {
+      max-width: 100%;
+      height: auto;
+    }
+    .about-intro__np-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .about-intro__np-text {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      margin: 0;
+    }
+    /* 世界的背景 */
+    .world-context {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .world-context__card {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      box-shadow: 0 2px 12px var(--shadow);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .world-context__card--crisis  { border-top: 4px solid #c94040; }
+    .world-context__card--extinct { border-top: 4px solid #c96030; }
+    .world-context__card--positive{ border-top: 4px solid var(--primary); }
+    .world-context__num {
+      font-size: 1.9rem;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+    .world-context__card--crisis  .world-context__num { color: #c94040; }
+    .world-context__card--extinct .world-context__num { color: #c96030; }
+    .world-context__card--positive .world-context__num { color: var(--primary); }
+    .world-context__label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-light);
+    }
+    .world-context__title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      border-bottom: 2px solid #e8e8e8;
+      padding-bottom: 8px;
+      width: 100%;
+    }
+    .world-context__body {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.75;
+      text-align: left;
+      flex: 1;
+    }
+    @media (max-width: 768px) {
+      .world-context { grid-template-columns: 1fr; }
+    }
+    /* =========================================
+       about-cycle: 取組サイクル（3ステップ）
+       ========================================= */
+    .cycle-cards {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      margin: 40px 0 0;
+    }
+    .cycle-card {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      padding: 32px 24px;
+      box-shadow: 0 2px 12px var(--shadow);
+      text-align: center;
+      border-top: 4px solid var(--primary);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .cycle-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px var(--shadow-md);
+    }
+    .cycle-card__step {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      align-self: center;
+    }
+    .cycle-card__icon {
+      margin: 0 auto 12px;
+      display: flex;
+      justify-content: center;
+    }
+    .cycle-card__subtitle {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+      letter-spacing: 0.04em;
+    }
+    .cycle-card__title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .cycle-card__desc {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.65;
+    }
+    .cycle-card__arrow {
+      align-self: center;
+      font-size: 1.6rem;
+      color: var(--primary);
+      padding: 0 12px;
+      flex-shrink: 0;
+      opacity: 0.4;
+    }
+    @media (max-width: 768px) {
+      .about-intro__mayor {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+      }
+      .about-intro__mayor-photo {
+        width: 120px;
+      }
+      .about-intro__mayor-quote {
+        text-align: left;
+      }
+      .cycle-cards {
+        flex-direction: column;
+        gap: 16px;
+      }
+      .cycle-card__arrow {
+        transform: rotate(90deg);
+        padding: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">メインコンテンツへスキップ</a>
+  <!-- ヘッダー -->
+  <header class="header">
+    <div class="header__inner">
+      <a href="../" class="header__logo">
+        <img src="../images/2026/02/logo.png" alt="アーバンネイチャー北九州" width="160" height="40"><span class="header__logo-sub" aria-hidden="true">北九州市生物多様性戦略 2025–2030</span>
+      </a>
+            <nav class="header__nav" aria-label="メインナビゲーション">
+        <a href="../news/" >お知らせ</a>
+        <div class="nav-item">
+          <a href="../about/" class="active" >アーバンネイチャー北九州とは？</a>
+          <ul class="dropdown">
+            <li><a href="../about/">全体像</a></li>
+            <li><a href="../about/biodiversity.html">生物多様性とは？</a></li>
+            <li><a href="../about/strategy.html">北九州市の取組</a></li>
+            <li><a href="../center/">活動拠点</a></li>
+            <li><a href="../about/spots.html">北九州市の自然スポット</a></li>
+          </ul>
+        </div>
+        <div class="nav-item">
+          <a href="../network/" >ネットワーク</a>
+          <ul class="dropdown">
+            <li><a href="../network/">北九州ネイチャーポジティブネットワーク</a></li>
+            <li><a href="../network/projects/">企業参加型プロジェクト</a></li>
+            
+          </ul>
+        </div>
+        <div class="nav-item">
+          <a href="../network/cases/">活動紹介</a>
+          <ul class="dropdown">
+            <li><a href="../network/cases/">ネイチャーポジティブ実践事例</a></li>
+            <li><a href="../blog/">企業の活動ブログ</a></li>
+            <li><a href="../blog/organization.html">団体等の活動ブログ</a></li>
+          </ul>
+        </div>
+        <a href="../events/" >イベントを探す</a>
+        <a href="../photos/" >みんなの写真展</a>
+      </nav>
+      <div class="header__actions">
+        <a href="../contact/" class="btn btn--primary btn--sm">お問合せ</a>
+        <button class="hamburger" aria-label="メニューを開く" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <!-- モバイルナビ -->
+  <nav class="mobile-nav" id="js-mobile-nav">
+    <a href="../news/">お知らせ</a>
+    <div class="mobile-nav__group">
+      <div class="mobile-nav__parent">
+        <a href="../about/">アーバンネイチャー北九州とは？</a>
+        <button class="mobile-nav__toggle" aria-expanded="false" aria-label="サブメニューを開く">
+          <span class="mobile-nav__toggle-icon"></span>
+        </button>
+      </div>
+      <div class="mobile-nav__children">
+        <a href="../about/">全体像</a>
+        <a href="../about/biodiversity.html">生物多様性とは？</a>
+        <a href="../about/strategy.html">北九州市の取組</a>
+        <a href="../about/spots.html">北九州市の自然スポット</a>
+        <a href="../center/">活動拠点</a>
+      </div>
+    </div>
+    <div class="mobile-nav__group">
+      <div class="mobile-nav__parent">
+        <a href="../network/">ネットワーク</a>
+        <button class="mobile-nav__toggle" aria-expanded="false" aria-label="サブメニューを開く">
+          <span class="mobile-nav__toggle-icon"></span>
+        </button>
+      </div>
+      <div class="mobile-nav__children">
+        <a href="../network/">北九州ネイチャーポジティブネットワーク</a>
+        <a href="../network/projects/">企業参加型プロジェクト</a>
+        
+      </div>
+    </div>
+    <div class="mobile-nav__group">
+      <div class="mobile-nav__parent">
+        <a href="../network/cases/">活動紹介</a>
+        <button class="mobile-nav__toggle" aria-expanded="false" aria-label="サブメニューを開く">
+          <span class="mobile-nav__toggle-icon"></span>
+        </button>
+      </div>
+      <div class="mobile-nav__children">
+        <a href="../network/cases/">ネイチャーポジティブ実践事例</a>
+        <a href="../blog/">企業の活動ブログ</a>
+        <a href="../blog/organization.html">団体等の活動ブログ</a>
+      </div>
+    </div>
+    <a href="../events/">イベントを探す</a>
+    <a href="../photos/">みんなの写真展</a>
+    <a href="../contact/">お問合せ</a>
+    <div class="mobile-nav__cta">
+      <a href="../join/" class="btn btn--primary btn--block">参加する</a>
+    </div>
+  </nav>
+  <!-- パンくずリスト -->
+  <div class="breadcrumb">
+    <div class="container">
+      <ol class="breadcrumb__list">
+        <li><a href="../">トップ</a></li>
+        <li>アーバンネイチャー北九州とは？</li>
+      </ol>
+    </div>
+  </div>
+  <!-- ページヘッダー -->
+  <section class="page-header" style="background-image: url('../images/2025/03/main1-scaled.jpg'); background-size: cover; background-position: center center;">
+    <div class="container">
+      <h1 class="page-header__title">全体像</h1>
+      <p class="page-header__desc">都市と自然が近接する北九州市ならではの強みを活かし、ネイチャーポジティブな未来へ</p>
+    </div>
+  </section>
+  <!-- メインコンテンツ -->
+  <main id="main-content">
+    <!-- 公式感を冒頭で立てるセクション -->
+    <section class="section section--white about-intro" id="about-intro">
+      <div class="container about-intro__inner">
+        <!-- 見出し＋本文 -->
+        <div class="about-intro__body">
+          <h2 class="about-intro__heading">アーバンネイチャー北九州とは？</h2>
+          <p class="about-intro__lead"><span class="marker-underline">アーバンネイチャー北九州とは、北九州市の特徴である<strong>「都市と近接した豊かな自然」</strong>を表す言葉です。</span><br><br>北九州市は、市街地と豊かな自然が近接した全国でも特色ある都市です。鉄鋼・化学工業の街として発展してきた一方で、市域面積の約4割を森林が占め、響灘・周防灘・関門海峡の3つの海に囲まれるなど、豊かな自然環境に恵まれています。<br>このような<strong>「都市と近接した豊かな自然」</strong>を<strong>「アーバンネイチャー北九州」</strong>と名付け、都市と自然が近接する北九州市ならではの強みを活かし、世界目標「ネイチャーポジティブ」を市民・企業とともに実現することを目指しています。</p>
+        </div>
+        <!-- 市長メッセージ -->
+        <!-- TODO: 公式マスコット画像が入手できた場合は figure 内に追加する -->
+        <figure class="about-intro__mayor">
+          <img src="images/mayor.png" alt="北九州市長 武内 和久" class="about-intro__mayor-photo" loading="lazy">
+          <figcaption class="about-intro__mayor-caption">
+            <span class="about-intro__mayor-label">北九州市長メッセージ</span>
+            <blockquote class="about-intro__mayor-quote">
+              「北九州市が誇る、都市に近接する豊かな自然を『アーバンネイチャー北九州』と定義し、『都市と自然の共生』というネイチャーポジティブのグローバルモデルとなることを目指します。」
+            </blockquote>
+            <cite class="about-intro__mayor-cite">北九州市長 武内 和久｜出典：北九州市生物多様性戦略 2025-2030（令和7年5月）</cite>
+          </figcaption>
+        </figure>
+        <!-- ネイチャーポジティブ説明 -->
+        <div class="about-intro__np-block">
+          <div class="about-intro__np-body">
+            <div class="about-intro__np-title">ネイチャーポジティブとは？</div>
+            <p class="about-intro__np-text">ネイチャーポジティブとは、2022年12月に採択された「昆明・モントリオール生物多様性枠組（COP15）」で掲げられた世界共通の目標です。<strong>「自然の損失を止め、回復の軌道に乗せる」</strong>ことを意味し、2030年までに生物多様性の減少傾向を反転させることを目指しています。単に自然を守るだけでなく、自然をより豊かにしていく考え方であり、企業、行政、市民を含む社会全体に積極的な行動が求められています。</p>
+          </div>
+          <div class="about-intro__np-visual">
+             <img src="../images/2026/07/nature-positive_graph.png" alt="ネイチャーポジティブ：自然の損失を止め、回復に転換するグラフ" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- 世界的背景 -->
+    <section class="section section--white">
+      <div class="container">
+        <h2 class="section__title">世界的背景</h2>
+        <p class="section__subtitle">なぜ今、ネイチャーポジティブが必要なのか</p>
+        <div class="world-context">
+          <!-- 生物多様性の危機 -->
+          <div class="world-context__card world-context__card--crisis">
+            <svg width="60" height="60" viewBox="0 0 60 60" fill="none" aria-hidden="true">
+              <circle cx="30" cy="30" r="28" fill="rgba(201,64,64,0.08)"/>
+              <line x1="8" y1="48" x2="52" y2="48" stroke="#ddd" stroke-width="1.5"/>
+              <line x1="8" y1="14" x2="8" y2="48" stroke="#ddd" stroke-width="1.5"/>
+              <polyline points="10,20 22,30 34,26 50,44" stroke="#c94040" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M 44 44 L 50 44 L 50 38" stroke="#c94040" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="world-context__num">73%</div>
+            <div class="world-context__label">過去50年で野生生物が減少</div>
+            <h3 class="world-context__title">生物多様性の危機</h3>
+            <p class="world-context__body">世界の野生生物の個体群は過去50年間で平均73%減少しています（WWF「生きている地球レポート2024」）。生息地の破壊・汚染・外来種・気候変動が重なり、今この瞬間も多くの種が地球上から失われ続けています。</p>
+          </div>
+          <!-- 第6の絶滅 -->
+          <div class="world-context__card world-context__card--extinct">
+            <svg width="60" height="60" viewBox="0 0 60 60" fill="none" aria-hidden="true">
+              <circle cx="30" cy="30" r="28" fill="rgba(201,96,48,0.08)"/>
+              <!-- 残っている種（上段・濃い） -->
+              <circle cx="16" cy="22" r="5" fill="#c96030" opacity="0.9"/>
+              <circle cx="30" cy="18" r="5" fill="#c96030" opacity="0.9"/>
+              <circle cx="44" cy="22" r="5" fill="#c96030" opacity="0.9"/>
+              <!-- 失われた種（下段・薄い＋×） -->
+              <circle cx="16" cy="40" r="5" fill="#c96030" opacity="0.2"/>
+              <circle cx="30" cy="44" r="5" fill="#c96030" opacity="0.2"/>
+              <circle cx="44" cy="40" r="5" fill="#c96030" opacity="0.2"/>
+              <line x1="27" y1="41" x2="33" y2="47" stroke="#c96030" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+              <line x1="33" y1="41" x2="27" y2="47" stroke="#c96030" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+              <line x1="13" y1="37" x2="19" y2="43" stroke="#c96030" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+              <line x1="19" y1="37" x2="13" y2="43" stroke="#c96030" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+              <line x1="41" y1="37" x2="47" y2="43" stroke="#c96030" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+              <line x1="47" y1="37" x2="41" y2="43" stroke="#c96030" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+            </svg>
+            <div class="world-context__num">100〜1,000倍</div>
+            <div class="world-context__label">自然状態と比べた絶滅スピード</div>
+            <h3 class="world-context__title">第6の大量絶滅</h3>
+            <p class="world-context__body">現在の種の絶滅スピードは自然状態の約100〜1,000倍。隕石衝突や火山噴火が原因だった過去5度の大量絶滅と異なり、今回は<strong>人間活動が原因</strong>という点で前例のない危機です。食料・水・気候・健康など私たちの生活基盤に直結します。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ネイチャーポジティブとは -->
+    <section class="section section--gray">
+      <div class="container">
+        <div class="content">
+          <h2><a href="strategy.html" class="hover-underline">北九州市生物多様性戦略 2025–2030</a></h2>
+          <p>北九州市では、「北九州市生物多様性戦略2025-2030」に基づき、生物多様性の保全と回復を通じてネイチャーポジティブの実現を目指しています。</p>
+          <p>「都市と近接した豊かな自然」＝「アーバンネイチャー北九州」という北九州市ならではの特徴を生かし、人と自然が共生する持続可能なまちづくりに、市民、企業、教育・研究機関、行政など多様な主体が連携しながら取り組みます。</p>
+          <p>この取組を推進する中核組織として<strong>「北九州ネイチャーポジティブセンター」</strong>と<strong>「北九州ネイチャーポジティブネットワーク」</strong>を構築しました。</p>
+        </div>
+      </div>
+    </section>
+    <!-- 取組サイクル -->
+    <section class="section section--white about-cycle" id="about-cycle">
+      <div class="container">
+        <h2 class="section__title">当サイトの活用方法</h2>
+        <p class="section__subtitle">当サイトでは、北九州市の魅力あふれる自然や各種イベント情報を発信しています。<br>ネットワーク参画団体の皆さまは、活動や取組の情報を掲載・発信することができます。ぜひ当サイトをご活用ください。</p>
+        <div class="cycle-cards">
+          <div class="cycle-card">
+            <div class="cycle-card__step">1</div>
+            <div class="cycle-card__icon">
+              <svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+                <!-- ハートで「好き」を表現 -->
+                <path d="M22 36 C22 36 6 25 6 15 C6 10.8 9.2 8 13 8 C16 8 18.5 9.8 22 13 C25.5 9.8 28 8 31 8 C34.8 8 38 10.8 38 15 C38 25 22 36 22 36Z" fill="#2C5F2D" opacity="0.15"/>
+                <path d="M22 34 C22 34 8 24 8 15 C8 11.4 10.8 9 14 9 C16.8 9 19 10.6 22 14 C25 10.6 27.2 9 30 9 C33.2 9 36 11.4 36 15 C36 24 22 34 22 34Z" fill="#2C5F2D"/>
+                <path d="M16 15 Q18 12 22 14" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+              </svg>
+            </div>
+            <p class="cycle-card__subtitle">ファンになる</p>
+            <h3 class="cycle-card__title">知って・好きになる</h3>
+            <p class="cycle-card__desc">自然スポット紹介、写真展、イベント告知などで関心を持つ。<br>（自然や生き物のフリー写真素材も利用できます）</p>
+          </div>
+          <div class="cycle-card__arrow" aria-hidden="true">&#8594;</div>
+          <div class="cycle-card">
+            <div class="cycle-card__step">2</div>
+            <div class="cycle-card__icon">
+              <svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+                <!-- 人と木のつながり -->
+                <circle cx="14" cy="11" r="5" fill="#2C5F2D"/>
+                <rect x="11" y="16" width="6" height="14" rx="3" fill="#2C5F2D"/>
+                <circle cx="31" cy="16" r="10" fill="#97BC62" opacity="0.8"/>
+                <rect x="29" y="24" width="4" height="12" rx="2" fill="#97BC62" opacity="0.8"/>
+                <line x1="17" y1="22" x2="25" y2="22" stroke="#2C5F2D" stroke-width="2" stroke-dasharray="2 2"/>
+              </svg>
+            </div>
+            <p class="cycle-card__subtitle">活動する</p>
+            <h3 class="cycle-card__title">
+              <a href="../network/index.html" class="hover-underline">参加する・つながる</a>
+            </h3>
+            <p class="cycle-card__desc">イベントや保全活動、勉強会への参加。<br>ネットワークへの加入など。</p>
+          </div>
+          <div class="cycle-card__arrow" aria-hidden="true">&#8594;</div>
+          <div class="cycle-card">
+            <div class="cycle-card__step">3</div>
+            <div class="cycle-card__icon">
+              <svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+                <!-- 循環矢印：持続する仕組み -->
+                <path d="M22 8 A14 14 0 1 1 8 22" stroke="#2C5F2D" stroke-width="3" stroke-linecap="round" fill="none"/>
+                <path d="M8 22 A14 14 0 0 0 22 36" stroke="#97BC62" stroke-width="3" stroke-linecap="round" fill="none"/>
+                <!-- 矢印の頭（上） -->
+                <path d="M17 6 L22 8 L19 13" stroke="#2C5F2D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <!-- 矢印の頭（下） -->
+                <path d="M27 38 L22 36 L25 31" stroke="#97BC62" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <!-- 中心の葉 -->
+                <path d="M22 17 C26 15 30 19 22 27 C14 19 18 15 22 17Z" fill="#2C5F2D" opacity="0.25"/>
+              </svg>
+            </div>
+            <p class="cycle-card__subtitle">継続する</p>
+            <h3 class="cycle-card__title">
+              <a href="../network/cases/index.html" class="hover-underline">発信する・創出する</a>
+            </h3>
+            <p class="cycle-card__desc">取組や活動の紹介。ネットワークを活用した各主体間の連携事業の創出など。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- 関連ページナビ -->
+    <section class="section section--gray">
+      <div class="container">
+        <h2 class="section__title">さらに詳しく知る</h2>
+        <p class="section__subtitle">アーバンネイチャー北九州を構成する2つの重要テーマ</p>
+        <div class="page-nav">
+          <a href="biodiversity.html" class="page-nav__card">
+            <div class="page-nav__card-title">生物多様性</div>
+            <div class="page-nav__card-desc">なぜ生物多様性が重要なのか。生態系サービスの仕組み、国内外の動向、北九州市の自然資源を詳しく解説します。</div>
+            <div class="page-nav__card-link">詳しく見る &rarr;</div>
+          </a>
+          <a href="strategy.html" class="page-nav__card">
+            <div class="page-nav__card-title">北九州市生物多様性戦略</div>
+            <div class="page-nav__card-desc">北九州市の生物多様性戦略の基本方針・施策と、私たち一人ひとりにできる具体的なアクションを紹介します。</div>
+            <div class="page-nav__card-link">詳しく見る &rarr;</div>
+          </a>
+        </div>
+      </div>
+    </section>
+  <!-- CTA -->
+  <section class="cta-band" style="background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('../images/cta-bg.png'); background-size: cover; background-position: center;">
+    <div class="container">
+      <h2 class="cta-band__title">お気軽にお問合せください</h2>
+      <div class="cta-band__buttons">
+        <a href="../contact/" class="btn btn--solid-white btn--lg">お問合せ</a>
+      </div>
+    </div>
+  </section>
+  </main>
+  <!-- フッター -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <span class="footer__brand-name">アーバンネイチャー北九州</span>
+          <p class="footer__desc">都市と自然が近接する北九州市の強みを活かし、市民・企業・行政が一体となってネイチャーポジティブの実現を目指すプラットフォームです。</p>
+        </div>
+        <div>
+          <h3 class="footer__heading">アーバンネイチャー北九州とは？</h3>
+          <div class="footer__links">
+            <a href="../about/">全体像</a>
+            <a href="../about/biodiversity.html">生物多様性とは？</a>
+            <a href="../about/strategy.html">北九州市の取組</a>
+            <a href="../center/">活動拠点</a>
+            <a href="../about/spots.html">北九州市の自然スポット</a>
+          </div>
+          <h3 class="footer__heading" style="margin-top:24px">ネットワーク</h3>
+          <div class="footer__links">
+            <a href="../network/">北九州ネイチャーポジティブ<br class="footer__br">ネットワーク</a>
+            <a href="../network/projects/">企業参加型プロジェクト</a>
+          </div>
+        </div>
+        <div>
+          <h3 class="footer__heading">活動紹介</h3>
+          <div class="footer__links">
+            <a href="../network/cases/">ネイチャーポジティブ実践事例</a>
+            <a href="../blog/">企業の活動ブログ</a>
+            <a href="../blog/organization.html">団体等の活動ブログ</a>
+          </div>
+        </div>
+        <div>
+          <h3 class="footer__heading">その他</h3>
+          <div class="footer__links">
+            <a href="../events/">イベントを探す</a>
+            <a href="../news/">お知らせ</a>
+            <a href="../photos/">みんなの写真展</a>
+            <a href="../contact/">お問合せ</a>
+            <a href="../privacy/">プライバシーポリシー</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>Copyright (C) 2026 CITY OF KITAKYUSHU All Rights Reserved.</span>
+      </div>
+    </div>
+  </footer>
+  <script src="../js/main.js"></script>
+</body>
+</html>
