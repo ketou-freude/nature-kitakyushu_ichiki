@@ -19,25 +19,26 @@
   <meta name="twitter:title" content="九州電力株式会社 北九州支店 | 実践事例 | アーバンネイチャー北九州">
   <meta name="twitter:description" content="九州電力株式会社 北九州支店の実践事例。地域の自然資本を守り、次世代へつなぐ ～ネイチャーポジティブ経営と地域共生～">
   <meta name="twitter:image" content="https://ai-yoshitani.github.io/nature-kitakyushu/images/2026/09/kyushu-denryoku.jpg">
-  <title>九州電力株式会社 北九州支店 | 実践事例 | アーバンネイチャー北九州</title>
+  <title>九州電力株式会社 北九州支店 | 活動紹介 | アーバンネイチャー北九州</title>
   <meta name="description" content="九州電力株式会社 北九州支店の実践事例。地域の自然資本を守り、次世代へつなぐ ～ネイチャーポジティブ経営と地域共生～">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/page/case.css">
 </head>
-<body>
+<body data-page="single" data-cpt="case">
   <a class="skip-link" href="#main-content">メインコンテンツへスキップ</a>
   <!-- ヘッダー -->
-  <header class="header">
+            <header class="header" data-common="header">
     <div class="header__inner">
       <a href="../../" class="header__logo">
         <img src="../../images/2026/02/logo.png" alt="アーバンネイチャー北九州" width="160" height="40"><span class="header__logo-sub" aria-hidden="true">北九州市生物多様性戦略 2025–2030</span>
       </a>
-            <nav class="header__nav" aria-label="メインナビゲーション">
+      <nav class="header__nav" aria-label="メインナビゲーション" data-nav="global" data-nav-current="active">
         <a href="../../news/" >お知らせ</a>
         <div class="nav-item">
-          <a href="../../about/" >アーバンネイチャー北九州とは？</a>
+          <a href="../../about/">アーバンネイチャー北九州とは？</a>
           <ul class="dropdown">
             <li><a href="../../about/">全体像</a></li>
             <li><a href="../../about/biodiversity.html">生物多様性とは？</a></li>
@@ -47,11 +48,10 @@
           </ul>
         </div>
         <div class="nav-item">
-          <a href="../../network/" >ネットワーク</a>
+          <a href="../../network/">ネットワーク</a>
           <ul class="dropdown">
             <li><a href="../../network/">北九州ネイチャーポジティブネットワーク</a></li>
             <li><a href="../../network/projects/">企業参加型プロジェクト</a></li>
-            
           </ul>
         </div>
         <div class="nav-item">
@@ -68,13 +68,15 @@
       <div class="header__actions">
         <a href="../../contact/" class="btn btn--primary btn--sm">お問合せ</a>
         <button class="hamburger" aria-label="メニューを開く" aria-expanded="false">
-          <span></span><span></span><span></span>
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
       </div>
     </div>
   </header>
   <!-- モバイルナビ -->
-  <nav class="mobile-nav" id="js-mobile-nav">
+  <nav class="mobile-nav" id="js-mobile-nav" data-nav="mobile">
     <a href="../../news/">お知らせ</a>
     <div class="mobile-nav__group">
       <div class="mobile-nav__parent">
@@ -101,7 +103,6 @@
       <div class="mobile-nav__children">
         <a href="../../network/">北九州ネイチャーポジティブネットワーク</a>
         <a href="../../network/projects/">企業参加型プロジェクト</a>
-        
       </div>
     </div>
     <div class="mobile-nav__group">
@@ -124,66 +125,61 @@
       <a href="../../join/" class="btn btn--primary btn--block">参加する</a>
     </div>
   </nav>
-
   <!-- パンくずリスト -->
-  <nav class="breadcrumb" aria-label="パンくずリスト">
+  <nav class="breadcrumb" data-breadcrumb aria-label="パンくずリスト">
     <div class="container">
       <ol class="breadcrumb__list">
         <li><a href="../../">トップ</a></li>
-        <li><a href="../">ネットワーク</a></li>
-        <li><a href="./">活動紹介</a></li>
-        <li>九州電力株式会社 北九州支店</li>
+        <li><a href="../../network/">ネットワーク</a></li>
+        <li><a href="../../network/cases/">活動紹介</a></li>
+        <li aria-current="page">九州電力株式会社 北九州支店</li>
       </ol>
     </div>
   </nav>
-
+  <main id="main-content">
   <!-- ページヘッダー -->
-  <section class="page-header" id="main-content" style="background-image: url('../../images/2025/03/main1-scaled.jpg'); background-size: cover; background-position: center center;">
+  <section class="page-header page-header--case" data-section="hero" data-section-label="ページヘッダー">
     <div class="container">
-      <h1 class="page-header__title">地域の自然資本を守り、次世代へつなぐ<br>～ネイチャーポジティブ経営と地域共生～</h1>
-      <p class="page-header__desc">九州電力株式会社 北九州支店</p>
+      <h1 class="page-header__title" data-acf="hero_title" data-acf-type="textarea">地域の自然資本を守り、次世代へつなぐ<br>～ネイチャーポジティブ経営と地域共生～</h1>
+      <p class="page-header__desc" data-acf="company_name">九州電力株式会社 北九州支店</p>
     </div>
   </section>
-
   <!-- 企業情報 -->
-  <section class="section section--white">
+  <section class="section section--white" data-section="case_detail" data-section-label="企業情報">
     <div class="container">
-      <div style="max-width: 900px; margin: 0 auto;">
-
+      <div class="case-detail">
         <!-- メイン画像 -->
-        <div style="margin-bottom: 40px; border-radius: var(--radius-lg); overflow: hidden;">
-          <img src="../../images/2026/09/kyushu-denryoku.jpg" alt="九州電力株式会社 北九州支店 - 地域の自然資本を守り、次世代へつなぐ" style="width: 100%; height: auto;">
+        <div class="case-detail__image-wrap">
+          <img src="../../images/2026/09/kyushu-denryoku.jpg" alt="九州電力株式会社 北九州支店 - 地域の自然資本を守り、次世代へつなぐ" class="case-detail__image" data-acf="case_image">
         </div>
-
         <!-- 企業基本情報 -->
-        <div style="background: var(--bg); border-radius: var(--radius-lg); padding: 24px 32px; margin-bottom: 48px;">
+        <div class="case-detail__info">
           <div class="table-wrap">
             <table>
               <caption class="sr-only">九州電力株式会社 企業基本情報</caption>
               <tbody>
                 <tr>
-                  <th scope="row" style="width: 160px;">企業名</th>
-                  <td>九州電力株式会社</td>
+                  <th scope="row">企業名</th>
+                  <td data-acf="company_full_name">九州電力株式会社</td>
                 </tr>
                 <tr>
                   <th scope="row">業種</th>
-                  <td>電気業</td>
+                  <td data-acf="company_industry">電気業</td>
                 </tr>
                 <tr>
                   <th scope="row">設立</th>
-                  <td>1951年</td>
+                  <td data-acf="company_founded">1951年</td>
                 </tr>
                 <tr>
                   <th scope="row">所在地</th>
-                  <td>福岡県福岡市中央区渡辺通（北九州支店：福岡県北九州市小倉北区米町）</td>
+                  <td data-acf="company_address">福岡県福岡市中央区渡辺通（北九州支店：福岡県北九州市小倉北区米町）</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
-
         <!-- ストーリー -->
-        <div class="content">
+        <div class="content" data-acf="case_body" data-acf-type="wysiwyg">
 
           <h2>本業（電力事業）と直結した脱炭素と生物多様性保全の両立</h2>
 
@@ -213,61 +209,62 @@
           <p>九州電力北九州支店では、これまでの海岸清掃などの活動を継続しながら、2025年にスタートした響灘ビオトープでのコアジサシの営巣環境整備を、北九州のシンボリックな活動へ発展させていくことを目指しています。</p>
           <p>今後はさらに活動を継続・発展させるため、社内の若手人材の参画促進、他企業との交流・パートナーシップなどを柔軟に取り入れていく意向です。</p>
 
-          <div style="background: var(--bg); border-left: 4px solid var(--primary); border-radius: 0 var(--radius) var(--radius) 0; padding: 16px 24px; margin-top: 32px;">
-            <p style="margin: 0; font-size: 0.9rem;">※取り組みに関心をお持ちの企業・団体の方は、北九州ネイチャーポジティブネットワーク事務局までお問い合わせください。</p>
-          </div>
+        </div>
+        <div class="case-note">
+          <p data-acf="case_note" data-acf-type="textarea">※取り組みに関心をお持ちの企業・団体の方は、北九州ネイチャーポジティブネットワーク事務局までお問い合わせください。</p>
         </div>
         <!-- 戻るリンク -->
-        <div style="margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border);">
-          <a href="./" class="btn btn--outline">&larr; 実践事例一覧に戻る</a>
+        <div class="case-back-link">
+          <a href="../../network/cases/" class="btn btn--outline">&larr; 実践事例一覧に戻る</a>
         </div>
 
       </div>
     </div>
   </section>
   <!-- CTA -->
-  <section class="cta-band" style="background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('../../images/cta-bg.png'); background-size: cover; background-position: center;">
+  <section class="cta-band" data-common="cta">
     <div class="container">
-      <h2 class="cta-band__title">お気軽にお問合せください</h2>
+      <h2 class="cta-band__title" data-acf="cta_band_title">お気軽にお問合せください</h2>
       <div class="cta-band__buttons">
         <a href="../../contact/" class="btn btn--solid-white btn--lg">お問合せ</a>
       </div>
     </div>
   </section>
+  </main>
   <!-- フッター -->
-  <footer class="footer">
+            <footer class="footer" data-common="footer">
     <div class="container">
       <div class="footer__grid">
         <div>
           <span class="footer__brand-name">アーバンネイチャー北九州</span>
-          <p class="footer__desc">都市と自然が近接する北九州市の強みを活かし、市民・企業・行政が一体となってネイチャーポジティブの実現を目指すプラットフォームです。</p>
+          <p class="footer__desc" data-acf="footer_text">都市と自然が近接する北九州市の強みを活かし、市民・企業・行政が一体となってネイチャーポジティブの実現を目指すプラットフォームです。</p>
         </div>
         <div>
-          <h3 class="footer__heading">アーバンネイチャー北九州とは？</h3>
-          <div class="footer__links">
+          <h3 class="footer__heading" data-acf="footer_title_1">アーバンネイチャー北九州とは？</h3>
+          <div class="footer__links" data-nav="footer_about">
             <a href="../../about/">全体像</a>
             <a href="../../about/biodiversity.html">生物多様性とは？</a>
             <a href="../../about/strategy.html">北九州市の取組</a>
             <a href="../../center/">活動拠点</a>
             <a href="../../about/spots.html">北九州市の自然スポット</a>
           </div>
-          <h3 class="footer__heading" style="margin-top:24px">ネットワーク</h3>
-          <div class="footer__links">
+          <h3 class="footer__heading footer__heading--spaced" data-acf="footer_title_3">ネットワーク</h3>
+          <div class="footer__links" data-nav="footer_network">
             <a href="../../network/">北九州ネイチャーポジティブ<br class="footer__br">ネットワーク</a>
             <a href="../../network/projects/">企業参加型プロジェクト</a>
           </div>
         </div>
         <div>
-          <h3 class="footer__heading">活動紹介</h3>
-          <div class="footer__links">
+          <h3 class="footer__heading" data-acf="footer_title_2">活動紹介</h3>
+          <div class="footer__links" data-nav="footer_cases">
             <a href="../../network/cases/">ネイチャーポジティブ実践事例</a>
             <a href="../../blog/">企業の活動ブログ</a>
             <a href="../../blog/organization.html">団体等の活動ブログ</a>
           </div>
         </div>
         <div>
-          <h3 class="footer__heading">その他</h3>
-          <div class="footer__links">
+          <h3 class="footer__heading" data-acf="footer_title_4">その他</h3>
+          <div class="footer__links" data-nav="footer_other">
             <a href="../../events/">イベントを探す</a>
             <a href="../../news/">お知らせ</a>
             <a href="../../photos/">みんなの写真展</a>

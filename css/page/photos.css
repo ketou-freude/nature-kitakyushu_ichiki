@@ -1,0 +1,16 @@
+/* photos/* 共通スタイル（みんなの写真展 カテゴリ別ギャラリー） */
+.usage-note { background: rgba(44, 95, 45, 0.06); border-left: 4px solid var(--primary); padding: 20px 24px; border-radius: 0 var(--radius) var(--radius) 0; margin-bottom: 40px; font-size: 0.9rem; line-height: 1.7; color: var(--text-light); }
+.usage-note strong { color: var(--primary); }
+.photo-item { display: block; background: var(--bg-white); }
+.photo-item__label { display: block; padding: 12px 16px; font-size: 0.9rem; font-weight: 600; color: var(--primary); text-align: center; }
+.photo-gallery__lead { text-align: center; font-size: 1rem; line-height: 1.8; color: var(--text-light); margin-bottom: 32px; }
+.page-header--photos { background-image: url('../../images/2025/03/sarakurayama.jpg'); }
+/* cta-band は data-common="cta" の共通領域なので class 自体は他ページ（about/index.html 等）と
+   完全一致させる必要がある（L09）。背景画像はこの photos.css だけがスコープなので、
+   タグ属性を増やさずセレクタで復元する。 */
+.cta-band { background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('../../images/cta-bg.png'); background-size: cover; background-position: center; }
+.footer__heading--mt { margin-top: 24px; }
+
+/* photos/policy.html フォーム微調整（L12対応） */
+.consent-item__required { color: #e53e3e; font-size: 0.85rem; }
+.form-group__note { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }

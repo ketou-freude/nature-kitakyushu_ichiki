@@ -1,0 +1,18 @@
+.page-header--nature-symbiosis { background-image: url('../../images/2025/03/higata.jpg'); }
+.content--wide { max-width: 900px; }
+.highlight-box { background: linear-gradient(135deg, rgba(44, 95, 45, 0.05), rgba(151, 188, 98, 0.08)); border-radius: var(--radius-lg); padding: 40px; margin: 32px 0; border: 1px solid rgba(44, 95, 45, 0.1); }
+.highlight-box h3 { color: var(--primary); margin-top: 0; }
+.goal-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 32px 0; }
+.goal-card { background: var(--bg-white); border-radius: var(--radius-lg); padding: 32px 24px; text-align: center; box-shadow: 0 2px 12px var(--shadow); }
+.goal-card__number { font-size: 2.5rem; font-weight: 800; color: var(--primary); line-height: 1; margin-bottom: 8px; }
+.goal-card__label { font-size: 0.9rem; color: var(--text-light); margin-bottom: 12px; }
+.goal-card__desc { font-size: 0.85rem; color: var(--text-light); line-height: 1.6; }
+.sites-placeholder { background: var(--bg); border: 2px dashed var(--border); border-radius: var(--radius-lg); padding: 60px 40px; text-align: center; margin: 32px 0; }
+.sites-placeholder__icon { font-size: 3rem; margin-bottom: 16px; }
+.sites-placeholder__text { font-size: 1rem; color: var(--text-muted); margin-bottom: 8px; }
+.sites-placeholder__sub { font-size: 0.85rem; color: var(--text-muted); }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin: 32px 0; }
+@media (max-width: 768px) {
+  .goal-cards { grid-template-columns: 1fr; }
+  .two-col { grid-template-columns: 1fr; }
+}

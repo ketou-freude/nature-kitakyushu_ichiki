@@ -1,0 +1,4 @@
+.page-header--blog-organization { background-image: url('../../images/2025/03/b-2.jpg'); }
+.blog-organization-empty { grid-column: 1/-1; text-align: center; padding: 64px 0; }
+.blog-organization-empty__lead { font-size: 1.1rem; color: var(--text-sub); }
+.blog-organization-empty__soon { font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-top: 8px; }

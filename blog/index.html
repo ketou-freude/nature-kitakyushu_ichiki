@@ -20,33 +20,25 @@
   <meta name="twitter:description" content="ネットワーク参加団体による活動の記録をお届けします">
   <meta name="twitter:image" content="https://ai-yoshitani.github.io/nature-kitakyushu/images/2025/03/b-2.jpg">
   <title>企業の活動ブログ | アーバンネイチャー北九州</title>
+  <meta name="description" content="ネットワーク参加団体による活動の記録をお届けします">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css">
-  <style>
-    .blog-card { display: flex; flex-direction: column; }
-    .blog-card__image { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
-    .blog-card__body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
-    .blog-card__meta { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
-    .blog-card__date { font-size: 0.8rem; color: var(--text-muted); }
-    .blog-card__org { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; background: rgba(2, 128, 144, 0.1); color: var(--accent); }
-    .blog-card__title { font-size: 1rem; font-weight: 700; margin-bottom: 8px; line-height: 1.5; }
-    .blog-card__excerpt { font-size: 0.85rem; color: var(--text-light); line-height: 1.6; margin-top: auto; }
-  </style>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/page/blog.css">
 </head>
-<body>
+<body data-page="page" data-page-id="blog">
   <a class="skip-link" href="#main-content">メインコンテンツへスキップ</a>
   <!-- ヘッダー -->
-  <header class="header">
+              <header class="header" data-common="header">
     <div class="header__inner">
       <a href="../" class="header__logo">
         <img src="../images/2026/02/logo.png" alt="アーバンネイチャー北九州" width="160" height="40"><span class="header__logo-sub" aria-hidden="true">北九州市生物多様性戦略 2025–2030</span>
       </a>
-            <nav class="header__nav" aria-label="メインナビゲーション">
+      <nav class="header__nav" aria-label="メインナビゲーション" data-nav="global" data-nav-current="active">
         <a href="../news/" >お知らせ</a>
         <div class="nav-item">
-          <a href="../about/" >アーバンネイチャー北九州とは？</a>
+          <a href="../about/">アーバンネイチャー北九州とは？</a>
           <ul class="dropdown">
             <li><a href="../about/">全体像</a></li>
             <li><a href="../about/biodiversity.html">生物多様性とは？</a></li>
@@ -56,11 +48,10 @@
           </ul>
         </div>
         <div class="nav-item">
-          <a href="../network/" >ネットワーク</a>
+          <a href="../network/">ネットワーク</a>
           <ul class="dropdown">
             <li><a href="../network/">北九州ネイチャーポジティブネットワーク</a></li>
             <li><a href="../network/projects/">企業参加型プロジェクト</a></li>
-            
           </ul>
         </div>
         <div class="nav-item">
@@ -77,13 +68,16 @@
       <div class="header__actions">
         <a href="../contact/" class="btn btn--primary btn--sm">お問合せ</a>
         <button class="hamburger" aria-label="メニューを開く" aria-expanded="false">
-          <span></span><span></span><span></span>
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
       </div>
     </div>
   </header>
   <!-- モバイルナビ -->
-  <nav class="mobile-nav" id="js-mobile-nav">
+  <nav class="mobile-nav" id="js-mobile-nav" data-nav="mobile">
+    <a href="../news/">お知らせ</a>
     <div class="mobile-nav__group">
       <div class="mobile-nav__parent">
         <a href="../about/">アーバンネイチャー北九州とは？</a>
@@ -109,7 +103,6 @@
       <div class="mobile-nav__children">
         <a href="../network/">北九州ネイチャーポジティブネットワーク</a>
         <a href="../network/projects/">企業参加型プロジェクト</a>
-        
       </div>
     </div>
     <div class="mobile-nav__group">
@@ -126,7 +119,6 @@
       </div>
     </div>
     <a href="../events/">イベントを探す</a>
-    <a href="../news/">お知らせ</a>
     <a href="../photos/">みんなの写真展</a>
     <a href="../contact/">お問合せ</a>
     <div class="mobile-nav__cta">
@@ -134,156 +126,91 @@
     </div>
   </nav>
   <!-- パンくずリスト -->
-  <nav class="breadcrumb" aria-label="パンくずリスト">
+  <nav class="breadcrumb" data-breadcrumb aria-label="パンくず">
     <div class="container">
       <ol class="breadcrumb__list">
         <li><a href="../">トップ</a></li>
         <li><a href="../network/cases/">活動紹介</a></li>
-        <li>企業の活動ブログ</li>
+        <li aria-current="page">企業の活動ブログ</li>
       </ol>
     </div>
   </nav>
   <!-- ページヘッダー -->
-  <div class="page-header" id="main-content" style="background-image: url('../images/2025/03/b-2.jpg'); background-size: cover; background-position: center center;">
+  <section class="page-header page-header--blog" data-section="page_header" data-section-label="ページヘッダー">
+    <template data-acf="hero_image" data-acf-type="image">../images/2025/03/b-2.jpg</template>
     <div class="container">
-      <h1 class="page-header__title">企業の活動ブログ</h1>
-      <p class="page-header__desc">ネットワーク参加団体による活動の記録をお届けします</p>
-    </div>
-  </div>
-  <!-- ブログ一覧 -->
-  <section class="section section--white">
-    <div class="container">
-      <div class="card-grid">
-        <!-- 旧記事（非表示）
-
-        <a href="#" class="card blog-card">
-          <img src="../images/2025/04/IMG_9308-450x450.jpg" alt="曽根干潟の渡り鳥観察レポート" class="blog-card__image">
-          <div class="blog-card__body">
-            <div class="blog-card__meta">
-              <span class="blog-card__date">2026.04.10</span>
-              <span class="blog-card__org">日本野鳥の会 北九州</span>
-            </div>
-            <h3 class="blog-card__title">曽根干潟の渡り鳥観察レポート ― 春の飛来状況</h3>
-            <p class="blog-card__excerpt">今年も曽根干潟に多くの渡り鳥が飛来しています。シギ・チドリ類を中心に、今年の飛来状況をレポートします。</p>
-          </div>
-        </a>
-        <a href="#" class="card blog-card">
-          <img src="../images/2025/08/APC_3057-450x450.jpg" alt="山田緑地の森づくり活動" class="blog-card__image">
-          <div class="blog-card__body">
-            <div class="blog-card__meta">
-              <span class="blog-card__date">2026.03.28</span>
-              <span class="blog-card__org">山田緑地を育てる会</span>
-            </div>
-            <h3 class="blog-card__title">山田緑地の森づくり ― 市民参加型の植樹活動を実施</h3>
-            <p class="blog-card__excerpt">3月の植樹祭では50名を超える市民が参加し、広葉樹の苗木200本を植えました。活動の様子をお伝えします。</p>
-          </div>
-        </a>
-        <a href="#" class="card blog-card">
-          <img src="../images/2025/04/IMG_8920-450x450.jpg" alt="響灘ビオトープの生き物調査" class="blog-card__image">
-          <div class="blog-card__body">
-            <div class="blog-card__meta">
-              <span class="blog-card__date">2026.03.15</span>
-              <span class="blog-card__org">響灘ビオトープ管理組合</span>
-            </div>
-            <h3 class="blog-card__title">響灘ビオトープ 早春の生き物調査結果</h3>
-            <p class="blog-card__excerpt">2月から3月にかけて実施した生き物調査の結果をまとめました。今年は新たに3種の希少植物が確認されました。</p>
-          </div>
-        </a>
-        <a href="#" class="card blog-card">
-          <img src="../images/2025/08/APC_9078-450x450.jpg" alt="紫川の水質モニタリング" class="blog-card__image">
-          <div class="blog-card__body">
-            <div class="blog-card__meta">
-              <span class="blog-card__date">2026.03.02</span>
-              <span class="blog-card__org">紫川を守る会</span>
-            </div>
-            <h3 class="blog-card__title">紫川の水質モニタリング ― 市民科学で河川環境を見守る</h3>
-            <p class="blog-card__excerpt">毎月実施している紫川の水質モニタリングの年間レポートです。水生昆虫の種類から水質の変化を追いかけます。</p>
-          </div>
-        </a>
-        <a href="#" class="card blog-card">
-          <img src="../images/2025/04/IMG_8956-450x450.jpg" alt="合馬の竹林保全活動" class="blog-card__image">
-          <div class="blog-card__body">
-            <div class="blog-card__meta">
-              <span class="blog-card__date">2026.02.20</span>
-              <span class="blog-card__org">合馬たけのこ振興会</span>
-            </div>
-            <h3 class="blog-card__title">合馬の竹林保全と農産物の魅力 ― 里山の恵みを次世代へ</h3>
-            <p class="blog-card__excerpt">北九州市の名産・合馬たけのこの竹林保全活動について、農家の方々と連携した取組をご紹介します。</p>
-          </div>
-        </a>
-        <a href="#" class="card blog-card">
-          <img src="../images/2025/08/APC_6257-450x450.jpg" alt="到津の森公園の動物たち" class="blog-card__image">
-          <div class="blog-card__body">
-            <div class="blog-card__meta">
-              <span class="blog-card__date">2026.02.05</span>
-              <span class="blog-card__org">到津の森公園</span>
-            </div>
-            <h3 class="blog-card__title">到津の森公園 冬の動物たちの暮らし</h3>
-            <p class="blog-card__excerpt">寒い冬でも元気な動物たちの様子をスタッフがレポート。飼育員ならではの視点で、動物たちの冬の過ごし方を紹介します。</p>
-          </div>
-        </a>
-      
-        -->
-        <a href="../news/20260228-2.html" class="card blog-card">
-          <img src="../images/2025/04/IMG_8920-450x450.jpg" alt="九州電力グループの活動報告" class="blog-card__image">
-          <div class="blog-card__body">
-            <div class="blog-card__meta">
-              <span class="blog-card__date">2026.06.10</span>
-              <span class="blog-card__org">九州電力グループ</span>
-            </div>
-            <h3 class="blog-card__title">九州電力グループの活動報告</h3>
-            <p class="blog-card__excerpt">響灘ビオトープ敷地内において渡り鳥営巣地の除草ボランティアを実施しました。参加者からは「環境保護への関心が高まった」という声が寄せられました。</p>
-          </div>
-        </a>
-        </div>
-      <div class="section__more">
-        <a href="#" class="btn btn--outline">もっと見る</a>
-      </div>
+      <h1 class="page-header__title" data-acf="page_header_title">企業の活動ブログ</h1>
+      <p class="page-header__desc" data-acf="page_header_desc">ネットワーク参加団体による活動の記録をお届けします</p>
     </div>
   </section>
+  <!-- メインコンテンツ -->
+  <main id="main-content">
+    <!-- ブログ一覧 -->
+    <section class="section section--white" data-section="blog_list" data-section-label="ブログ一覧">
+      <div class="container">
+        <h2 class="sr-only">企業の活動ブログ一覧</h2>
+        <div class="card-grid">
+          <a href="../news/20260228-2.html" class="card blog-card">
+            <img src="../images/2025/04/IMG_8920-450x450.jpg" alt="九州電力グループの活動報告" class="blog-card__image" data-acf="card_1_image">
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <span class="blog-card__date" data-acf="card_1_date" data-acf-type="text">2026.06.10</span>
+                <span class="blog-card__org" data-acf="card_1_org" data-acf-type="text">九州電力グループ</span>
+              </div>
+              <h3 class="blog-card__title" data-acf="card_1_title">九州電力グループの活動報告</h3>
+              <p class="blog-card__excerpt" data-acf="card_1_excerpt">響灘ビオトープ敷地内において渡り鳥営巣地の除草ボランティアを実施しました。参加者からは「環境保護への関心が高まった」という声が寄せられました。</p>
+            </div>
+          </a>
+        </div>
+        <div class="section__more">
+          <a href="#" class="btn btn--outline">もっと見る</a>
+        </div>
+      </div>
+    </section>
   <!-- CTA -->
-  <section class="cta-band" style="background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('../images/cta-bg.png'); background-size: cover; background-position: center;">
+  <section class="cta-band" data-common="cta">
     <div class="container">
-      <h2 class="cta-band__title">お気軽にお問合せください</h2>
+      <h2 class="cta-band__title" data-acf="cta_band_title">お気軽にお問合せください</h2>
       <div class="cta-band__buttons">
         <a href="../contact/" class="btn btn--solid-white btn--lg">お問合せ</a>
       </div>
     </div>
   </section>
+  </main>
   <!-- フッター -->
-  <footer class="footer">
+              <footer class="footer" data-common="footer">
     <div class="container">
       <div class="footer__grid">
         <div>
           <span class="footer__brand-name">アーバンネイチャー北九州</span>
-          <p class="footer__desc">都市と自然が近接する北九州市の強みを活かし、市民・企業・行政が一体となってネイチャーポジティブの実現を目指すプラットフォームです。</p>
+          <p class="footer__desc" data-acf="footer_text">都市と自然が近接する北九州市の強みを活かし、市民・企業・行政が一体となってネイチャーポジティブの実現を目指すプラットフォームです。</p>
         </div>
         <div>
-          <h3 class="footer__heading">アーバンネイチャー北九州とは？</h3>
-          <div class="footer__links">
+          <h3 class="footer__heading" data-acf="footer_title_1">アーバンネイチャー北九州とは？</h3>
+          <div class="footer__links" data-nav="footer_about">
             <a href="../about/">全体像</a>
             <a href="../about/biodiversity.html">生物多様性とは？</a>
             <a href="../about/strategy.html">北九州市の取組</a>
             <a href="../center/">活動拠点</a>
             <a href="../about/spots.html">北九州市の自然スポット</a>
           </div>
-          <h3 class="footer__heading" style="margin-top:24px">ネットワーク</h3>
-          <div class="footer__links">
+          <h3 class="footer__heading footer__heading--spaced" data-acf="footer_title_3">ネットワーク</h3>
+          <div class="footer__links" data-nav="footer_network">
             <a href="../network/">北九州ネイチャーポジティブ<br class="footer__br">ネットワーク</a>
             <a href="../network/projects/">企業参加型プロジェクト</a>
           </div>
         </div>
         <div>
-          <h3 class="footer__heading">活動紹介</h3>
-          <div class="footer__links">
+          <h3 class="footer__heading" data-acf="footer_title_2">活動紹介</h3>
+          <div class="footer__links" data-nav="footer_cases">
             <a href="../network/cases/">ネイチャーポジティブ実践事例</a>
             <a href="../blog/">企業の活動ブログ</a>
             <a href="../blog/organization.html">団体等の活動ブログ</a>
           </div>
         </div>
         <div>
-          <h3 class="footer__heading">その他</h3>
-          <div class="footer__links">
+          <h3 class="footer__heading" data-acf="footer_title_4">その他</h3>
+          <div class="footer__links" data-nav="footer_other">
             <a href="../events/">イベントを探す</a>
             <a href="../news/">お知らせ</a>
             <a href="../photos/">みんなの写真展</a>

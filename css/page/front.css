@@ -1,0 +1,696 @@
+/* data-page="front" 専用CSS。
+   共通の base.css で賄えない front page 固有のクラスのみを持つ。
+   旧モックの <style> 内 :root (--color-*) は base.css の変数と値が一致しないものが
+   あるため（--color-accent #028090 / --color-bg #fafaf5 / --color-dark #1a3a1b は
+   base.css の対応変数と値が異なる）、ここでは差し替えず元の見た目のまま
+   リテラル値に固定して移植している（見た目を1pxも変えないため）。
+   .stats* / .cta-band-title 系 / .network-grid・.blog-card 系・.tag-blog/.tag-case は
+   このページの本文に対応する要素が無い旧 <style> の死んだルールのため移植していない。 */
+
+body {
+  background-color: #fafaf5;
+}
+
+/* ===== ヒーロー ===== */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.hero-slides {
+  position: absolute;
+  inset: 0;
+}
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.12);
+  transition: opacity 1.2s ease;
+}
+.hero-slide.is-active {
+  opacity: 1;
+}
+.hero-slide:nth-child(1) {
+  background-image: url("../../images/2025/03/main1-scaled.jpg");
+  background-position: center center;
+}
+.hero-slide:nth-child(2) {
+  background-image: url("../../images/2025/03/b-2.jpg");
+  background-position: center 40%;
+}
+.hero-slide:nth-child(3) {
+  background-image: url("../../images/2025/03/wakamatsu-coast.jpg");
+  background-position: center center;
+}
+.hero-slide:nth-child(4) {
+  background-image: url("../../images/2025/03/sarakurayama.jpg");
+  background-position: center center;
+}
+.hero-slide:nth-child(5) {
+  background-image: url("../../images/2025/03/biotope.jpg");
+  background-position: center center;
+}
+.hero-slide:nth-child(6) {
+  background-image: url("../../images/2025/03/higata.jpg");
+  background-position: center 30%;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #ffffff;
+  padding: 40px 20px;
+  max-width: 800px;
+}
+.hero-catch {
+  font-size: clamp(2rem, 5.5vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1.35;
+  margin-bottom: 20px;
+  color: #ffffff;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+}
+.hero-sub {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-weight: 400;
+  line-height: 1.9;
+  margin-bottom: 40px;
+  color: #ffffff;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+}
+.hero-dots {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  gap: 10px;
+}
+.hero-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  transition:
+    background 0.3s,
+    transform 0.3s;
+}
+.hero-dot::before {
+  content: "";
+  position: absolute;
+  inset: -18px;
+}
+.hero-dot.is-active {
+  background: #ffffff;
+  transform: scale(1.3);
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  animation: front-hero-scroll-bounce 2s infinite;
+}
+.hero-scroll-arrow {
+  width: 20px;
+  height: 20px;
+  border-right: 2px solid rgba(255, 255, 255, 0.8);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.8);
+  transform: rotate(45deg);
+}
+@keyframes front-hero-scroll-bounce {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(6px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-scroll {
+    animation: none;
+  }
+  .facilities-track {
+    animation: none;
+  }
+}
+
+/* ===== 共通の見出し（section-title / section-subtitle） ===== */
+.section-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #2c5f2d;
+  text-align: center;
+  margin-bottom: 12px;
+}
+.section-subtitle {
+  font-size: 0.95rem;
+  color: #666666;
+  text-align: center;
+  margin-bottom: 48px;
+}
+.section-more {
+  text-align: center;
+  margin-top: 36px;
+}
+.more-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #2c5f2d;
+  transition: gap 0.2s;
+}
+.more-link:hover {
+  gap: 12px;
+}
+
+/* ===== お知らせ（latest_news） ===== */
+[data-section="latest_news"] {
+  padding: 80px 0;
+  background: #fff;
+}
+[data-loop="news"] {
+  margin-top: 40px;
+  border-top: 1px solid var(--border);
+}
+/* data-loop-item と data-loop-sample の両方に付く class で当てる
+   （L07: data-loop-sample の中に data-acf を書けないため、属性セレクタでは
+   サンプルカードの見た目が保てない。class 併用で解決する） */
+.newsfeed-badge {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: rgba(44, 95, 45, 0.12);
+  color: var(--primary);
+  padding: 3px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.newsfeed-date {
+  flex-shrink: 0;
+  font-size: 0.82rem;
+  color: var(--text-light);
+  white-space: nowrap;
+}
+.newsfeed-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ===== ペルソナ選択 ===== */
+.persona {
+  padding: 80px 0;
+  background: #f4f7f4;
+}
+.persona-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.persona-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 32px 28px;
+  border-radius: 16px;
+  background: #fff;
+  border: 2px solid transparent;
+  border-bottom: 4px solid #97bc62;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    transform 0.2s;
+  position: relative;
+}
+.persona-card:hover,
+.persona-card:focus-within {
+  border-color: #2c5f2d;
+  border-bottom-color: #2c5f2d;
+  box-shadow: 0 8px 24px rgba(44, 95, 45, 0.14);
+  transform: translateY(-4px);
+}
+.persona-icon {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+.persona-icon svg {
+  width: 34px;
+  height: 34px;
+  fill: none;
+  stroke: #2c5f2d;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.persona-label {
+  font-size: 1.15rem;
+  color: #2c5f2d;
+  font-weight: 800;
+  line-height: 1.3;
+}
+.persona-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #333333;
+  line-height: 1.5;
+}
+.persona-desc {
+  font-size: 0.83rem;
+  color: #666666;
+  line-height: 1.7;
+  flex-grow: 1;
+}
+.persona-arrow {
+  color: #97bc62;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 4px;
+  text-decoration: none;
+}
+@media (max-width: 639px) {
+  .persona-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (min-width: 640px) {
+  .persona-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .persona-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .persona-card {
+    padding: 28px 20px;
+  }
+}
+
+/* ===== 動画セクション（videos） ===== */
+[data-section="videos"] {
+  padding: 80px 0;
+  background: #fff;
+}
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+}
+/* SP: 3列のままだと1枚94px幅になりテキスト版が読めないため縦1列にする */
+@media (max-width: 768px) {
+  .video-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+.video-grid > div > div:first-child {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.video-grid > div:nth-child(1) > div:first-child,
+.video-grid > div:nth-child(2) > div:first-child {
+  background: #000;
+}
+.video-grid video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.video-grid iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+[data-acf^="videos_caption_"] {
+  margin-top: 12px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #2c5f2d;
+}
+[data-acf="videos_credit_2"],
+[data-acf="videos_subcaption_3"] {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 4px;
+}
+.video-transcript {
+  margin-top: 6px;
+}
+.video-transcript summary {
+  font-size: 0.8rem;
+  color: #028090;
+  cursor: pointer;
+  padding: 4px 0;
+}
+.video-transcript summary:hover {
+  text-decoration: underline;
+}
+.video-transcript__body {
+  margin-top: 8px;
+  padding: 12px 16px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: #444;
+}
+
+/* ===== 北九州市の自然スポット（featured_spots） ===== */
+[data-section="featured_spots"] {
+  padding: 80px 0;
+  background: #f5f7f5;
+}
+[data-loop="spot"] {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin: 40px 0 32px;
+}
+/* data-loop-item と data-loop-sample の両方に付く class で当てる（news 同様。L07） */
+.spotfeed-image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+}
+.spot-card-link > div {
+  padding: 16px;
+  background: #fff;
+}
+.spotfeed-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #2c5f2d;
+  margin-bottom: 4px;
+}
+.spotfeed-excerpt {
+  font-size: 0.8rem;
+  color: #666;
+  line-height: 1.5;
+}
+[data-section="featured_spots"] > .container > div:last-child {
+  text-align: center;
+}
+@media (min-width: 640px) {
+  [data-loop="spot"] {
+    /* SPは1列固定のため、ここは実質 min-width:640px 以上のみ効く上書き。値は元と同一 */
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ===== 活動拠点（facilities） ===== */
+.facilities {
+  padding: 80px 0;
+}
+.facilities-scroll {
+  overflow: hidden;
+  padding: 8px 0 24px;
+}
+.facilities-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: front-facilities-auto-scroll 50s linear infinite;
+}
+.facilities:hover .facilities-track {
+  animation-play-state: paused;
+}
+@keyframes front-facilities-auto-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.facility-card {
+  flex: 0 0 260px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+.facility-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+.facility-card-image {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #e0e0e0;
+}
+.facility-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.facility-card-name {
+  padding: 14px 16px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ===== 地域との繋がり（network） ===== */
+.network {
+  padding: 80px 0;
+  background: #fff;
+}
+.mine-card {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  color: inherit;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.mine-card-img {
+  flex: 0 0 44%;
+  max-width: 44%;
+}
+.mine-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  min-height: 260px;
+}
+.mine-card-body {
+  flex: 1;
+  padding: 40px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+/* 「地域との繋がり」の1件は data-loop ではなく固定の注目事例カード（4ループ:
+   spot/center/event/news には含まれない）。data-acf は .mine-card 配下に直接付く */
+.mine-card [data-acf="case_tag"] {
+  display: inline-block;
+  background: rgba(2, 128, 144, 0.1);
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 12px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+}
+.mine-card [data-acf="case_title"] {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+.mine-card [data-acf="case_catchcopy"] {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 14px;
+}
+.mine-card [data-acf="case_excerpt"] {
+  font-size: 0.88rem;
+  color: var(--text-light);
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+.mine-card-body > span:last-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+@media (max-width: 639px) {
+  .mine-card {
+    flex-direction: column;
+  }
+  .mine-card .mine-card-img {
+    max-width: 100%;
+    flex: none;
+  }
+  .mine-card .mine-card-body {
+    padding: 24px;
+  }
+}
+
+/* ===== イベントを探す（events） ===== */
+.events {
+  padding: 80px 0;
+}
+.events-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+.event-card {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+.event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+.event-card-image {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+.event-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.event-card-body {
+  padding: 20px;
+}
+.event-date {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #028090;
+  margin-bottom: 8px;
+}
+.event-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.event-card-meta {
+  font-size: 0.8rem;
+  color: #666666;
+}
+@media (min-width: 640px) {
+  .events-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 768px) {
+  .events-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ===== みんなの写真展（photos） ===== */
+.photos {
+  padding: 80px 0;
+  background: #fff;
+}
+.photos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.photo-category {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 1;
+  cursor: pointer;
+}
+.photo-category img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+.photo-category:hover img {
+  transform: scale(1.08);
+}
+.photo-category-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 40%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+}
+.photo-category-name {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+}
+@media (min-width: 640px) {
+  .photos-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ===== フッター（front page 固有の微調整） ===== */
+.footer__links + .footer__heading {
+  margin-top: 24px;
+}

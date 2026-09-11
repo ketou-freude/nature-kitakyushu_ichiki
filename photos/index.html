@@ -23,26 +23,22 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css">
-  <style>
-    .usage-note { background: rgba(44, 95, 45, 0.06); border-left: 4px solid var(--primary); padding: 20px 24px; border-radius: 0 var(--radius) var(--radius) 0; margin-bottom: 40px; font-size: 0.9rem; line-height: 1.7; color: var(--text-light); }
-    .usage-note strong { color: var(--primary); }
-    .photo-item { display: block; background: var(--bg-white); }
-    .photo-item__label { display: block; padding: 12px 16px; font-size: 0.9rem; font-weight: 600; color: var(--primary); text-align: center; }
-  </style>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/page/photos.css">
+
 </head>
-<body>
+<body data-page="page" data-page-id="photos">
   <a class="skip-link" href="#main-content">メインコンテンツへスキップ</a>
   <!-- ヘッダー -->
-  <header class="header">
+            <header class="header" data-common="header">
     <div class="header__inner">
       <a href="../" class="header__logo">
         <img src="../images/2026/02/logo.png" alt="アーバンネイチャー北九州" width="160" height="40"><span class="header__logo-sub" aria-hidden="true">北九州市生物多様性戦略 2025–2030</span>
       </a>
-            <nav class="header__nav" aria-label="メインナビゲーション">
+      <nav class="header__nav" aria-label="メインナビゲーション" data-nav="global" data-nav-current="active">
         <a href="../news/" >お知らせ</a>
         <div class="nav-item">
-          <a href="../about/" >アーバンネイチャー北九州とは？</a>
+          <a href="../about/">アーバンネイチャー北九州とは？</a>
           <ul class="dropdown">
             <li><a href="../about/">全体像</a></li>
             <li><a href="../about/biodiversity.html">生物多様性とは？</a></li>
@@ -52,11 +48,10 @@
           </ul>
         </div>
         <div class="nav-item">
-          <a href="../network/" >ネットワーク</a>
+          <a href="../network/">ネットワーク</a>
           <ul class="dropdown">
             <li><a href="../network/">北九州ネイチャーポジティブネットワーク</a></li>
             <li><a href="../network/projects/">企業参加型プロジェクト</a></li>
-            
           </ul>
         </div>
         <div class="nav-item">
@@ -73,13 +68,15 @@
       <div class="header__actions">
         <a href="../contact/" class="btn btn--primary btn--sm">お問合せ</a>
         <button class="hamburger" aria-label="メニューを開く" aria-expanded="false">
-          <span></span><span></span><span></span>
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
       </div>
     </div>
   </header>
   <!-- モバイルナビ -->
-  <nav class="mobile-nav" id="js-mobile-nav">
+  <nav class="mobile-nav" id="js-mobile-nav" data-nav="mobile">
     <a href="../news/">お知らせ</a>
     <div class="mobile-nav__group">
       <div class="mobile-nav__parent">
@@ -106,7 +103,6 @@
       <div class="mobile-nav__children">
         <a href="../network/">北九州ネイチャーポジティブネットワーク</a>
         <a href="../network/projects/">企業参加型プロジェクト</a>
-        
       </div>
     </div>
     <div class="mobile-nav__group">
@@ -130,7 +126,7 @@
     </div>
   </nav>
   <!-- パンくずリスト -->
-  <nav class="breadcrumb" aria-label="パンくずリスト">
+  <nav class="breadcrumb" aria-label="パンくずリスト" data-breadcrumb>
     <div class="container">
       <ol class="breadcrumb__list">
         <li><a href="../">トップ</a></li>
@@ -139,58 +135,58 @@
     </div>
   </nav>
   <!-- ページヘッダー -->
-  <div class="page-header" id="main-content" style="background-image: url('../images/2025/03/sarakurayama.jpg'); background-size: cover; background-position: center center;">
+  <div class="page-header page-header--photos" id="main-content">
     <div class="container">
-      <h1 class="page-header__title">みんなの写真展</h1>
-      <p class="page-header__desc">北九州市の自然写真を無料でご利用いただけます</p>
+      <h1 class="page-header__title" data-acf="page_header_title">みんなの写真展</h1>
+      <p class="page-header__desc" data-acf="page_header_text">北九州市の自然写真を無料でご利用いただけます</p>
     </div>
   </div>
   <!-- フリー素材ギャラリー -->
-  <section class="section section--white">
+  <section class="section section--white" data-section="gallery" data-section-label="フリー素材ギャラリー">
     <div class="container">
-      <p style="text-align:center; font-size:1rem; line-height:1.8; color:var(--text-light); margin-bottom:32px;">
+      <p class="photo-gallery__lead" data-acf="gallery_intro">
         写真アーカイブです。無料素材としてお使いいただけます。
       </p>
-      <div class="usage-note">
+      <div class="usage-note" data-acf="usage_note" data-acf-type="wysiwyg">
         <strong>ご利用について：</strong> 当サイトの写真素材を利用する場合は、<a href="../privacy/#photo-terms">コチラ</a>の事項に同意していただく必要がございます。 同意いただけない場合は利用できませんのでご注意ください。
       </div>
       <!-- カテゴリグリッド -->
       <div class="photo-grid">
         <a class="photo-item" href="sea.html">
-          <img src="../images/2025/04/20250419_031114641-450x450.jpg" alt="">
-          <span class="photo-item__label">海・干潟・ビオトープ</span>
+          <img data-acf="photo_1_image" src="../images/2025/04/20250419_031114641-450x450.jpg" alt="海・干潟・ビオトープ">
+          <span class="photo-item__label" data-acf="photo_1_label">海・干潟・ビオトープ</span>
         </a>
         <a class="photo-item" href="mountain.html">
-          <img src="../images/photos/hiraodai1/羊群原とキス岩-.jpg" alt="">
-          <span class="photo-item__label">山</span>
+          <img data-acf="photo_2_image" src="../images/photos/hiraodai1/羊群原とキス岩-.jpg" alt="山">
+          <span class="photo-item__label" data-acf="photo_2_label">山</span>
         </a>
         <a class="photo-item" href="river.html">
-          <img src="../images/2025/04/IMG_9012-450x450.jpg" alt="">
-          <span class="photo-item__label">川</span>
+          <img data-acf="photo_3_image" src="../images/2025/04/IMG_9012-450x450.jpg" alt="川">
+          <span class="photo-item__label" data-acf="photo_3_label">川</span>
         </a>
         <a class="photo-item" href="animal.html">
-          <img src="../images/2025/04/カルガモ-450x450.jpg" alt="">
-          <span class="photo-item__label">動物</span>
+          <img data-acf="photo_4_image" src="../images/2025/04/カルガモ-450x450.jpg" alt="動物">
+          <span class="photo-item__label" data-acf="photo_4_label">動物</span>
         </a>
         <a class="photo-item" href="plant.html">
-          <img src="../images/2025/03/sagisou-450x450.jpg" alt="">
-          <span class="photo-item__label">植物</span>
+          <img data-acf="photo_5_image" src="../images/2025/03/sagisou-450x450.jpg" alt="植物">
+          <span class="photo-item__label" data-acf="photo_5_label">植物</span>
         </a>
         <a class="photo-item" href="urbannature.html">
-          <img src="../images/2025/04/IMG_8716-450x450.jpg" alt="">
-          <span class="photo-item__label">街と自然</span>
+          <img data-acf="photo_6_image" src="../images/2025/04/IMG_8716-450x450.jpg" alt="街と自然">
+          <span class="photo-item__label" data-acf="photo_6_label">街と自然</span>
         </a>
         <a class="photo-item" href="produce.html">
-          <img src="../images/2025/04/IMG_8956-450x450.jpg" alt="">
-          <span class="photo-item__label">農産品</span>
+          <img data-acf="photo_7_image" src="../images/2025/04/IMG_8956-450x450.jpg" alt="農産品">
+          <span class="photo-item__label" data-acf="photo_7_label">農産品</span>
         </a>
         <a class="photo-item" href="etc.html">
-          <img src="../images/2025/04/20230517ハタケシメジ-450x450.jpg" alt="">
-          <span class="photo-item__label">昆虫・その他</span>
+          <img data-acf="photo_8_image" src="../images/2025/04/20230517ハタケシメジ-450x450.jpg" alt="昆虫・その他">
+          <span class="photo-item__label" data-acf="photo_8_label">昆虫・その他</span>
         </a>
         <a class="photo-item" href="contest.html">
-          <img src="../images/photos/photo-contest/9985.jpg" alt="">
-          <span class="photo-item__label">コンテスト作品</span>
+          <img data-acf="photo_9_image" src="../images/photos/photo-contest/9985.jpg" alt="コンテスト作品">
+          <span class="photo-item__label" data-acf="photo_9_label">コンテスト作品</span>
         </a>
       </div>
       <!--
@@ -322,48 +318,48 @@
     </div>
   </section>
   <!-- CTA -->
-  <section class="cta-band" style="background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('../images/cta-bg.png'); background-size: cover; background-position: center;">
+  <section class="cta-band" data-common="cta">
     <div class="container">
-      <h2 class="cta-band__title">お気軽にお問合せください</h2>
+      <h2 class="cta-band__title" data-acf="cta_band_title">お気軽にお問合せください</h2>
       <div class="cta-band__buttons">
         <a href="../contact/" class="btn btn--solid-white btn--lg">お問合せ</a>
       </div>
     </div>
   </section>
   <!-- フッター -->
-  <footer class="footer">
+            <footer class="footer" data-common="footer">
     <div class="container">
       <div class="footer__grid">
         <div>
           <span class="footer__brand-name">アーバンネイチャー北九州</span>
-          <p class="footer__desc">都市と自然が近接する北九州市の強みを活かし、市民・企業・行政が一体となってネイチャーポジティブの実現を目指すプラットフォームです。</p>
+          <p class="footer__desc" data-acf="footer_text">都市と自然が近接する北九州市の強みを活かし、市民・企業・行政が一体となってネイチャーポジティブの実現を目指すプラットフォームです。</p>
         </div>
         <div>
-          <h3 class="footer__heading">アーバンネイチャー北九州とは？</h3>
-          <div class="footer__links">
+          <h3 class="footer__heading" data-acf="footer_title_1">アーバンネイチャー北九州とは？</h3>
+          <div class="footer__links" data-nav="footer_about">
             <a href="../about/">全体像</a>
             <a href="../about/biodiversity.html">生物多様性とは？</a>
             <a href="../about/strategy.html">北九州市の取組</a>
             <a href="../center/">活動拠点</a>
             <a href="../about/spots.html">北九州市の自然スポット</a>
           </div>
-          <h3 class="footer__heading" style="margin-top:24px">ネットワーク</h3>
-          <div class="footer__links">
+          <h3 class="footer__heading footer__heading--spaced" data-acf="footer_title_3">ネットワーク</h3>
+          <div class="footer__links" data-nav="footer_network">
             <a href="../network/">北九州ネイチャーポジティブ<br class="footer__br">ネットワーク</a>
             <a href="../network/projects/">企業参加型プロジェクト</a>
           </div>
         </div>
         <div>
-          <h3 class="footer__heading">活動紹介</h3>
-          <div class="footer__links">
+          <h3 class="footer__heading" data-acf="footer_title_2">活動紹介</h3>
+          <div class="footer__links" data-nav="footer_cases">
             <a href="../network/cases/">ネイチャーポジティブ実践事例</a>
             <a href="../blog/">企業の活動ブログ</a>
             <a href="../blog/organization.html">団体等の活動ブログ</a>
           </div>
         </div>
         <div>
-          <h3 class="footer__heading">その他</h3>
-          <div class="footer__links">
+          <h3 class="footer__heading" data-acf="footer_title_4">その他</h3>
+          <div class="footer__links" data-nav="footer_other">
             <a href="../events/">イベントを探す</a>
             <a href="../news/">お知らせ</a>
             <a href="../photos/">みんなの写真展</a>

@@ -8,7 +8,7 @@
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../favicon.svg">
   <!-- OGP -->
-  <meta property="og:title" content="動物1 | みんなの写真展 | アーバンネイチャー北九州">
+  <meta property="og:title" content="動物1 | アーバンネイチャー北九州">
   <meta property="og:description" content="">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ai-yoshitani.github.io/nature-kitakyushu/photos/animal1.html">
@@ -16,35 +16,31 @@
   <meta property="og:site_name" content="アーバンネイチャー北九州">
   <meta property="og:locale" content="ja_JP">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="動物1 | みんなの写真展 | アーバンネイチャー北九州">
+  <meta name="twitter:title" content="動物1 | アーバンネイチャー北九州">
   <meta name="twitter:description" content="">
   <meta name="twitter:image" content="https://ai-yoshitani.github.io/nature-kitakyushu/images/photos/animal1/1%E3%83%9B%E3%82%AA%E3%82%A2%E3%82%AB.jpg">
-  <title>動物1 | みんなの写真展 | アーバンネイチャー北九州</title>
+  <title>動物1 | アーバンネイチャー北九州</title>
   <!-- #cat= 付きURLでも正規URLはハッシュ無しに固定する -->
   <link rel="canonical" href="https://ai-yoshitani.github.io/nature-kitakyushu/photos/animal1.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css">
-  <style>
-    .usage-note { background: rgba(44, 95, 45, 0.06); border-left: 4px solid var(--primary); padding: 20px 24px; border-radius: 0 var(--radius) var(--radius) 0; margin-bottom: 40px; font-size: 0.9rem; line-height: 1.7; color: var(--text-light); }
-    .usage-note strong { color: var(--primary); }
-    .photo-item { display: block; background: var(--bg-white); }
-    .photo-item__label { display: block; padding: 12px 16px; font-size: 0.9rem; font-weight: 600; color: var(--primary); text-align: center; }
-  </style>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/page/photos.css">
+
 </head>
-<body>
+<body data-page="page" data-page-id="photos_animal1">
   <a class="skip-link" href="#main-content">メインコンテンツへスキップ</a>
   <!-- ヘッダー -->
-  <header class="header">
+            <header class="header" data-common="header">
     <div class="header__inner">
       <a href="../" class="header__logo">
         <img src="../images/2026/02/logo.png" alt="アーバンネイチャー北九州" width="160" height="40"><span class="header__logo-sub" aria-hidden="true">北九州市生物多様性戦略 2025–2030</span>
       </a>
-            <nav class="header__nav" aria-label="メインナビゲーション">
+      <nav class="header__nav" aria-label="メインナビゲーション" data-nav="global" data-nav-current="active">
         <a href="../news/" >お知らせ</a>
         <div class="nav-item">
-          <a href="../about/" >アーバンネイチャー北九州とは？</a>
+          <a href="../about/">アーバンネイチャー北九州とは？</a>
           <ul class="dropdown">
             <li><a href="../about/">全体像</a></li>
             <li><a href="../about/biodiversity.html">生物多様性とは？</a></li>
@@ -54,11 +50,10 @@
           </ul>
         </div>
         <div class="nav-item">
-          <a href="../network/" >ネットワーク</a>
+          <a href="../network/">ネットワーク</a>
           <ul class="dropdown">
             <li><a href="../network/">北九州ネイチャーポジティブネットワーク</a></li>
             <li><a href="../network/projects/">企業参加型プロジェクト</a></li>
-            
           </ul>
         </div>
         <div class="nav-item">
@@ -75,13 +70,15 @@
       <div class="header__actions">
         <a href="../contact/" class="btn btn--primary btn--sm">お問合せ</a>
         <button class="hamburger" aria-label="メニューを開く" aria-expanded="false">
-          <span></span><span></span><span></span>
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
       </div>
     </div>
   </header>
   <!-- モバイルナビ -->
-  <nav class="mobile-nav" id="js-mobile-nav">
+  <nav class="mobile-nav" id="js-mobile-nav" data-nav="mobile">
     <a href="../news/">お知らせ</a>
     <div class="mobile-nav__group">
       <div class="mobile-nav__parent">
@@ -108,7 +105,6 @@
       <div class="mobile-nav__children">
         <a href="../network/">北九州ネイチャーポジティブネットワーク</a>
         <a href="../network/projects/">企業参加型プロジェクト</a>
-        
       </div>
     </div>
     <div class="mobile-nav__group">
@@ -132,7 +128,7 @@
     </div>
   </nav>
   <!-- パンくずリスト -->
-  <nav class="breadcrumb" aria-label="パンくずリスト" id="main-content">
+  <nav class="breadcrumb" aria-label="パンくずリスト" id="main-content" data-breadcrumb>
     <div class="container">
       <ol class="breadcrumb__list">
         <li><a href="../">トップ</a></li>
@@ -143,177 +139,177 @@
     </div>
   </nav>
   <!-- ページヘッダー -->
-  <div class="page-header" style="background-image: url('../images/2025/03/sarakurayama.jpg'); background-size: cover; background-position: center center;">
+  <div class="page-header page-header--photos">
     <div class="container">
-      <h1 class="page-header__title">動物1</h1>
-      <p class="page-header__desc">動物1の写真</p>
+      <h1 class="page-header__title" data-acf="page_header_title">動物1</h1>
+      <p class="page-header__desc" data-acf="page_header_text">動物1の写真</p>
     </div>
   </div>
   <!-- フリー素材ギャラリー -->
-  <section class="section section--white">
+  <section class="section section--white" data-section="gallery" data-section-label="フリー素材ギャラリー">
     <div class="container">
-      <p style="text-align:center; font-size:1rem; line-height:1.8; color:var(--text-light); margin-bottom:32px;">
+      <p class="photo-gallery__lead" data-acf="gallery_intro">
         写真アーカイブです。無料素材としてお使いいただけます。
       </p>
-      <div class="usage-note">
+      <div class="usage-note" data-acf="usage_note" data-acf-type="wysiwyg">
         <strong>ご利用について：</strong> 当サイトの写真素材を利用する場合は、<a href="../privacy/#photo-terms">コチラ</a>の事項に同意していただく必要がございます。 同意いただけない場合は利用できませんのでご注意ください。
       </div>
 
       <div class="photo-grid">
         <div class="photo-item">
-          <img src="../images/photos/animal1/ヤツガシラ.jpg" alt="動物1の写真1" loading="lazy" decoding="async">
+          <img data-acf="photo_1_image" src="../images/photos/animal1/ヤツガシラ.jpg" alt="動物1の写真1" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/ムラサキサギ.jpg" alt="動物1の写真2" loading="lazy" decoding="async">
+          <img data-acf="photo_2_image" src="../images/photos/animal1/ムラサキサギ.jpg" alt="動物1の写真2" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/マガモ.jpg" alt="動物1の写真3" loading="lazy" decoding="async">
+          <img data-acf="photo_3_image" src="../images/photos/animal1/マガモ.jpg" alt="動物1の写真3" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/ハシビロガモ-.jpg" alt="動物1の写真4" loading="lazy" decoding="async">
+          <img data-acf="photo_4_image" src="../images/photos/animal1/ハシビロガモ-.jpg" alt="動物1の写真4" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/チュウヒ.jpg" alt="動物1の写真5" loading="lazy" decoding="async">
+          <img data-acf="photo_5_image" src="../images/photos/animal1/チュウヒ.jpg" alt="動物1の写真5" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/チュウヒ　オス.jpg" alt="動物1の写真6" loading="lazy" decoding="async">
+          <img data-acf="photo_6_image" src="../images/photos/animal1/チュウヒ　オス.jpg" alt="動物1の写真6" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/コサギ.jpg" alt="動物1の写真7" loading="lazy" decoding="async">
+          <img data-acf="photo_7_image" src="../images/photos/animal1/コサギ.jpg" alt="動物1の写真7" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/コガモ.jpg" alt="動物1の写真8" loading="lazy" decoding="async">
+          <img data-acf="photo_8_image" src="../images/photos/animal1/コガモ.jpg" alt="動物1の写真8" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/カルガモ-.jpg" alt="動物1の写真9" loading="lazy" decoding="async">
+          <img data-acf="photo_9_image" src="../images/photos/animal1/カルガモ-.jpg" alt="動物1の写真9" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/カルガモ.jpg" alt="動物1の写真10" loading="lazy" decoding="async">
+          <img data-acf="photo_10_image" src="../images/photos/animal1/カルガモ.jpg" alt="動物1の写真10" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/カヤネズミ_2.jpg" alt="動物1の写真11" loading="lazy" decoding="async">
+          <img data-acf="photo_11_image" src="../images/photos/animal1/カヤネズミ_2.jpg" alt="動物1の写真11" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/カヤネズミ_1.jpg" alt="動物1の写真12" loading="lazy" decoding="async">
+          <img data-acf="photo_12_image" src="../images/photos/animal1/カヤネズミ_1.jpg" alt="動物1の写真12" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/カイツブリ-.jpg" alt="動物1の写真13" loading="lazy" decoding="async">
+          <img data-acf="photo_13_image" src="../images/photos/animal1/カイツブリ-.jpg" alt="動物1の写真13" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/オカヨシガモ.jpg" alt="動物1の写真14" loading="lazy" decoding="async">
+          <img data-acf="photo_14_image" src="../images/photos/animal1/オカヨシガモ.jpg" alt="動物1の写真14" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/オオバン.jpg" alt="動物1の写真15" loading="lazy" decoding="async">
+          <img data-acf="photo_15_image" src="../images/photos/animal1/オオバン.jpg" alt="動物1の写真15" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/オオジュリン.jpg" alt="動物1の写真16" loading="lazy" decoding="async">
+          <img data-acf="photo_16_image" src="../images/photos/animal1/オオジュリン.jpg" alt="動物1の写真16" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/アカアシシギ.jpg" alt="動物1の写真17" loading="lazy" decoding="async">
+          <img data-acf="photo_17_image" src="../images/photos/animal1/アカアシシギ.jpg" alt="動物1の写真17" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/Ｅ.jpg" alt="動物1の写真18" loading="lazy" decoding="async">
+          <img data-acf="photo_18_image" src="../images/photos/animal1/Ｅ.jpg" alt="動物1の写真18" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/Ｄ.jpg" alt="動物1の写真19" loading="lazy" decoding="async">
+          <img data-acf="photo_19_image" src="../images/photos/animal1/Ｄ.jpg" alt="動物1の写真19" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/Ｃ.jpg" alt="動物1の写真20" loading="lazy" decoding="async">
+          <img data-acf="photo_20_image" src="../images/photos/animal1/Ｃ.jpg" alt="動物1の写真20" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/Ｂ.jpg" alt="動物1の写真21" loading="lazy" decoding="async">
+          <img data-acf="photo_21_image" src="../images/photos/animal1/Ｂ.jpg" alt="動物1の写真21" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/Ａ.jpg" alt="動物1の写真22" loading="lazy" decoding="async">
+          <img data-acf="photo_22_image" src="../images/photos/animal1/Ａ.jpg" alt="動物1の写真22" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/202502022ベニマシコ-オス1.jpg" alt="動物1の写真23" loading="lazy" decoding="async">
+          <img data-acf="photo_23_image" src="../images/photos/animal1/202502022ベニマシコ-オス1.jpg" alt="動物1の写真23" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/20250223ミヤマホオジロ♂.jpg" alt="動物1の写真24" loading="lazy" decoding="async">
+          <img data-acf="photo_24_image" src="../images/photos/animal1/20250223ミヤマホオジロ♂.jpg" alt="動物1の写真24" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/20250222アトリ♂1.jpg" alt="動物1の写真25" loading="lazy" decoding="async">
+          <img data-acf="photo_25_image" src="../images/photos/animal1/20250222アトリ♂1.jpg" alt="動物1の写真25" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/20250208クロジ-メス.jpg" alt="動物1の写真26" loading="lazy" decoding="async">
+          <img data-acf="photo_26_image" src="../images/photos/animal1/20250208クロジ-メス.jpg" alt="動物1の写真26" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/20250208アオジ雌.jpg" alt="動物1の写真27" loading="lazy" decoding="async">
+          <img data-acf="photo_27_image" src="../images/photos/animal1/20250208アオジ雌.jpg" alt="動物1の写真27" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/20250120モズ雄.jpg" alt="動物1の写真28" loading="lazy" decoding="async">
+          <img data-acf="photo_28_image" src="../images/photos/animal1/20250120モズ雄.jpg" alt="動物1の写真28" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/20250120シロハラ.jpg" alt="動物1の写真29" loading="lazy" decoding="async">
+          <img data-acf="photo_29_image" src="../images/photos/animal1/20250120シロハラ.jpg" alt="動物1の写真29" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/20250113ルリビタキ雌.jpg" alt="動物1の写真30" loading="lazy" decoding="async">
+          <img data-acf="photo_30_image" src="../images/photos/animal1/20250113ルリビタキ雌.jpg" alt="動物1の写真30" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/20241210アナグマ.jpg" alt="動物1の写真31" loading="lazy" decoding="async">
+          <img data-acf="photo_31_image" src="../images/photos/animal1/20241210アナグマ.jpg" alt="動物1の写真31" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/20240703キジ_メス.jpg" alt="動物1の写真32" loading="lazy" decoding="async">
+          <img data-acf="photo_32_image" src="../images/photos/animal1/20240703キジ_メス.jpg" alt="動物1の写真32" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/20240610ウグイス_広谷湿原.jpg" alt="動物1の写真33" loading="lazy" decoding="async">
+          <img data-acf="photo_33_image" src="../images/photos/animal1/20240610ウグイス_広谷湿原.jpg" alt="動物1の写真33" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/20240603セッカ.jpg" alt="動物1の写真34" loading="lazy" decoding="async">
+          <img data-acf="photo_34_image" src="../images/photos/animal1/20240603セッカ.jpg" alt="動物1の写真34" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/20231214キクガシラコウモリ.jpg" alt="動物1の写真35" loading="lazy" decoding="async">
+          <img data-acf="photo_35_image" src="../images/photos/animal1/20231214キクガシラコウモリ.jpg" alt="動物1の写真35" loading="lazy" decoding="async">
         </div>
         <div class="photo-item">
-          <img src="../images/photos/animal1/1ホオアカ.jpg" alt="動物1の写真36" loading="lazy" decoding="async">
+          <img data-acf="photo_36_image" src="../images/photos/animal1/1ホオアカ.jpg" alt="動物1の写真36" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
   </section>
   <!-- CTA -->
-  <section class="cta-band" style="background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('../images/cta-bg.png'); background-size: cover; background-position: center;">
+  <section class="cta-band" data-common="cta">
     <div class="container">
-      <h2 class="cta-band__title">お気軽にお問合せください</h2>
+      <h2 class="cta-band__title" data-acf="cta_band_title">お気軽にお問合せください</h2>
       <div class="cta-band__buttons">
         <a href="../contact/" class="btn btn--solid-white btn--lg">お問合せ</a>
       </div>
     </div>
   </section>
   <!-- フッター -->
-  <footer class="footer">
+            <footer class="footer" data-common="footer">
     <div class="container">
       <div class="footer__grid">
         <div>
           <span class="footer__brand-name">アーバンネイチャー北九州</span>
-          <p class="footer__desc">都市と自然が近接する北九州市の強みを活かし、市民・企業・行政が一体となってネイチャーポジティブの実現を目指すプラットフォームです。</p>
+          <p class="footer__desc" data-acf="footer_text">都市と自然が近接する北九州市の強みを活かし、市民・企業・行政が一体となってネイチャーポジティブの実現を目指すプラットフォームです。</p>
         </div>
         <div>
-          <h3 class="footer__heading">アーバンネイチャー北九州とは？</h3>
-          <div class="footer__links">
+          <h3 class="footer__heading" data-acf="footer_title_1">アーバンネイチャー北九州とは？</h3>
+          <div class="footer__links" data-nav="footer_about">
             <a href="../about/">全体像</a>
             <a href="../about/biodiversity.html">生物多様性とは？</a>
             <a href="../about/strategy.html">北九州市の取組</a>
             <a href="../center/">活動拠点</a>
             <a href="../about/spots.html">北九州市の自然スポット</a>
           </div>
-          <h3 class="footer__heading" style="margin-top:24px">ネットワーク</h3>
-          <div class="footer__links">
+          <h3 class="footer__heading footer__heading--spaced" data-acf="footer_title_3">ネットワーク</h3>
+          <div class="footer__links" data-nav="footer_network">
             <a href="../network/">北九州ネイチャーポジティブ<br class="footer__br">ネットワーク</a>
             <a href="../network/projects/">企業参加型プロジェクト</a>
           </div>
         </div>
         <div>
-          <h3 class="footer__heading">活動紹介</h3>
-          <div class="footer__links">
+          <h3 class="footer__heading" data-acf="footer_title_2">活動紹介</h3>
+          <div class="footer__links" data-nav="footer_cases">
             <a href="../network/cases/">ネイチャーポジティブ実践事例</a>
             <a href="../blog/">企業の活動ブログ</a>
             <a href="../blog/organization.html">団体等の活動ブログ</a>
           </div>
         </div>
         <div>
-          <h3 class="footer__heading">その他</h3>
-          <div class="footer__links">
+          <h3 class="footer__heading" data-acf="footer_title_4">その他</h3>
+          <div class="footer__links" data-nav="footer_other">
             <a href="../events/">イベントを探す</a>
             <a href="../news/">お知らせ</a>
             <a href="../photos/">みんなの写真展</a>
