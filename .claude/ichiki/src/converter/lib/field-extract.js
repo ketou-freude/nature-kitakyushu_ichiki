@@ -371,4 +371,4 @@ function analyzeField(page, $, el, opts, errors) {
   return results;
 }
 
-module.exports = { analyzeField, significantTextNodes, directChildren, deriveType };
+module.exports = { analyzeField, significantTextNodes, directChildren, deriveType, acfKey, ownerExpr };

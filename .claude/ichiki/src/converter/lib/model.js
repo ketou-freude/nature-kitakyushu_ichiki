@@ -47,6 +47,27 @@ function collectFieldsShallow(page, $, rootEl, errors, excludeSet, linkRegistry)
   return fields;
 }
 
+// rootEl 配下で <template data-acf="…"> の個数を数える（構造見本の選定に使う）。
+//
+// <template> は「フィールドは作るが出力しない」宣言（render.js）。CPT の構造見本
+// （canonicalSingle）にこれが多いページを選ぶと、他の single ページが実データとして
+// 持っているフィールドまで出力コードが存在しなくなる（実測: about/spots/hiraodai.html
+// が info_center/info_cave を実マークアップで持つのに、構造見本の auma.html が
+// <template> で隠していたため出力されなかった）。
+// 「最初に見つかったページ」ではなく「<template> が最も少ない=実マークアップが
+// 最も豊富なページ」を構造見本に選ぶことで、この種の取りこぼしを減らす。
+function countTemplateFields(page) {
+  let n = 0;
+  const walk = (el) => {
+    if (!el || el.type !== 'tag') return;
+    const attrs = el.attribs || {};
+    if ((el.name || '').toLowerCase() === 'template' && ('data-acf' in attrs || 'data-acf-url' in attrs)) n++;
+    for (const child of el.children || []) walk(child);
+  };
+  if (page.mainEl) walk(page.mainEl);
+  return n;
+}
+
 // rootEl 配下で、指定した data-* 属性を持つ要素を列挙する（ネストしても内側まで探す）。
 function findAll(rootEl, $, attrName) {
   const out = [];
@@ -342,11 +363,36 @@ function buildModel(pages, errors, opts = {}) {
       // L08 相当: 対応する single が無い data-loop はテンプレート生成時に検出してエラーにする。
       continue;
     }
-    const canonical = entry.singlePages[0];
+    // 構造見本は「最初に見つかったページ」ではなく「<template> による隠しフィールドが
+    // 最も少ない=実マークアップが最も豊富なページ」を選ぶ（countTemplateFields 参照）。
+    // 同数なら発見順を維持する（安定ソート）。
+    const canonical = entry.singlePages.reduce(
+      (best, p) => (countTemplateFields(p) < countTemplateFields(best) ? p : best),
+      entry.singlePages[0]
+    );
     const excluded = excludedForFields(canonical, canonical.$);
     const canonicalFields = collectFieldsShallow(canonical, canonical.$, canonical.mainEl, errors, excluded, model.linkRegistry);
     entry.fields = canonicalFields;
     entry.canonicalSingle = canonical;
+
+    // 構造見本(canonical)が <template> で隠しているフィールドでも、他の single
+    // ページが実マークアップ(<template> でない)として持っていれば、その要素を
+    // render.js から参照できるように記録しておく（条件付き描画のフォールバック用）。
+    // 同じフィールドが複数ページに実マークアップで存在する場合は最初に見つかったものを使う。
+    entry.realFieldEl = new Map();
+    for (const p of entry.singlePages) {
+      if (!p.mainEl) continue;
+      const walk = (el) => {
+        if (!el || el.type !== 'tag') return;
+        const a = el.attribs || {};
+        if ((el.name || '').toLowerCase() !== 'template') {
+          const name = a['data-acf'];
+          if (name && !entry.realFieldEl.has(name)) entry.realFieldEl.set(name, { page: p, el });
+        }
+        for (const child of el.children || []) walk(child);
+      };
+      walk(p.mainEl);
+    }
 
     // variant は「同じ投稿の別テンプレート」なので、詳細ページと同じフィールドを持たない。
     // 構造一致は求めず、フィールドを CPT の集合へ合流させる

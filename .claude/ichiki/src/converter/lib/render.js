@@ -1,7 +1,7 @@
 'use strict';
 
 const { EditList } = require('./edits');
-const { analyzeField } = require('./field-extract');
+const { analyzeField, acfKey, ownerExpr } = require('./field-extract');
 const { resolveFixedHref } = require('./link-resolve');
 const { navWalkerClass } = require('./php-util');
 const { DECLARATION_ATTRS } = require('./constants');
@@ -148,6 +148,24 @@ function renderFragment(page, model, el, includeSelf, errors, scopeSlug) {
     // 型は導出できないので data-acf-type が必須になる（L05 がそのまま効く）。
     if ((node.name || '').toLowerCase() === 'template' && 'data-acf' in attrs) {
       analyzeField(page, page.$, node, { linkRegistry: model.linkRegistry, scopeSlug: currentScope }, errors);
+
+      // 構造見本(canonical)がこのフィールドを <template> で隠しているだけで、
+      // 同じ CPT の別ページに実マークアップがあるなら、それを条件付きで使う。
+      // 「値が入っていれば表示・空なら非表示」の宣言方法は vocabulary.md 上は
+      // 未定義だが、何も出さないままだと実データを持つ他ページも永久に表示できない
+      // （実測: about/spots/hiraodai.html の info_center/info_cave、event 各ページの
+      // schedule_time_N・summary_capacity 等）。フィールド名の有無を条件にすることで、
+      // 値が入っている投稿だけ自然に表示される。
+      const fieldName = attrs['data-acf'];
+      const entry = page.cpt ? model.cptMap.get(page.cpt) : null;
+      const source = entry && entry.realFieldEl && entry.realFieldEl.get(fieldName);
+      if (source && !(source.page === page && source.el === node)) {
+        const fragment = renderFragment(source.page, model, source.el, true, errors, currentScope);
+        const cond = `get_field('${acfKey(currentScope, fieldName)}'${ownerExpr(currentScope)})`;
+        addAbs(nloc.startOffset, nloc.endOffset, `<?php if ( ${cond} ) : ?>${fragment}<?php endif; ?>`);
+        return;
+      }
+
       addAbs(nloc.startOffset, nloc.endOffset, '');
       return;
     }
