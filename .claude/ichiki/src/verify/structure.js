@@ -88,7 +88,10 @@ function mockClassesForPage(html) {
   $('[data-acf]').each((_, el) => {
     const $el = $(el);
     const directText = $el.contents().toArray().filter((c) => c.type === 'text' && (c.data || '').trim() !== '');
-    if (directText.length > 1 && isFormattingOnly($el)) {
+    const hasFormattingChild = $el.contents().toArray().some((c) => c.type === 'tag' && FORMATTING_TAGS.includes((c.name || '').toLowerCase()));
+    // field-extract.js と同じ判定: テキストノードが複数、または整形タグの子を
+    // 1つでも伴えばマージ対象（本文が複数行かどうかとは無関係）。
+    if ((directText.length > 1 || hasFormattingChild) && isFormattingOnly($el)) {
       $el.find(FORMATTING_TAGS.join(',')).removeAttr('class');
     }
   });
