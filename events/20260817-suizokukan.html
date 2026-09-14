@@ -70,9 +70,9 @@
     </div>
   </header>
   <!-- モバイルナビ -->
-  <nav class="mobile-nav" id="js-mobile-nav" data-nav="mobile">
-    <a href="../news/">お知らせ</a>
-    <div class="mobile-nav__group">
+  <nav class="mobile-nav" id="js-mobile-nav" data-nav="mobile" data-common="mobile_nav">
+    <a href="../news/" data-nav-item>お知らせ</a>
+    <div class="mobile-nav__group" data-nav-item>
       <div class="mobile-nav__parent">
         <a href="../about/">アーバンネイチャー北九州とは？</a>
         <button class="mobile-nav__toggle" aria-expanded="false" aria-label="サブメニューを開く">
@@ -87,7 +87,7 @@
         <a href="../center/">活動拠点</a>
       </div>
     </div>
-    <div class="mobile-nav__group">
+    <div class="mobile-nav__group" data-nav-item>
       <div class="mobile-nav__parent">
         <a href="../network/">ネットワーク</a>
         <button class="mobile-nav__toggle" aria-expanded="false" aria-label="サブメニューを開く">
@@ -99,7 +99,7 @@
         <a href="../network/projects/">企業参加型プロジェクト</a>
       </div>
     </div>
-    <div class="mobile-nav__group">
+    <div class="mobile-nav__group" data-nav-item>
       <div class="mobile-nav__parent">
         <a href="../network/cases/">活動紹介</a>
         <button class="mobile-nav__toggle" aria-expanded="false" aria-label="サブメニューを開く">
@@ -112,12 +112,10 @@
         <a href="../blog/organization.html">団体等の活動ブログ</a>
       </div>
     </div>
-    <a href="../events/">イベントを探す</a>
-    <a href="../photos/">みんなの写真展</a>
-    <a href="../contact/">お問合せ</a>
-    <div class="mobile-nav__cta">
-      <a href="../join/" class="btn btn--primary btn--block">参加する</a>
-    </div>
+    <a href="../events/" data-nav-item>イベントを探す</a>
+    <a href="../photos/" data-nav-item>みんなの写真展</a>
+    <a href="../contact/" data-nav-item>お問合せ</a>
+    <a href="../join/" class="btn btn--primary btn--block mobile-nav__cta-link">参加する</a>
   </nav>
   <!-- パンくず -->
   <div class="breadcrumb" data-breadcrumb>
@@ -192,7 +190,7 @@
             <div class="ev-summary">
               <div class="ev-summary__head">📋 開催概要</div>
               <table class="ev-summary__table">
-                <caption class="sr-only">開催概要</caption>
+                <caption class="sr-only">開催概要</caption><tbody>
                 <tr>
                   <th scope="row">開催日時</th>
                   <td data-acf="summary_datetime" data-acf-type="textarea">令和8年8月29日（土）20時まで開館</td>
@@ -221,7 +219,7 @@
                   <th scope="row">申込締切</th>
                   <td></td>
                 </tr>
-              </table>
+              </tbody></table>
             </div>
           </aside>
         </div><!-- /ev-layout -->
@@ -266,6 +264,65 @@
       </div>
     </div>
   </section>
+  
+  <template data-acf="species_note" data-acf-type="textarea">（該当なし）</template>
+  <template data-acf="note_warn_body" data-acf-type="textarea">（該当なし）</template>
+  <template data-acf="info_block" data-acf-type="wysiwyg"><p>（該当なし）</p></template>
+  <template data-acf="summary_capacity" data-acf-type="textarea">（該当なし）</template>
+  <template data-acf="summary_fee" data-acf-type="textarea">（該当なし）</template>
+  <template data-acf="summary_target" data-acf-type="textarea">（該当なし）</template>
+  <template data-acf="summary_organizer" data-acf-type="textarea">（該当なし）</template>
+  <template data-acf="summary_deadline" data-acf-type="textarea">（該当なし）</template>
+  <template data-acf="venue_intro" data-acf-type="wysiwyg"><p>（該当なし）</p></template>
+  <a class="acf-hidden-field" data-acf="map_src" data-acf-type="url" href="https://example.com/"></a>
+  <template data-acf="schedule_time_1" data-acf-type="text">（該当なし）</template>
+  <template data-acf="schedule_desc_1" data-acf-type="text">（該当なし）</template>
+  <template data-acf="schedule_time_2" data-acf-type="text">（該当なし）</template>
+  <template data-acf="schedule_desc_2" data-acf-type="text">（該当なし）</template>
+  <template data-acf="schedule_time_3" data-acf-type="text">（該当なし）</template>
+  <template data-acf="schedule_desc_3" data-acf-type="text">（該当なし）</template>
+  <template data-acf="schedule_time_4" data-acf-type="text">（該当なし）</template>
+  <template data-acf="schedule_desc_4" data-acf-type="text">（該当なし）</template>
+  <template data-acf="schedule_time_5" data-acf-type="text">（該当なし）</template>
+  <template data-acf="schedule_desc_5" data-acf-type="text">（該当なし）</template>
+  <template data-acf="schedule_time_6" data-acf-type="text">（該当なし）</template>
+  <template data-acf="schedule_desc_6" data-acf-type="text">（該当なし）</template>
+  <template data-acf="schedule_time_7" data-acf-type="text">（該当なし）</template>
+  <template data-acf="schedule_desc_7" data-acf-type="text">（該当なし）</template>
+  <template data-acf="note_warn_title" data-acf-type="text">（該当なし）</template>
+  <template data-acf="note_info_title" data-acf-type="text">（該当なし）</template>
+  <template data-acf="note_info_body" data-acf-type="textarea">（該当なし）</template>
+  <template data-acf="apply_deadline" data-acf-type="text">（該当なし）</template>
+  <template data-acf="apply_contact" data-acf-type="wysiwyg"><p>（該当なし）</p></template>
+  <template data-acf="venue_address" data-acf-type="textarea">（該当なし）</template>
+  <template data-acf="venue_access" data-acf-type="textarea">（該当なし）</template>
+  <template data-acf="summary_remaining" data-acf-type="text">（該当なし）</template>
+  <template data-acf="content_caption_1" data-acf-type="textarea">（該当なし）</template>
+  <template data-acf="content_caption_2" data-acf-type="textarea">（該当なし）</template>
+  <template data-acf="content_body_6" data-acf-type="textarea">（該当なし）</template>
+  <template data-acf="content_body_7" data-acf-type="textarea">（該当なし）</template>
+  <template data-acf="content_body_8" data-acf-type="textarea">（該当なし）</template>
+  <template data-acf="content_body_9" data-acf-type="textarea">（該当なし）</template>
+  <template data-acf="content_body_10" data-acf-type="textarea">（該当なし）</template>
+  <template data-acf="content_body_11" data-acf-type="textarea">（該当なし）</template>
+  <template data-acf="announce_title" data-acf-type="text">（該当なし）</template>
+  <template data-acf="announce_body" data-acf-type="textarea">（該当なし）</template>
+  <template data-acf="announce_contact" data-acf-type="wysiwyg"><p>（該当なし）</p></template>
+  <template data-acf="summary_method" data-acf-type="textarea">（該当なし）</template>
+  <template data-acf="summary_cta_note" data-acf-type="text">（該当なし）</template>
+  <template data-acf="body" data-acf-type="wysiwyg"><p>（該当なし）</p></template>
+  <template data-acf="content_image_1_caption" data-acf-type="text">（該当なし）</template>
+  <template data-acf="contact_intro" data-acf-type="textarea">（該当なし）</template>
+  <template data-acf="schedule_time_8" data-acf-type="text">（該当なし）</template>
+  <template data-acf="schedule_desc_8" data-acf-type="text">（該当なし）</template>
+  <template data-acf="summary_apply_method" data-acf-type="text">（該当なし）</template>
+  <img class="acf-hidden-field" data-acf="content_image_1" data-acf-type="image" src="../images/2026/02/logo.png" alt="" aria-hidden="true">
+  <img class="acf-hidden-field" data-acf="content_image_2" data-acf-type="image" src="../images/2026/02/logo.png" alt="" aria-hidden="true">
+  <img class="acf-hidden-field" data-acf="content_image_3" data-acf-type="image" src="../images/2026/02/logo.png" alt="" aria-hidden="true">
+  <img class="acf-hidden-field" data-acf="content_image" data-acf-type="image" src="../images/2026/02/logo.png" alt="" aria-hidden="true">
+  
+  <a class="acf-hidden-field" data-acf="apply_link_label" href="https://example.com/" data-acf-url="apply_link_url">（該当なし）</a>
+  <a class="acf-hidden-field" data-acf="summary_cta_label" href="https://example.com/" data-acf-url="summary_cta_url">（該当なし）</a>
   </main>
               <footer class="footer" data-common="footer">
     <div class="container">

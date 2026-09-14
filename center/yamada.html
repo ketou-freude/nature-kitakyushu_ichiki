@@ -101,9 +101,9 @@
     </div>
   </header>
   <!-- モバイルナビ -->
-  <nav class="mobile-nav" id="js-mobile-nav" data-nav="mobile">
-    <a href="../news/">お知らせ</a>
-    <div class="mobile-nav__group">
+  <nav class="mobile-nav" id="js-mobile-nav" data-nav="mobile" data-common="mobile_nav">
+    <a href="../news/" data-nav-item>お知らせ</a>
+    <div class="mobile-nav__group" data-nav-item>
       <div class="mobile-nav__parent">
         <a href="../about/">アーバンネイチャー北九州とは？</a>
         <button class="mobile-nav__toggle" aria-expanded="false" aria-label="サブメニューを開く">
@@ -118,7 +118,7 @@
         <a href="../center/">活動拠点</a>
       </div>
     </div>
-    <div class="mobile-nav__group">
+    <div class="mobile-nav__group" data-nav-item>
       <div class="mobile-nav__parent">
         <a href="../network/">ネットワーク</a>
         <button class="mobile-nav__toggle" aria-expanded="false" aria-label="サブメニューを開く">
@@ -130,7 +130,7 @@
         <a href="../network/projects/">企業参加型プロジェクト</a>
       </div>
     </div>
-    <div class="mobile-nav__group">
+    <div class="mobile-nav__group" data-nav-item>
       <div class="mobile-nav__parent">
         <a href="../network/cases/">活動紹介</a>
         <button class="mobile-nav__toggle" aria-expanded="false" aria-label="サブメニューを開く">
@@ -143,12 +143,10 @@
         <a href="../blog/organization.html">団体等の活動ブログ</a>
       </div>
     </div>
-    <a href="../events/">イベントを探す</a>
-    <a href="../photos/">みんなの写真展</a>
-    <a href="../contact/">お問合せ</a>
-    <div class="mobile-nav__cta">
-      <a href="../join/" class="btn btn--primary btn--block">参加する</a>
-    </div>
+    <a href="../events/" data-nav-item>イベントを探す</a>
+    <a href="../photos/" data-nav-item>みんなの写真展</a>
+    <a href="../contact/" data-nav-item>お問合せ</a>
+    <a href="../join/" class="btn btn--primary btn--block mobile-nav__cta-link">参加する</a>
   </nav>
     <!-- パンくずリスト -->
     <nav class="breadcrumb" aria-label="パンくずリスト">
@@ -161,13 +159,13 @@
       </div>
     </nav>
     <!-- ページヘッダー -->
-    <section id="main-content" class="page-header page-header--center-yamada" data-section="hero">
-  <template data-acf="hero_image" data-acf-type="image">../images/2026/04/yamada-hero.png</template>
-      <div class="container">
-        <h1 class="page-header__title">山田緑地</h1>
-        <p class="page-header__desc">都市公園（140ha）</p>
-      </div>
-    </section>
+    <section id="main-content" class="page-header" data-section="hero">
+    <img class="page-header__bg" src="../images/2026/04/yamada-hero.png" alt="山田緑地" data-acf="hero_image">
+    <div class="container">
+      <h1 class="page-header__title" data-acf="hero_title">山田緑地</h1>
+      <p class="page-header__desc" data-acf="hero_category">都市公園（140ha）</p>
+    </div>
+  </section>
     <!-- 施設詳細 -->
     <section class="section section--white" data-section="facility_detail">
       <div class="container">

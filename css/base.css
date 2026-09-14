@@ -1281,3 +1281,7 @@ tr:nth-child(even) {
 .map-frame iframe { border: 0; display: block; }
 .map-frame--tall { height: 480px; box-shadow: 0 2px 16px rgba(0,0,0,0.12); }
 .label-nowrap { font-weight: 600; color: var(--primary); white-space: nowrap; }
+
+/* モバイルナビの「参加する」CTAリンク: data-nav="mobile" の兄弟項目と
+   同じ<a>直下シェイプに揃えるため、div ラッパーを使わずこのクラスで余白を再現する */
+.mobile-nav__cta-link { margin-top: 24px; }

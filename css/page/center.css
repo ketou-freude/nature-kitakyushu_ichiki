@@ -234,17 +234,9 @@
 
 /* レスポンシブ(640px以下)の .urban-center-grid 折返しは css/base.css に既存定義あり(重複させない) */
 
-/* 施設ごとのヒーロー背景（L12対応: インラインstyle撤去、data-acf="hero_image" と対で宣言） */
-.page-header--center-greenpark { background-image: url('../../images/2025/03/b-2.jpg'); background-size: cover; background-position: center 40%; }
-.page-header--center-hotarukan { background-image: url('../../images/2025/03/hotaru.jpg'); background-size: cover; background-position: center 60%; }
+/* center/index.html（一覧ページ）は固定の1枚背景のみCSSクラスで管理。
+   単体ページ（施設ごとの写真）は <img class="page-header__bg"> + data-acf="hero_image" に統一済み。 */
 .page-header--center-index { background-image: url('../../images/2025/03/biotope2.jpg'); background-size: cover; background-position: center center; }
-.page-header--center-inochi { background-image: url('../../images/2025/03/nature1.jpg'); background-size: cover; background-position: center center; }
-.page-header--center-itouzu { background-image: url('../../images/2025/03/b-2.jpg'); background-size: cover; background-position: center center; }
-.page-header--center-katsuki-hotaru { background-image: url('../../images/2025/03/hotaru.jpg'); background-size: cover; background-position: center center; }
-.page-header--center-mizukankyokan { background-image: url('../../images/2025/03/higata.jpg'); background-size: cover; background-position: center center; }
-.page-header--center-soraland { background-image: url('../../images/2026/04/soraland-hero.png'); background-size: cover; background-position: center center; }
-.page-header--center-takamiya { background-image: url('../../images/2025/03/sarakurayama.jpg'); background-size: cover; background-position: center center; }
-.page-header--center-yamada { background-image: url('../../images/2026/04/yamada-hero.png'); background-size: cover; background-position: center 50%; }
 
 /* 事務局セクション（L12対応） */
 .urban-center-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 900px; margin: 0 auto; align-items: center; }
