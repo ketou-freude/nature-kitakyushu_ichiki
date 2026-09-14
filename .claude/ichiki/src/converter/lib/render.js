@@ -15,6 +15,12 @@ function dataAttrNames(el) {
   return Object.keys(el.attribs || {}).filter((k) => DECLARATION_ATTRS.has(k));
 }
 
+// 要素の class 一覧に cls が含まれるかを判定する（スペース区切りのトークン一致）。
+function hasClass(el, cls) {
+  const c = (el.attribs && el.attribs.class) || '';
+  return c.split(/\s+/).includes(cls);
+}
+
 // 部分木(el 配下)を、data-* 宣言をすべて WordPress の呼び出しへ変換した文字列として描画する。
 // includeSelf=true なら el 自身のタグも出力に含める(header/footer/共通セクション用)。
 // includeSelf=false なら el の「中身」だけを出力する(<main> の中身をページ本体として使う場合)。
@@ -140,6 +146,24 @@ function renderFragment(page, model, el, includeSelf, errors, scopeSlug) {
       addAbs(cloc.startTag.endOffset, cloc.endTag.startOffset, '<?php the_title(); ?>');
     }
 
+    // 隠しフィールドの実マークアップへの条件付きフォールバックを試す。
+    // 見つかれば置換用の PHP 文字列を返し、無ければ null を返す。
+    //
+    // 同じ CPT の別ページに実マークアップがあるなら、それを条件付きで使う。
+    // 「値が入っていれば表示・空なら非表示」の宣言方法は vocabulary.md 上は
+    // 未定義だが、何も出さないままだと実データを持つ他ページも永久に表示できない
+    // （実測: about/spots/hiraodai.html の info_center/info_cave、event 各ページの
+    // schedule_time_N・summary_capacity・content_image_N 等）。フィールド名の
+    // 有無を条件にすることで、値が入っている投稿だけ自然に表示される。
+    function realFieldFallback(fieldName) {
+      const entry = page.cpt ? model.cptMap.get(page.cpt) : null;
+      const source = entry && entry.realFieldEl && entry.realFieldEl.get(fieldName);
+      if (!source || (source.page === page && source.el === node)) return null;
+      const fragment = renderFragment(source.page, model, source.el, true, errors, currentScope);
+      const cond = `get_field('${acfKey(currentScope, fieldName)}'${ownerExpr(currentScope)})`;
+      return `<?php if ( ${cond} ) : ?>${fragment}<?php endif; ?>`;
+    }
+
     // <template data-acf="…">: **フィールドは作るが出力しない。**
     //
     // 画面に出ないがお客様が編集する値（地図の緯度経度、並び順、外部システムのID等）を
@@ -148,26 +172,25 @@ function renderFragment(page, model, el, includeSelf, errors, scopeSlug) {
     // 型は導出できないので data-acf-type が必須になる（L05 がそのまま効く）。
     if ((node.name || '').toLowerCase() === 'template' && 'data-acf' in attrs) {
       analyzeField(page, page.$, node, { linkRegistry: model.linkRegistry, scopeSlug: currentScope }, errors);
+      const replacement = realFieldFallback(attrs['data-acf']);
+      addAbs(nloc.startOffset, nloc.endOffset, replacement || '');
+      return;
+    }
 
-      // 構造見本(canonical)がこのフィールドを <template> で隠しているだけで、
-      // 同じ CPT の別ページに実マークアップがあるなら、それを条件付きで使う。
-      // 「値が入っていれば表示・空なら非表示」の宣言方法は vocabulary.md 上は
-      // 未定義だが、何も出さないままだと実データを持つ他ページも永久に表示できない
-      // （実測: about/spots/hiraodai.html の info_center/info_cave、event 各ページの
-      // schedule_time_N・summary_capacity 等）。フィールド名の有無を条件にすることで、
-      // 値が入っている投稿だけ自然に表示される。
-      const fieldName = attrs['data-acf'];
-      const entry = page.cpt ? model.cptMap.get(page.cpt) : null;
-      const source = entry && entry.realFieldEl && entry.realFieldEl.get(fieldName);
-      if (source && !(source.page === page && source.el === node)) {
-        const fragment = renderFragment(source.page, model, source.el, true, errors, currentScope);
-        const cond = `get_field('${acfKey(currentScope, fieldName)}'${ownerExpr(currentScope)})`;
-        addAbs(nloc.startOffset, nloc.endOffset, `<?php if ( ${cond} ) : ?>${fragment}<?php endif; ?>`);
+    // class="acf-hidden-field" が付いた実要素: <template> が data-acf-type="url"/
+    // "image" を保持できないため、URL/画像型フィールドはこちら（実要素+非表示
+    // クラスによる CSS 非表示）で隠す運用になっている（例: hero_image、map_src）。
+    // <template> と同じく「表示用ではないプレースホルダー」なので、同じ CPT の
+    // 別ページに実マークアップがあればそちらを条件付きで使う。無ければ、これまで
+    // 通りモック上の非表示プレースホルダーをそのまま出力する(挙動を変えない)。
+    if ('data-acf' in attrs && hasClass(node, 'acf-hidden-field')) {
+      const replacement = realFieldFallback(attrs['data-acf']);
+      if (replacement !== null) {
+        analyzeField(page, page.$, node, { linkRegistry: model.linkRegistry, scopeSlug: currentScope }, errors);
+        addAbs(nloc.startOffset, nloc.endOffset, replacement);
         return;
       }
-
-      addAbs(nloc.startOffset, nloc.endOffset, '');
-      return;
+      // フォールバック無し: 通常経路（applyFieldAndLinkEdits）にそのまま進める。
     }
 
     stripAllDataAttrs(node);

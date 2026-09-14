@@ -63,6 +63,22 @@ function mockClassesForPage(html) {
   // vocabulary.md 3章: data-loop-sample は変換器が丸ごと破棄するダミー。
   // 実際の変換結果に忠実に比較するため、集計前に DOM から取り除く。
   $('[data-loop-sample]').remove();
+  // class="acf-hidden-field": CSS(display:none)で常に非表示にする、
+  // <template> が保持できない url/image 型フィールド専用の「実要素の隠しプレース
+  // ホルダー」(render.js)。構造見本(canonicalSingle)がこの状態のとき、同じ CPT の
+  // 別ページに実マークアップがあれば render.js がそちらへ条件付きで差し替えるため、
+  // acf-hidden-field 自身の class 文字列は生成物に一切残らない(意図した動作)。
+  // 常に非表示という性質上、このクラス自体が生成物に必要になることはないため、
+  // data-loop-sample と同じ理由で集計前に取り除く。
+  $('.acf-hidden-field').remove();
+  // data-nav 配下の <br>: メニュー項目のラベルは nav-structure.js が $a.text() で
+  // プレーンテキスト化してから wp-admin のメニュー項目タイトルとして保存する
+  // (menus.js)。wp_nav_menu() が出すのはその文字列だけなので、ラベル内部の
+  // 装飾タグ(改行位置の手動指定等)は構造上どうしても失われる。<br> は常に
+  // 中身を持たない装飾要素であり、これ自体がWP側で編集可能な値を持つことは
+  // ないため、data-loop-sample と同じ理由でこの経路だけ除外する
+  // (実測: footer の data-nav="footer_network" 内の <br class="footer__br">)。
+  $('[data-nav] br').remove();
   // data-cf7-field を宣言した要素は、CF7 のフォームタグ1つに丸ごと置き換わる(6章)。
   // 宣言した要素自身の class / id はタグオプション(class:xxx)として引き継がれるが、
   // **中のマークアップは CF7 が自前で組む**ため残らない。

@@ -47,25 +47,64 @@ function collectFieldsShallow(page, $, rootEl, errors, excludeSet, linkRegistry)
   return fields;
 }
 
-// rootEl 配下で <template data-acf="…"> の個数を数える（構造見本の選定に使う）。
+// 要素の class 一覧に cls が含まれるかを判定する（スペース区切りのトークン一致）。
+function hasClass(el, cls) {
+  const c = (el.attribs && el.attribs.class) || '';
+  return c.split(/\s+/).includes(cls);
+}
+
+// data-acf を持つ要素が「表示用の実マークアップではない」プレースホルダーかどうか。
+// 2種類ある:
+//   1. <template data-acf="…">                  … render.js が丸ごと出力しない
+//   2. class="acf-hidden-field" が付いた実要素   … CSS(display:none)で常に非表示
+//      （<template> は data-acf-type="url"/"image" を保持できないため、URL/画像型は
+//      こちらの実要素+非表示クラスで隠す運用になっている。実測: hero_image 等）
+function isHiddenFieldPlaceholder(el) {
+  return (el.name || '').toLowerCase() === 'template' || hasClass(el, 'acf-hidden-field');
+}
+
+// rootEl 配下で、隠しフィールド(上記2種)の個数を数える（構造見本の選定に使う）。
 //
-// <template> は「フィールドは作るが出力しない」宣言（render.js）。CPT の構造見本
-// （canonicalSingle）にこれが多いページを選ぶと、他の single ページが実データとして
-// 持っているフィールドまで出力コードが存在しなくなる（実測: about/spots/hiraodai.html
-// が info_center/info_cave を実マークアップで持つのに、構造見本の auma.html が
-// <template> で隠していたため出力されなかった）。
-// 「最初に見つかったページ」ではなく「<template> が最も少ない=実マークアップが
+// これが多いページを構造見本(canonicalSingle)に選ぶと、他の single ページが
+// 実データとして持っているフィールドまで出力コードが存在しなくなる
+// （実測: about/spots/hiraodai.html が info_center/info_cave を実マークアップで
+// 持つのに、構造見本の auma.html が <template> で隠していたため出力されなかった）。
+// 「最初に見つかったページ」ではなく「隠しフィールドが最も少ない=実マークアップが
 // 最も豊富なページ」を構造見本に選ぶことで、この種の取りこぼしを減らす。
 function countTemplateFields(page) {
   let n = 0;
   const walk = (el) => {
     if (!el || el.type !== 'tag') return;
     const attrs = el.attribs || {};
-    if ((el.name || '').toLowerCase() === 'template' && ('data-acf' in attrs || 'data-acf-url' in attrs)) n++;
+    if (isHiddenFieldPlaceholder(el) && ('data-acf' in attrs || 'data-acf-url' in attrs)) n++;
     for (const child of el.children || []) walk(child);
   };
   if (page.mainEl) walk(page.mainEl);
   return n;
+}
+
+// 空白のみのテキストノードを無視した「意味のある子ノード」。
+function significantChildren(el) {
+  return (el.children || []).filter((c) => c.type === 'tag' || (c.type === 'text' && c.data && c.data.trim()));
+}
+
+// data-acf を持つ実要素そのものだけを差し替え元にすると、周囲の見た目を決める
+// 装飾ラッパー（例: <figure class="ev-figure"><img data-acf="…"></figure> の
+// ev-figure）の class がフォールバック描画に含まれない（実測: events/*.html の
+// ev-figure/ev-figure--even）。親が「この要素だけを包む」単純なラッパーで、
+// 親自身が構造宣言(data-*)を持たない場合に限り、親ごと差し替え対象にする。
+// 安全のため1階層だけしか遡らない。
+const STRUCTURAL_ATTRS_FOR_WRAP = [
+  'data-acf', 'data-acf-url', 'data-section', 'data-loop', 'data-loop-item',
+  'data-common', 'data-nav', 'data-cf7', 'data-breadcrumb',
+];
+function widenToWrapper(el) {
+  const parent = el.parent;
+  if (!parent || parent.type !== 'tag') return el;
+  const attrs = parent.attribs || {};
+  if (STRUCTURAL_ATTRS_FOR_WRAP.some((k) => k in attrs)) return el;
+  if (significantChildren(parent).length !== 1) return el;
+  return parent;
 }
 
 // rootEl 配下で、指定した data-* 属性を持つ要素を列挙する（ネストしても内側まで探す）。
@@ -375,9 +414,10 @@ function buildModel(pages, errors, opts = {}) {
     entry.fields = canonicalFields;
     entry.canonicalSingle = canonical;
 
-    // 構造見本(canonical)が <template> で隠しているフィールドでも、他の single
-    // ページが実マークアップ(<template> でない)として持っていれば、その要素を
-    // render.js から参照できるように記録しておく（条件付き描画のフォールバック用）。
+    // 構造見本(canonical)が隠しフィールド(<template> または class="acf-hidden-field")
+    // にしているフィールドでも、他の single ページが実マークアップ(表示用の本物の要素)
+    // として持っていれば、その要素を render.js から参照できるように記録しておく
+    // （条件付き描画のフォールバック用）。
     // 同じフィールドが複数ページに実マークアップで存在する場合は最初に見つかったものを使う。
     entry.realFieldEl = new Map();
     for (const p of entry.singlePages) {
@@ -385,9 +425,9 @@ function buildModel(pages, errors, opts = {}) {
       const walk = (el) => {
         if (!el || el.type !== 'tag') return;
         const a = el.attribs || {};
-        if ((el.name || '').toLowerCase() !== 'template') {
+        if (!isHiddenFieldPlaceholder(el)) {
           const name = a['data-acf'];
-          if (name && !entry.realFieldEl.has(name)) entry.realFieldEl.set(name, { page: p, el });
+          if (name && !entry.realFieldEl.has(name)) entry.realFieldEl.set(name, { page: p, el: widenToWrapper(el) });
         }
         for (const child of el.children || []) walk(child);
       };
