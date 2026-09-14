@@ -221,3 +221,7 @@
 .ev-figure--even { margin: 28px 0; }
 
 .ev-content__inline-image { width: 100%; max-width: 560px; height: auto; display: block; border-radius: var(--radius-lg); box-shadow: 0 2px 12px var(--shadow); margin: 8px 0 28px; }
+
+/* CPTのsingleテンプレート間でフィールド構成を揃えるための非表示プレースホルダ
+   (data-acf-type="image" は <template> 非対応のため、hidden画像で代替) */
+.acf-hidden-field { display: none; }

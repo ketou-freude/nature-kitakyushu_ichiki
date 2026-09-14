@@ -77,9 +77,9 @@
     </div>
   </header>
   <!-- モバイルナビ -->
-  <nav class="mobile-nav" id="js-mobile-nav" data-nav="mobile">
-    <a href="../news/">お知らせ</a>
-    <div class="mobile-nav__group">
+  <nav class="mobile-nav" id="js-mobile-nav" data-nav="mobile" data-common="mobile_nav">
+    <a href="../news/" data-nav-item>お知らせ</a>
+    <div class="mobile-nav__group" data-nav-item>
       <div class="mobile-nav__parent">
         <a href="../about/">アーバンネイチャー北九州とは？</a>
         <button class="mobile-nav__toggle" aria-expanded="false" aria-label="サブメニューを開く">
@@ -94,7 +94,7 @@
         <a href="../center/">活動拠点</a>
       </div>
     </div>
-    <div class="mobile-nav__group">
+    <div class="mobile-nav__group" data-nav-item>
       <div class="mobile-nav__parent">
         <a href="../network/">ネットワーク</a>
         <button class="mobile-nav__toggle" aria-expanded="false" aria-label="サブメニューを開く">
@@ -106,7 +106,7 @@
         <a href="../network/projects/">企業参加型プロジェクト</a>
       </div>
     </div>
-    <div class="mobile-nav__group">
+    <div class="mobile-nav__group" data-nav-item>
       <div class="mobile-nav__parent">
         <a href="../network/cases/">活動紹介</a>
         <button class="mobile-nav__toggle" aria-expanded="false" aria-label="サブメニューを開く">
@@ -119,12 +119,10 @@
         <a href="../blog/organization.html">団体等の活動ブログ</a>
       </div>
     </div>
-    <a href="../events/">イベントを探す</a>
-    <a href="../photos/">みんなの写真展</a>
-    <a href="../contact/">お問合せ</a>
-    <div class="mobile-nav__cta">
-      <a href="../join/" class="btn btn--primary btn--block">参加する</a>
-    </div>
+    <a href="../events/" data-nav-item>イベントを探す</a>
+    <a href="../photos/" data-nav-item>みんなの写真展</a>
+    <a href="../contact/" data-nav-item>お問合せ</a>
+    <a href="../join/" class="btn btn--primary btn--block mobile-nav__cta-link">参加する</a>
   </nav>
   <!-- パンくずリスト -->
   <nav class="breadcrumb" aria-label="パンくずリスト">
@@ -137,11 +135,11 @@
     </div>
   </nav>
   <!-- ページヘッダー -->
-  <section id="main-content" class="page-header page-header--center-hotarukan" data-section="hero">
-  <template data-acf="hero_image" data-acf-type="image">../images/2025/03/hotaru.jpg</template>
+  <section id="main-content" class="page-header" data-section="hero">
+    <img class="page-header__bg page-header__bg--pos-60" src="../images/2025/03/hotaru.jpg" alt="北九州市ほたる館" data-acf="hero_image">
     <div class="container">
-      <h1 class="page-header__title">北九州市ほたる館</h1>
-      <p class="page-header__desc">ホタル保全教育施設</p>
+      <h1 class="page-header__title" data-acf="hero_title">北九州市ほたる館</h1>
+      <p class="page-header__desc" data-acf="hero_category">ホタル保全教育施設</p>
     </div>
   </section>
   <!-- 施設詳細 -->

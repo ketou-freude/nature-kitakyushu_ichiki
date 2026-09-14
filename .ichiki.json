@@ -1,0 +1,16 @@
+{
+  "project": "nature-kitakyushu_ichiki",
+  "mockup": "./",
+  "theme_slug": "nature-kitakyushuichiki",
+  "title_separator": " | ",
+  "retrofit": {
+    "before": ".ichiki/mockup-before",
+    "note": "構造化が途中。変換し終えたらこの節ごと消す"
+  },
+  "plugins_required": [
+    "advanced-custom-fields",
+    "contact-form-7",
+    "safe-svg"
+  ],
+  "ichiki_version": "0.3.0"
+}

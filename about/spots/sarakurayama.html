@@ -62,9 +62,9 @@
     </div>
   </header>
   <!-- モバイルナビ -->
-  <nav class="mobile-nav" id="js-mobile-nav" data-nav="mobile">
-    <a href="../../news/">お知らせ</a>
-    <div class="mobile-nav__group">
+  <nav class="mobile-nav" id="js-mobile-nav" data-nav="mobile" data-common="mobile_nav">
+    <a href="../../news/" data-nav-item>お知らせ</a>
+    <div class="mobile-nav__group" data-nav-item>
       <div class="mobile-nav__parent">
         <a href="../../about/">アーバンネイチャー北九州とは？</a>
         <button class="mobile-nav__toggle" aria-expanded="false" aria-label="サブメニューを開く">
@@ -79,7 +79,7 @@
         <a href="../../center/">活動拠点</a>
       </div>
     </div>
-    <div class="mobile-nav__group">
+    <div class="mobile-nav__group" data-nav-item>
       <div class="mobile-nav__parent">
         <a href="../../network/">ネットワーク</a>
         <button class="mobile-nav__toggle" aria-expanded="false" aria-label="サブメニューを開く">
@@ -91,7 +91,7 @@
         <a href="../../network/projects/">企業参加型プロジェクト</a>
       </div>
     </div>
-    <div class="mobile-nav__group">
+    <div class="mobile-nav__group" data-nav-item>
       <div class="mobile-nav__parent">
         <a href="../../network/cases/">活動紹介</a>
         <button class="mobile-nav__toggle" aria-expanded="false" aria-label="サブメニューを開く">
@@ -104,12 +104,10 @@
         <a href="../../blog/organization.html">団体等の活動ブログ</a>
       </div>
     </div>
-    <a href="../../events/">イベントを探す</a>
-    <a href="../../photos/">みんなの写真展</a>
-    <a href="../../contact/">お問合せ</a>
-    <div class="mobile-nav__cta">
-      <a href="../../join/" class="btn btn--primary btn--block">参加する</a>
-    </div>
+    <a href="../../events/" data-nav-item>イベントを探す</a>
+    <a href="../../photos/" data-nav-item>みんなの写真展</a>
+    <a href="../../contact/" data-nav-item>お問合せ</a>
+    <a href="../../join/" class="btn btn--primary btn--block mobile-nav__cta-link">参加する</a>
   </nav>
   <nav class="breadcrumb" data-breadcrumb aria-label="パンくず">
     <div class="container">
@@ -161,7 +159,7 @@
             <div class="spot-info-card">
               <div class="spot-info-card__head" data-acf="info_heading" data-acf-type="text">📍 基本情報・アクセス</div>
               <table class="spot-info-table">
-                <caption class="sr-only">皿倉山 基本情報・アクセス</caption>
+                <caption class="sr-only">皿倉山 基本情報・アクセス</caption><tbody>
                 <tr><th scope="row">所在地</th><td data-acf="info_address">〒805-0057 福岡県北九州市八幡東区大字尾倉1481-1（ケーブルカー山麓駅）</td></tr>
                 <tr><th scope="row">ケーブルカー料金</th><td data-acf="info_fee">往復：大人1,230円・小人620円</td></tr>
                 <tr><th scope="row">営業時間</th><td data-acf="info_hours">4〜10月 10:00〜22:00 / 11〜3月 10:00〜20:00　毎週火曜定休</td></tr>
@@ -169,7 +167,9 @@
                 <tr><th scope="row">公共交通</th><td data-acf="info_access_public">JR八幡駅→無料シャトルバス約10分→ケーブルカー山麓駅</td></tr>
                 <tr><th scope="row">駐車場</th><td data-acf="info_parking">帆柱公園立体駐車場 178台（有料：2時間以内100円〜）</td></tr>
                 <tr><th scope="row">公式サイト</th><td><a href="https://www.sarakurayama-cablecar.co.jp/" target="_blank" rel="noopener" data-acf="info_official_label" data-acf-url="info_official_url">皿倉山ケーブルカー公式サイト</a></td></tr>
-              </table>
+              </tbody></table>
+              <template data-acf="info_cave" data-acf-type="textarea">（該当なし）</template>
+              <template data-acf="info_center" data-acf-type="textarea">（該当なし）</template>
             </div>
           </div>
         </div>
