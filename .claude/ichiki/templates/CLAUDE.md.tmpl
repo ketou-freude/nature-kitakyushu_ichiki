@@ -1,0 +1,37 @@
+# 案件用 CLAUDE.md — {{PROJECT}}（Ichiki / mockup→WordPress）
+
+<!-- Ichiki Phase 0 (ichiki scan) で自動生成 / generated: {{GENERATED}} -->
+<!-- 固定ルールは下の import で読み込む。人手で触るのは「ACF化除外」ブロックだけ -->
+@.claude/ichiki/rules/ichiki.md
+
+## プロジェクト
+- プロジェクト名: {{PROJECT}}
+- フィールド台帳: `acf-map.yaml` を参照（フィールド候補・タブ分類・デフォルト値・nav・form・装飾・meta）
+
+## 対象ページ
+{{PAGES}}
+
+## 構築（コマンド）
+モックから WordPress テーマまで、AI の判断は入らない。全部コマンドで出る。
+
+```
+node .claude/ichiki/bin/ichiki.js gate <mockup>     # lint→scan→変換→検証を一括
+node .claude/ichiki/bin/ichiki.js convert <mockup> <themeDir>
+```
+
+- 入力はモックそのもの。`acf-map.yaml` は**お客様と合意するための台帳**であって、
+  変換の入力ではない（変換器はモックを読む）。両者が食い違えば `gate` が止める
+- フィールド名・型・タブ・トップ・nav 解決・画像方式は、すべてモックの宣言で決まる
+  （`.claude/ichiki/rules/vocabulary.md`）。推測する工程は無い
+- モックを直したら `gate` を回し直す。台帳も同時に出し直される
+
+## モックを触るとき
+お客様と合意するまでモックは何度も変わる。**規約を外すと変換が止まる**ので、
+編集の前に `.claude/ichiki/rules/vocabulary.md`（宣言の一覧）を読むこと。
+規約に合っているかは `ichiki lint <mockup>` で確認できる。
+
+## ACF化除外
+<!-- 【人手】ここだけ確認・追記する。宣言ゼロでも動作する -->
+- CSSアニメーション用SVG
+- `<style>` タグ内のインラインSVG
+- （案件固有の除外をここに追記）

@@ -243,4 +243,7 @@
 .urban-center-grid__img { border-radius: 12px; width: 100%; box-shadow: 0 2px 16px rgba(0,0,0,0.12); }
 .urban-center-grid__desc { font-size: 0.9rem; color: var(--text-light); margin-bottom: 20px; }
 .urban-center-grid__dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; font-size: 0.9rem; }
+
+/* CPTフィールド整合のための隠しフィールド（施設情報が未整備の施設向けプレースホルダー） */
+.acf-hidden-field { display: none; }
 .urban-center-grid__link { color: var(--primary); }
