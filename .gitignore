@@ -1,2 +1,10 @@
 # 環境依存の設定（このPC固有の絶対パス・ローカルURLを含むためコミットしない）
 .ichiki.local.json
+
+# ichiki（旧サブモジュール、本プロジェクト専用の複製として取り込み済み）
+.claude/ichiki/node_modules/
+.claude/ichiki/.DS_Store
+.claude/ichiki/*.log
+.claude/ichiki/test/.tmp-out*/
+.claude/ichiki/visual-out/
+.claude/ichiki/visual-diff-report/

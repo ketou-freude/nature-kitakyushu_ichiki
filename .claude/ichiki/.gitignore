@@ -1,0 +1,10 @@
+node_modules/
+.claude/
+.DS_Store
+*.log
+test/.tmp-out/
+test/.tmp-out-common-footer/
+test/.tmp-out-scan-asset-paths/
+test/.tmp-out-backslash/
+visual-out/
+visual-diff-report/
