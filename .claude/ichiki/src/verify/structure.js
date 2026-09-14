@@ -71,6 +71,30 @@ function mockClassesForPage(html) {
   // 常に非表示という性質上、このクラス自体が生成物に必要になることはないため、
   // data-loop-sample と同じ理由で集計前に取り除く。
   $('.acf-hidden-field').remove();
+  // data-acf 要素の直下に複数のテキストノードが、整形専用タグ(br/strong/em/b/i/
+  // small/sub/sup/wbr/u/mark)だけを挟んで分裂している場合、field-extract.js の
+  // isFormattingOnly 判定により**中身をまるごと1つのフィールド値**として
+  // the_field() に置き換える(値はHTMLを含む)。つまり内側の <small class="…"> 等は
+  // 投稿ごとに自由入力される値の一部であり、構造見本のclassとして固定されない
+  // (実測: summary_datetime 内の <small class="ev-summary__muted">)。
+  // data-loop-sample と同じ理由で、集計前にこの装飾classだけ取り除く。
+  const FORMATTING_TAGS = ['br', 'strong', 'em', 'b', 'i', 'small', 'sub', 'sup', 'wbr', 'u', 'mark'];
+  const isFormattingOnly = ($el) =>
+    $el.contents().toArray().every((c) => {
+      if (c.type === 'text') return true;
+      if (c.type === 'tag' && FORMATTING_TAGS.includes((c.name || '').toLowerCase())) return isFormattingOnly($(c));
+      return false;
+    });
+  $('[data-acf]').each((_, el) => {
+    const $el = $(el);
+    const directText = $el.contents().toArray().filter((c) => c.type === 'text' && (c.data || '').trim() !== '');
+    const hasFormattingChild = $el.contents().toArray().some((c) => c.type === 'tag' && FORMATTING_TAGS.includes((c.name || '').toLowerCase()));
+    // field-extract.js と同じ判定: テキストノードが複数、または整形タグの子を
+    // 1つでも伴えばマージ対象（本文が複数行かどうかとは無関係）。
+    if ((directText.length > 1 || hasFormattingChild) && isFormattingOnly($el)) {
+      $el.find(FORMATTING_TAGS.join(',')).removeAttr('class');
+    }
+  });
   // data-nav 配下の <br>: メニュー項目のラベルは nav-structure.js が $a.text() で
   // プレーンテキスト化してから wp-admin のメニュー項目タイトルとして保存する
   // (menus.js)。wp_nav_menu() が出すのはその文字列だけなので、ラベル内部の

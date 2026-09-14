@@ -202,10 +202,8 @@
 .ev-related { margin-top: 64px; }
 .ev-related__title { font-size: 1.3rem; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
 .ev-related__subtitle { font-size: 0.85rem; color: var(--text-light); margin-bottom: 0; }
-.ev-summary__fee { color: var(--primary); font-size: 1.1em; }
 .ev-summary__muted { color: var(--text-light); }
 .ev-summary__accent { color: var(--accent); }
-.ev-summary__urgent { color: #e53935; }
 .ev-summary__cta-note { font-size: 0.85rem; color: var(--text-light); text-align: center; margin-bottom: 12px; }
 .ev-announce__contact { font-size: 0.88rem; color: var(--text); line-height: 1.9; }
 

@@ -292,7 +292,18 @@ function analyzeField(page, $, el, opts, errors) {
         errors.add(page.relPath, line, `data-acf="${name}": 直下にテキストが見つかりません(型は${type})`);
         return results;
       }
-      if (sig.length > 1) {
+      // 直下のテキストノードが1個でも、<br>/<small> 等の整形タグの子を伴う場合は
+      // マージ対象にする。以前は「テキストノードが2個以上」の場合しかマージせず、
+      // 「本文1行 + <br><small>補足</small>」のように整形タグの前がテキスト1個
+      // だけの構造では、補足部分が投稿ごとに編集できない固定マークアップとして
+      // 残ってしまっていた（実測: events/*.html の summary_place/summary_target
+      // 内の <small class="ev-summary__muted">）。本文が複数行(<br>区切り)かどうかは
+      // 値の中身の問題であって、整形タグを伴うかどうかとは無関係なので、
+      // 判定はテキストノード数ではなく「整形タグの子を持つか」だけにする。
+      const hasFormattingChild = directChildren(el).some(
+        (c) => c.type === 'tag' && FORMATTING_TAGS.has((c.name || '').toLowerCase())
+      );
+      if (sig.length > 1 || hasFormattingChild) {
         // <br> 等の整形タグで区切られているだけなら、内側まるごとを1フィールドにする。
         if (isFormattingOnly(el) && loc.startTag && loc.endTag) {
           const start = loc.startTag.endOffset;
@@ -302,12 +313,17 @@ function analyzeField(page, $, el, opts, errors) {
           results.edits.push({ start, end, replacement: phpFieldOutput(name, opts && opts.scopeSlug) });
           return results;
         }
-        errors.add(
-          page.relPath,
-          line,
-          `data-acf="${name}": 直下のテキストノードが${sig.length}個に分裂しています(要素間にタグが挟まる構造は未定義。vocabulary.md 未決事項1と同種の問題)`
-        );
-        return results;
+        if (sig.length > 1) {
+          errors.add(
+            page.relPath,
+            line,
+            `data-acf="${name}": 直下のテキストノードが${sig.length}個に分裂しています(要素間にタグが挟まる構造は未定義。vocabulary.md 未決事項1と同種の問題)`
+          );
+          return results;
+        }
+        // sig.length === 1 で isFormattingOnly ではない(整形タグ以外の兄弟が
+        // 混在する)場合は、従来通り単一テキストノードの置換にフォールバックする
+        // (data-deco 等の固定要素を無編集のまま温存する既存の設計を維持)。
       }
       const node = sig[0];
       const defaultValue = (node.data || '').trim();

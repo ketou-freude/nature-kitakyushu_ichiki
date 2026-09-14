@@ -27,56 +27,6 @@
   background-position: center center;
 }
 
-/* --- 概要文・施設についての本文コンテナ（旧: style="max-width:800px;margin:0 auto;"） --- */
-.center-content {
-  max-width: 800px;
-  margin: 0 auto;
-}
-/* 文中リンクを含むためwysiwyg化した段落(2.6節)。旧 <p> と同じ見た目にする */
-.center-content .wysiwyg-block {
-  margin-bottom: 16px;
-  line-height: 1.8;
-}
-
-/* --- 施設情報ボックスの見出し（旧: style="font-size:1.3rem;color:var(--primary);margin-bottom:16px;border:none;padding:0;"） --- */
-.facility-detail__info-title {
-  font-size: 1.3rem;
-  color: var(--primary);
-  margin-bottom: 16px;
-  border: none;
-  padding: 0;
-}
-
-/* --- アクセスマップの地図枠（旧: style="border-radius:12px;overflow:hidden;box-shadow:...;margin-top:24px;"） --- */
-.facility-detail__map-frame {
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-  margin-top: 24px;
-}
-.facility-detail__map-frame iframe {
-  border: 0;
-  display: block;
-}
-
-/* --- この施設のイベント：カード無し/一覧表示の余白（旧: style="text-align:center;padding:40px;color:var(--text-muted);"） --- */
-.facility-events__empty {
-  text-align: center;
-  padding: 40px;
-  color: var(--text-muted);
-}
-.facility-events__more-btn {
-  margin-top: 16px;
-}
-
-/* --- 戻るリンク（旧: style="padding:32px 0;" / style="text-align:center;"） --- */
-.facility-back {
-  padding: 32px 0;
-}
-.facility-back__inner {
-  text-align: center;
-}
-
 /* --- 拠点マップ（center/index.html #center-map。旧インラインstyle） --- */
 #center-map {
   height: 480px;
