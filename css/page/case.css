@@ -38,18 +38,9 @@
   border-radius: var(--radius-lg);
   overflow: hidden;
 }
-.case-detail__image-wrap--contain {
-  text-align: center;
-  background: var(--bg);
-}
 .case-detail__image {
   width: 100%;
   height: auto;
-}
-.case-detail__image--contain {
-  height: 365px;
-  width: auto;
-  max-width: 100%;
 }
 .case-detail__info {
   background: var(--bg);
