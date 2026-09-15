@@ -8,3 +8,6 @@
 .claude/ichiki/test/.tmp-out*/
 .claude/ichiki/visual-out/
 .claude/ichiki/visual-diff-report/
+
+# deliver（見た目の比較）が生成するスクリーンショット一式（再生成可能・容量大）
+docs/visual/
