@@ -434,13 +434,20 @@ function buildModel(pages, errors, opts = {}) {
       walk(p.mainEl);
     }
 
-    // 値によって class を切り替えたいフィールド(例: article_category の値ごとに
-    // タグの色を変える、status_label の値ごとにステータスの色を変える)。
-    // 構造見本は1ページの1つのclassしか持てないため、CPT全ページの実マークアップ
-    // から「この値のときはこのclass」という対応表を集めておく。値が2種類以上
-    // 見つかったフィールドだけが対象(1種類しか無ければ静的classのままでよい)。
+    // 値によって class を切り替えたいフィールド(編集者回答2026-09で明示された
+    // 2件のみ: article_category の値ごとにタグの色を変える、status_label の
+    // 値ごとにステータスの色を変える)。構造見本は1ページの1つのclassしか
+    // 持てないため、CPT全ページの実マークアップから「この値のときはこの
+    // class」という対応表を集めておく。値が2種類以上見つかったフィールド
+    // だけが対象(1種類しか無ければ静的classのままでよい)。
     // 対象は「直下のテキストノードがちょうど1個で、他に子要素を持たない」
     // 単純な形(<span data-acf="X">値</span>)のみ(article_category/status_labelの形)。
+    //
+    // 対象フィールドは明示的なallowlistに限定する。summary_fee等、単に
+    // ページ間で装飾classの付け忘れ・表記ゆれがあるだけのフィールドまで
+    // 対象にすると、本来「全ページで同じclassに揃える」だけで済む箇所が
+    // 不必要に条件分岐化されてしまう(実測: summary_fee/summary_deadline)。
+    const VALUE_CLASS_FIELD_ALLOWLIST = new Set(['article_category', 'status_label']);
     entry.fieldValueClassMap = new Map();
     for (const p of entry.singlePages) {
       if (!p.mainEl) continue;
@@ -448,7 +455,7 @@ function buildModel(pages, errors, opts = {}) {
         if (!el || el.type !== 'tag') return;
         const a = el.attribs || {};
         const name = a['data-acf'];
-        if (name && !isHiddenFieldPlaceholder(el)) {
+        if (name && VALUE_CLASS_FIELD_ALLOWLIST.has(name) && !isHiddenFieldPlaceholder(el)) {
           const kids = el.children || [];
           const directText = kids.filter((c) => c.type === 'text' && (c.data || '').trim() !== '');
           if (directText.length === 1 && kids.every((c) => c.type !== 'tag')) {

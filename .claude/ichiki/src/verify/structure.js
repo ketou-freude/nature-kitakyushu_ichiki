@@ -175,6 +175,27 @@ function literalClassesInText(text) {
     set.add(m[1]);
   }
 
+  // render.js の値→class 切り替え(fieldValueClassMap)が生成する
+  // `$__ncls = array( '値' => 'class ...', ... )` は、class="..." 属性の
+  // 中身がPHP式そのもの(シングルクォートを含む)になるため、上の
+  // class="..." 正規表現では拾えない。CF7 の class: 構文と同じ理由で、
+  // この構文だけは個別に検出する(生成時に確定する静的文字列の集合であり、
+  // 「動的で確認できない」ケースではない)。
+  const ncls = text.matchAll(/\$__ncls\s*=\s*array\(([\s\S]*?)\);/g);
+  for (const nm of ncls) {
+    const body = nm[1];
+    const pairRe = /=>\s*'((?:[^'\\]|\\.)*)'/g;
+    let pm;
+    while ((pm = pairRe.exec(body))) {
+      for (const c of pm[1].split(/\s+/).filter(Boolean)) set.add(c);
+    }
+  }
+  // 対応表に無い値のフォールバック: echo esc_attr( ... : 'class ...' );
+  const fallbackRe = /\$__ncls\[\s*\$__nval\s*\]\s*\)\s*:\s*'((?:[^'\\]|\\.)*)'/g;
+  while ((m = fallbackRe.exec(text))) {
+    for (const c of m[1].split(/\s+/).filter(Boolean)) set.add(c);
+  }
+
   return set;
 }
 
