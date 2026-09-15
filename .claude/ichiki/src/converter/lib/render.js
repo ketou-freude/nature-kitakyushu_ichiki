@@ -182,6 +182,13 @@ function renderFragment(page, model, el, includeSelf, errors, scopeSlug) {
     // schedule_time_N・summary_capacity・content_image_N 等）。フィールド名の
     // 有無を条件にすることで、値が入っている投稿だけ自然に表示される。
     function realFieldFallback(fieldName) {
+      // archive ページは自分専用の宣言(型がsingle側と別のことがある)を持つため対象外。
+      // 実測: center/index.html の hero_image は data-acf-type="text" だが、
+      // single 側の実マークアップ(<img>、image型)を差し替え元にすると、
+      // get_field() が文字列を返すのに $var['url'] で配列アクセスしてしまい
+      // 「Cannot access offset of type string on string」で archive-nkk_center.php
+      // が Fatal error になっていた。
+      if (page.dataPage !== 'single') return null;
       const entry = page.cpt ? model.cptMap.get(page.cpt) : null;
       const source = entry && entry.realFieldEl && entry.realFieldEl.get(fieldName);
       if (!source || (source.page === page && source.el === node)) return null;
@@ -368,7 +375,8 @@ function renderFragment(page, model, el, includeSelf, errors, scopeSlug) {
       }
 
       // 別フィールドの値から object-position 等を動的に差し込む(POSITION_FIELD_FOR)。
-      const posFieldName = POSITION_FIELD_FOR[`${page.cpt}:${fieldName}`];
+      // realFieldFallback と同じ理由で single ページ限定(archive は別の宣言を持つ)。
+      const posFieldName = page.dataPage === 'single' ? POSITION_FIELD_FOR[`${page.cpt}:${fieldName}`] : null;
       if (posFieldName && nloc.startTag) {
         const cond = `get_field('${acfKey(currentScope, posFieldName)}'${ownerExpr(currentScope)})`;
         const selfClosing = page.html[nloc.startTag.endOffset - 2] === '/';
