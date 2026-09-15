@@ -191,12 +191,7 @@
 .ev-figure__img { width: 100%; height: auto; display: block; }
 .ev-figure__img--framed { border-radius: var(--radius-lg); box-shadow: 0 2px 12px var(--shadow); }
 .ev-figure__img--md { max-width: 560px; }
-.ev-figure__img--sm { max-width: 300px; }
 .ev-figure__caption { margin-top: 10px; font-size: 0.85rem; color: var(--text-light); }
-/* 画像の直後に地の文キャプション<p>が続く箇所（<figure>で包むと .ev-content p の
-   見た目から外れるため、img 単体に余白だけ当てる） */
-.ev-figure__img--gap-a { margin: 8px 0 18px; }
-.ev-figure__img--gap-b { margin: 28px 0 18px; }
 .ev-venue__intro { margin-bottom: 16px; }
 .ev-venue__intro a { color: var(--accent); font-weight: 600; text-decoration: underline; }
 .ev-related { margin-top: 64px; }
@@ -214,9 +209,6 @@
 /* single-nkk_event: 地の文に<a>等が混ざり wysiwyg <div> にした際の
    見た目維持（.ev-content p と同一の値）。2.6節参照。 */
 .ev-content__block { line-height: 1.85; color: var(--text); margin-bottom: 16px; }
-
-/* single-nkk_event: 図版キャプション付きfigureの余白差分(margin:28px 0)の受け皿 */
-.ev-figure--even { margin: 28px 0; }
 
 .ev-content__inline-image { width: 100%; max-width: 560px; height: auto; display: block; border-radius: var(--radius-lg); box-shadow: 0 2px 12px var(--shadow); margin: 8px 0 28px; }
 

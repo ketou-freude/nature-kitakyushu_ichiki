@@ -15,6 +15,32 @@ function dataAttrNames(el) {
   return Object.keys(el.attribs || {}).filter((k) => DECLARATION_ATTRS.has(k));
 }
 
+// 運用判断により、値に応じた自動クラス切り替え(model.js の fieldValueClassMap)を
+// 一時的に固定classへ差し替えるフィールド。
+// 'event:status_label': 色分けは一旦保留し、全て緑(ev-status--open)固定にする
+// (編集者回答2026-09: 「色は一旦すべて現行の緑でお願いします。ステータス機能を
+// 実装しておいて、あとから状態ごとに色を変えられるようにお願いします」)。
+// 実データが揃って色分けを再開する場合は、この1行を削除するだけでよい
+// (fieldValueClassMap の対応表はそのまま使われる)。
+const FORCE_UNIFORM_CLASS = {
+  'event:status_label': 'ev-status ev-status--open',
+};
+
+// PHP のシングルクォート文字列リテラル用にエスケープする。
+function phpStr(s) {
+  return String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+}
+
+// data-acf 要素に、別の数値フィールドの値から動的な object-position を
+// 差し込むペア。編集者回答(2026-09)「hero画像の切り抜き位置を0〜100%で
+// 調整できるようにしてほしい」に対応。値は投稿ごとに連続的に変わりうる
+// ため class 切り替えでは表現できず、変換器がその場でインラインstyleを
+// 生成する(モック側は data-acf-type="text" の非表示 <template> にしたがい
+// 画面には出ない値なので、L12「モックにインラインstyleを書かない」には抵触しない)。
+const POSITION_FIELD_FOR = {
+  'center:hero_image': 'hero_image_position',
+};
+
 // 要素の class 一覧に cls が含まれるかを判定する（スペース区切りのトークン一致）。
 function hasClass(el, cls) {
   const c = (el.attribs && el.attribs.class) || '';
@@ -312,6 +338,43 @@ function renderFragment(page, model, el, includeSelf, errors, scopeSlug) {
       for (const e of edits) addAbs(e.start, e.end, e.replacement);
       const acfField = fields.find((f) => f.name === attrs['data-acf']);
       if (acfField && (acfField.type === 'wysiwyg' || acfField.type === 'image')) skipRecurse = true;
+    }
+
+    // 値に応じて class を切り替えるフィールド(model.js の fieldValueClassMap。
+    // 例: article_category の値ごとにタグの色を変える、status_label の値ごとに
+    // ステータスの色を変える)。モック上は「その投稿の今の値」に対応するclassしか
+    // 書かれていないが、他の値の投稿でも正しい色になるよう、値に応じた
+    // 条件分岐へ置き換える。
+    if (hasAcf) {
+      const fieldName = attrs['data-acf'];
+      const cptEntry = page.cpt ? model.cptMap.get(page.cpt) : null;
+      const valueMap = cptEntry && cptEntry.fieldValueClassMap && cptEntry.fieldValueClassMap.get(fieldName);
+      const classLoc = nloc.attrs && nloc.attrs.class;
+      if (valueMap && classLoc) {
+        const forced = FORCE_UNIFORM_CLASS[`${page.cpt}:${fieldName}`];
+        if (forced !== undefined) {
+          addAbs(classLoc.startOffset, classLoc.endOffset, `class="${forced}"`);
+        } else {
+          const defaultClass = (attrs.class || '').trim();
+          const pairs = [...valueMap.entries()]
+            .map(([val, cls]) => `'${phpStr(val)}' => '${phpStr(cls)}'`)
+            .join(', ');
+          const cond = `get_field('${acfKey(currentScope, fieldName)}'${ownerExpr(currentScope)})`;
+          const php =
+            `<?php $__ncls = array( ${pairs} ); $__nval = ${cond}; ` +
+            `echo esc_attr( isset( $__ncls[ $__nval ] ) ? $__ncls[ $__nval ] : '${phpStr(defaultClass)}' ); ?>`;
+          addAbs(classLoc.startOffset, classLoc.endOffset, `class="${php}"`);
+        }
+      }
+
+      // 別フィールドの値から object-position 等を動的に差し込む(POSITION_FIELD_FOR)。
+      const posFieldName = POSITION_FIELD_FOR[`${page.cpt}:${fieldName}`];
+      if (posFieldName && nloc.startTag) {
+        const cond = `get_field('${acfKey(currentScope, posFieldName)}'${ownerExpr(currentScope)})`;
+        const selfClosing = page.html[nloc.startTag.endOffset - 2] === '/';
+        const insertAt = nloc.startTag.endOffset - (selfClosing ? 2 : 1);
+        addAbs(insertAt, insertAt, ` style="object-position: center <?php echo esc_attr( ${cond} ); ?>%;"`);
+      }
     }
 
     // <a> の href は固定リンクとして解決する。

@@ -12,13 +12,9 @@
   object-fit: cover;
   z-index: 0;
 }
-/* 実測: greenpark/hotarukan のみ元モックが background-position を中央からずらしていた */
-.page-header__bg--pos-40 {
-  object-position: center 40%;
-}
-.page-header__bg--pos-60 {
-  object-position: center 60%;
-}
+/* 切り抜き位置(縦方向)は施設ごとに調整できるよう hero_image_position フィールド
+   (0-100の数値)から object-position を動的に出力する(変換器: render.js)。
+   既定値は50(中央)。greenpark=40, hotarukan=60 のみモックで調整済み。 */
 
 /* --- ページヘッダー：一覧ページ（center/index.html）は固定の1枚背景 --- */
 .page-header--center {

@@ -434,6 +434,40 @@ function buildModel(pages, errors, opts = {}) {
       walk(p.mainEl);
     }
 
+    // 値によって class を切り替えたいフィールド(例: article_category の値ごとに
+    // タグの色を変える、status_label の値ごとにステータスの色を変える)。
+    // 構造見本は1ページの1つのclassしか持てないため、CPT全ページの実マークアップ
+    // から「この値のときはこのclass」という対応表を集めておく。値が2種類以上
+    // 見つかったフィールドだけが対象(1種類しか無ければ静的classのままでよい)。
+    // 対象は「直下のテキストノードがちょうど1個で、他に子要素を持たない」
+    // 単純な形(<span data-acf="X">値</span>)のみ(article_category/status_labelの形)。
+    entry.fieldValueClassMap = new Map();
+    for (const p of entry.singlePages) {
+      if (!p.mainEl) continue;
+      const walk = (el) => {
+        if (!el || el.type !== 'tag') return;
+        const a = el.attribs || {};
+        const name = a['data-acf'];
+        if (name && !isHiddenFieldPlaceholder(el)) {
+          const kids = el.children || [];
+          const directText = kids.filter((c) => c.type === 'text' && (c.data || '').trim() !== '');
+          if (directText.length === 1 && kids.every((c) => c.type !== 'tag')) {
+            const value = directText[0].data.trim();
+            const cls = (a.class || '').trim();
+            if (!entry.fieldValueClassMap.has(name)) entry.fieldValueClassMap.set(name, new Map());
+            const m = entry.fieldValueClassMap.get(name);
+            if (!m.has(value)) m.set(value, cls);
+          }
+        }
+        for (const child of el.children || []) walk(child);
+      };
+      walk(p.mainEl);
+    }
+    for (const [name, m] of entry.fieldValueClassMap) {
+      const distinctClasses = new Set(m.values());
+      if (distinctClasses.size < 2) entry.fieldValueClassMap.delete(name);
+    }
+
     // variant は「同じ投稿の別テンプレート」なので、詳細ページと同じフィールドを持たない。
     // 構造一致は求めず、フィールドを CPT の集合へ合流させる
     // （合流させないと ACF に登録されず、variant テンプレートが常に空を出す）。
