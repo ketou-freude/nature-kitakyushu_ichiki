@@ -217,12 +217,16 @@ function checkPage(url, page, html) {
     const $t = $(`.${s.cls}`);
     if ($t.length === 0) continue; // 対応する要素が見つからない場合はここでは扱わない
     // 画像フィールドは要素そのものが <img> になる。テキストで判定すると必ず空になるので、
-    // 自身が <img src> を持つ場合も「値あり」とみなす（フォールバックも値のうち）。
+    // 自身が src を持つ場合も「値あり」とみなす（フォールバックも値のうち）。
+    // url型フィールドが <iframe data-acf-type="url"> のように img 以外の要素の src に
+    // 直接載る場合もあるため、img に限定せず「自身/子孫が非空の src を持つか」で判定する
+    // (実測: network/hibikinadabiotope.html の facility_map_src。値は正しく出ているのに
+    // img 限定判定のせいで常に empty-field と誤検出していた)。
     const filled = $t.toArray().some((el) => {
       const $e = $(el);
       if ($e.text().trim() !== '') return true;
-      if ($e.is('img') && ($e.attr('src') || '') !== '') return true;
-      if ($e.find('img').filter((_, im) => ($(im).attr('src') || '') !== '').length > 0) return true;
+      if (($e.attr('src') || '') !== '') return true;
+      if ($e.find('[src]').filter((_, im) => ($(im).attr('src') || '') !== '').length > 0) return true;
       // input/textarea 等は value で判定
       if (($e.attr('value') || '') !== '') return true;
       return false;

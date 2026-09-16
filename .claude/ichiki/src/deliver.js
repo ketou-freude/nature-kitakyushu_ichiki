@@ -76,7 +76,10 @@ function main() {
   let stoppedAt = null;
 
   for (const s of steps) {
-    const p = spawnSync(process.execPath, s.args, { encoding: 'utf8' });
+    // maxBuffer 既定値(1MB)だと diff/a11y の大量出力(146ページ分)で打ち切られ、
+    // 実際には成功しているのに正体不明のエラー(切り詰められた断片)として報告される
+    // ことがあったため、明示的に広げる。
+    const p = spawnSync(process.execPath, s.args, { encoding: 'utf8', maxBuffer: 1024 * 1024 * 200 });
     const out = (p.stdout || '') + (p.stderr || '');
     if (p.status !== 0) {
       failures.push({ name: s.name, output: out, blocking: s.blocking, detail: s.detail });
