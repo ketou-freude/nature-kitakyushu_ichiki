@@ -177,6 +177,18 @@ function generateSeedPostsPhp(model) {
 
   L.push('');
 
+  // 投稿の「作成」と「フィールド値の設定」を2段階に分ける。
+  //
+  // 以前は1件ずつ「作成したその場でフィールドを埋める」処理をしていたが、
+  // wysiwyg 内の内部リンク解決(nkk_get_page_permalink())は「参照先の固定ページが
+  // 既に作られている」ことが前提であり、作成順はモック側の発見順(ほぼファイル名の
+  // アルファベット順)に過ぎない。実測: privacy ページが後の方(例: photos/*.html群
+  // より後)に作られるため、それより前に処理される photos/*.html の
+  // 「コチラ(→プライバシーポリシー)」リンクが nkk_get_page_permalink('privacy') の
+  // 時点でまだ存在しないprivacyページを参照し、href="" になっていた(30ページ分)。
+  // 全投稿を先に作り切ってから値を入れれば、参照順に依存しなくなる。
+  const entries = []; // { varBase, create: string[], fields: string[] }
+
   // --- 1. 固定ページ ---
   for (const [pageId, entry] of model.pageMap) {
     const slug = pageId.replace(/_/g, '-');
@@ -184,14 +196,15 @@ function generateSeedPostsPhp(model) {
     // 実行時に剥がしていた頃は中間区画が残り、管理画面の一覧に
     // 「…しました | お知らせ」と出ていた（実測）。
     const title = ownTitle(model, entry.page) || pageId;
-    L.push(`    // 固定ページ: ${pageId}`);
-    L.push(
-      `    list( $post_id, $created ) = nkk_seed_get_or_create( 'page', ${phpSingleQuote(slug)}, ${phpSingleQuote(title)}, ${phpSingleQuote(`page-${pageId}.php`)} );`
-    );
-    L.push('    if ( $post_id && $created ) {');
-    L.push(...fieldAssignments(pageId, entry.fields, '        '));
-    L.push('    }');
-    L.push('');
+    const varBase = `page_${pageId}`;
+    entries.push({
+      varBase,
+      comment: `固定ページ: ${pageId}`,
+      create: [
+        `nkk_seed_get_or_create( 'page', ${phpSingleQuote(slug)}, ${phpSingleQuote(title)}, ${phpSingleQuote(`page-${pageId}.php`)} )`,
+      ],
+      fields: fieldAssignments(pageId, entry.fields, '        '),
+    });
   }
 
   // --- 2. CPT の初期記事（モックの single 1枚ぶん） ---
@@ -201,14 +214,12 @@ function generateSeedPostsPhp(model) {
     const rel = entry.canonicalSingle.relPath || '';
     const slug = rel.replace(/\.html$/, '').split('/').pop() || cpt;
     const title = ownTitle(model, entry.canonicalSingle, entry.label) || cpt;
-    L.push(`    // CPT 初期記事: ${postType}（モック ${rel} の内容）`);
-    L.push(
-      `    list( $post_id, $created ) = nkk_seed_get_or_create( ${phpSingleQuote(postType)}, ${phpSingleQuote(slug)}, ${phpSingleQuote(title)} );`
-    );
-    L.push('    if ( $post_id && $created ) {');
-    L.push(...fieldAssignments(cpt, entry.fields, '        '));
-    L.push('    }');
-    L.push('');
+    entries.push({
+      varBase: `cpt_${cpt}`,
+      comment: `CPT 初期記事: ${postType}（モック ${rel} の内容）`,
+      create: [`nkk_seed_get_or_create( ${phpSingleQuote(postType)}, ${phpSingleQuote(slug)}, ${phpSingleQuote(title)} )`],
+      fields: fieldAssignments(cpt, entry.fields, '        '),
+    });
   }
 
   // --- 2.5 トップページ ---
@@ -219,18 +230,13 @@ function generateSeedPostsPhp(model) {
   // 実測: front-page.php はテンプレート階層で優先されるので画面は出るが、
   // 画像9枚を含む70フィールドがどこにも入らず、管理画面から編集もできなかった。
   if (model.front && model.front.ownFields && model.front.ownFields.length) {
-    L.push('    // トップページ（front のフィールドの受け皿）');
-    L.push(
-      `    list( $post_id, $created ) = nkk_seed_get_or_create( 'page', 'front', ${phpSingleQuote(ownTitle(model, model.front) || 'トップページ')} );`
-    );
-    L.push('    if ( $post_id ) {');
-    L.push("        update_option( 'show_on_front', 'page' );");
-    L.push("        update_option( 'page_on_front', $post_id );");
-    L.push('    }');
-    L.push('    if ( $post_id && $created ) {');
-    L.push(...fieldAssignments('front', model.front.ownFields, '        '));
-    L.push('    }');
-    L.push('');
+    entries.push({
+      varBase: 'front',
+      comment: 'トップページ（front のフィールドの受け皿）',
+      create: [`nkk_seed_get_or_create( 'page', 'front', ${phpSingleQuote(ownTitle(model, model.front) || 'トップページ')} )`],
+      afterCreate: ["update_option( 'show_on_front', 'page' );", "update_option( 'page_on_front', $__nkk_pid_front );"],
+      fields: fieldAssignments('front', model.front.ownFields, '        '),
+    });
   }
 
   // --- 2.6 CPT 一覧ページ独自のフィールド ---
@@ -244,22 +250,49 @@ function generateSeedPostsPhp(model) {
     if (!af.length) continue;
     const tmpl = `archive-${CPT_PREFIX}${cpt}.php`;
     const slug = `${cpt}-archive-settings`;
-    L.push(`    // CPT 一覧の独自フィールドの受け皿: ${cpt}`);
-    L.push(
-      `    list( $post_id, $created ) = nkk_seed_get_or_create( 'page', ${phpSingleQuote(slug)}, ${phpSingleQuote(`${cpt} 一覧の設定`)}, ${phpSingleQuote(tmpl)} );`
-    );
-    L.push('    if ( $post_id && $created ) {');
-    L.push(...fieldAssignments(`${cpt}_archive`, af, '        '));
-    L.push('    }');
-    L.push('');
+    entries.push({
+      varBase: `archive_${cpt}`,
+      comment: `CPT 一覧の独自フィールドの受け皿: ${cpt}`,
+      create: [
+        `nkk_seed_get_or_create( 'page', ${phpSingleQuote(slug)}, ${phpSingleQuote(`${cpt} 一覧の設定`)}, ${phpSingleQuote(tmpl)} )`,
+      ],
+      fields: fieldAssignments(`${cpt}_archive`, af, '        '),
+    });
   }
 
   // --- 3. サイト共通設定 ---
   if (model.siteOptionFields && model.siteOptionFields.length) {
-    L.push('    // サイト共通設定（site-options ページ）');
-    L.push("    list( $post_id, $created ) = nkk_seed_get_or_create( 'page', 'site-options', 'サイト共通設定', 'page-site-options.php' );");
-    L.push('    if ( $post_id && $created ) {');
-    L.push(...fieldAssignments('site_options', model.siteOptionFields, '        '));
+    entries.push({
+      varBase: 'site_options',
+      comment: 'サイト共通設定（site-options ページ）',
+      create: ["nkk_seed_get_or_create( 'page', 'site-options', 'サイト共通設定', 'page-site-options.php' )"],
+      fields: fieldAssignments('site_options', model.siteOptionFields, '        '),
+    });
+  }
+
+  // --- フェーズ1: 全ての固定ページ・投稿を先に作る ---
+  L.push('    // --- フェーズ1: 全ての固定ページ・投稿を先に作る(値の設定は後段でまとめて行う) ---');
+  for (const e of entries) {
+    L.push(`    // ${e.comment}`);
+    L.push(`    list( $__nkk_pid_${e.varBase}, $__nkk_created_${e.varBase} ) = ${e.create[0]};`);
+    if (e.afterCreate) {
+      L.push(`    if ( $__nkk_pid_${e.varBase} ) {`);
+      for (const line of e.afterCreate) L.push(`        ${line}`);
+      L.push('    }');
+    }
+  }
+  L.push('');
+
+  // --- フェーズ2: 全ての投稿が揃った状態でフィールド値を設定する ---
+  // (wysiwyg内の内部リンク解決等、他の投稿の存在を前提とする処理が
+  //  作成順に関わらず常に正しく解決できるようにするため)
+  L.push('    // --- フェーズ2: フィールド値を設定する(この時点で全投稿が作成済み) ---');
+  for (const e of entries) {
+    if (!e.fields.length) continue;
+    L.push(`    // ${e.comment}`);
+    L.push(`    if ( $__nkk_pid_${e.varBase} && $__nkk_created_${e.varBase} ) {`);
+    L.push(`        $post_id = $__nkk_pid_${e.varBase};`);
+    L.push(...e.fields);
     L.push('    }');
     L.push('');
   }
